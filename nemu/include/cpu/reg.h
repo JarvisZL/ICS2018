@@ -28,7 +28,10 @@ typedef struct {
    */
   rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
 
-  vaddr_t eip;
+  union{
+    uint32_t eip;
+    uint16_t ip; 
+  };
 
 } CPU_state;
 
