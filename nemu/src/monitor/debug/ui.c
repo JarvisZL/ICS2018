@@ -133,7 +133,7 @@ static int cmd_x(char *args){
 	int addr=cmd_p(s2);
         for(int i=0;i<len;++i)
 	{
-           printf("ox%x: %d\n",addr+i*4,vaddr_read(addr,4));
+           printf("ox%x: %d\n",addr+i*4,vaddr_read(addr+i*4,4));
 	}
   return 0;
 }
