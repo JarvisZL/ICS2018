@@ -101,14 +101,14 @@ static int cmd_info(char *args){
     if(strcmp(args,s)==0)
     {
       printf("eax\t ox%x  %d\n",cpu.eax,cpu.eax);
-      printf("eax\t ox%x  %d\n",cpu.ecx,cpu.ecx);     
-      printf("eax\t ox%x  %d\n",cpu.edx,cpu.edx);
-      printf("eax\t ox%x  %d\n",cpu.ebx,cpu.ebx);
-      printf("eax\t ox%x  %d\n",cpu.esp,cpu.esp);
-      printf("eax\t ox%x  %d\n",cpu.ebp,cpu.ebp);
-      printf("eax\t ox%x  %d\n",cpu.esi,cpu.esi);
-      printf("eax\t ox%x  %d\n",cpu.edi,cpu.edi);
-      printf("eax\t ox%x  %d\n",cpu.eip,cpu.eip);
+      printf("ecx\t ox%x  %d\n",cpu.ecx,cpu.ecx);     
+      printf("edx\t ox%x  %d\n",cpu.edx,cpu.edx);
+      printf("ebx\t ox%x  %d\n",cpu.ebx,cpu.ebx);
+      printf("esp\t ox%x  %d\n",cpu.esp,cpu.esp);
+      printf("ebp\t ox%x  %d\n",cpu.ebp,cpu.ebp);
+      printf("esi\t ox%x  %d\n",cpu.esi,cpu.esi);
+      printf("ebi\t ox%x  %d\n",cpu.edi,cpu.edi);
+      printf("eip\t ox%x  %d\n",cpu.eip,cpu.eip);
     }
 return 0;
 };
