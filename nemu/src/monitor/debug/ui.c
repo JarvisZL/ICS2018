@@ -107,15 +107,15 @@ static int cmd_info(char *args){
      const char s[2]="r";
     if(strcmp(args,s)==0)
     {
-      printf("eax\t ox%x  %d\n",cpu.eax,cpu.eax);
-      printf("ecx\t ox%x  %d\n",cpu.ecx,cpu.ecx);     
-      printf("edx\t ox%x  %d\n",cpu.edx,cpu.edx);
-      printf("ebx\t ox%x  %d\n",cpu.ebx,cpu.ebx);
-      printf("esp\t ox%x  %d\n",cpu.esp,cpu.esp);
-      printf("ebp\t ox%x  %d\n",cpu.ebp,cpu.ebp);
-      printf("esi\t ox%x  %d\n",cpu.esi,cpu.esi);
-      printf("ebi\t ox%x  %d\n",cpu.edi,cpu.edi);
-      printf("eip\t ox%x  %d\n",cpu.eip,cpu.eip);
+      printf("eax\t 0x%x  %d\n",cpu.eax,cpu.eax);
+      printf("ecx\t 0x%x  %d\n",cpu.ecx,cpu.ecx);     
+      printf("edx\t 0x%x  %d\n",cpu.edx,cpu.edx);
+      printf("ebx\t 0x%x  %d\n",cpu.ebx,cpu.ebx);
+      printf("esp\t 0x%x  %d\n",cpu.esp,cpu.esp);
+      printf("ebp\t 0x%x  %d\n",cpu.ebp,cpu.ebp);
+      printf("esi\t 0x%x  %d\n",cpu.esi,cpu.esi);
+      printf("ebi\t 0x%x  %d\n",cpu.edi,cpu.edi);
+      printf("eip\t 0x%x  %d\n",cpu.eip,cpu.eip);
     }
 return 0;
 };
@@ -133,7 +133,7 @@ static int cmd_x(char *args){
 	int addr=cmd_p(s2);
         for(int i=0;i<len;++i)
 	{
-           printf("ox%x: %d\n",addr+i*4,vaddr_read(addr+i*4,4));
+          printf("0x%x: %d\n",addr+i*4,vaddr_read(addr+i*4,4));
 	}
   return 0;
 }
