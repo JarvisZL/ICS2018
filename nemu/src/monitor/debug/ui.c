@@ -46,7 +46,11 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
+ // { "si", "Step Through", cmd_si},
+ 
+ 
+ 
+ 
   /* TODO: Add more commands */
 
 };
@@ -57,7 +61,7 @@ static int cmd_help(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
   int i;
-
+  puts(args); 
   if (arg == NULL) {
     /* no argument given */
     for (i = 0; i < NR_CMD; i ++) {
@@ -75,6 +79,12 @@ static int cmd_help(char *args) {
   }
   return 0;
 }
+
+//static int cmd_si(char *args){};
+	
+
+
+
 
 void ui_mainloop(int is_batch_mode) {
   if (is_batch_mode) {
