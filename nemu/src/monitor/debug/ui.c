@@ -100,7 +100,15 @@ static int cmd_info(char *args){
      const char s[2]="r";
     if(strcmp(args,s)==0)
     {
-      printf("eax\t ox%x  %d",cpu.eax,cpu.eax); 
+      printf("eax\t ox%x  %d\n",cpu.eax,cpu.eax);
+      printf("eax\t ox%x  %d\n",cpu.ecx,cpu.ecx);     
+      printf("eax\t ox%x  %d\n",cpu.edx,cpu.edx);
+      printf("eax\t ox%x  %d\n",cpu.ebx,cpu.ebx);
+      printf("eax\t ox%x  %d\n",cpu.esp,cpu.esp);
+      printf("eax\t ox%x  %d\n",cpu.ebp,cpu.ebp);
+      printf("eax\t ox%x  %d\n",cpu.esi,cpu.esi);
+      printf("eax\t ox%x  %d\n",cpu.edi,cpu.edi);
+      printf("eax\t ox%x  %d\n",cpu.eip,cpu.eip);
     }
 return 0;
 };
