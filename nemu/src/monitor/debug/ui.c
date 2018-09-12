@@ -40,6 +40,8 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args);
 
+static int cmd_info(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -49,10 +51,9 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Step Through", cmd_si},
+  { "info", "print program status", cmd_info}, 
  
- 
- 
- 
+
   /* TODO: Add more commands */
 
 };
@@ -95,7 +96,14 @@ static int cmd_si(char *args){
   return 0;
 };
 	
-
+static int cmd_info(char *args){
+     const char s[2]="r";
+    if(strcmp(args,s)==0)
+    {
+      printf("eax\t ox%x  %d",cpu.eax,cpu.eax); 
+    }
+return 0;
+};
 
 
 
