@@ -42,6 +42,10 @@ static int cmd_si(char *args);
 
 static int cmd_info(char *args);
 
+static int cmd_p(char *args);
+
+static int cmd_x(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -52,8 +56,11 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Step Through", cmd_si},
   { "info", "print program status", cmd_info}, 
- 
+  { "p", "print express", cmd_p},
+  { "x", "scan memory", cmd_x},
 
+
+  
   /* TODO: Add more commands */
 
 };
@@ -64,7 +71,7 @@ static int cmd_help(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
   int i;
-  
+ 
   if (arg == NULL) {
     /* no argument given */
     for (i = 0; i < NR_CMD; i ++) {
@@ -112,6 +119,25 @@ static int cmd_info(char *args){
     }
 return 0;
 };
+//now the cmd_p is not completed
+static int cmd_p(char *args){
+       char* useless;
+       long num=strtol(args,&useless,16); 
+  return (int) num;
+}
+
+static int cmd_x(char *args){
+        char* s1=strtok(args," ");
+        char* s2=s1+strlen(s1)+1;
+	int len=atoi(s1);
+	int addr=cmd_p(s2);
+        for(int i=0;i<len;++i)
+	{
+           printf("ox%x: %d\n",addr+i*4,vaddr_read(addr,4));
+	}
+  return 0;
+}
+
 
 
 
