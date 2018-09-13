@@ -117,6 +117,25 @@ static int cmd_info(char *args){
       printf("ebi\t 0x%x \t%d\n",cpu.edi,cpu.edi);
       printf("eip\t 0x%x \t%d\n",cpu.eip,cpu.eip);
        
+      printf("ax\t 0x%x \t%d\n",cpu.gpr[0]._16,cpu.gpr[0]._16);
+      printf("cx\t 0x%x \t%d\n",cpu.gpr[1]._16,cpu.gpr[1]._16);
+      printf("dx\t 0x%x \t%d\n",cpu.gpr[2]._16,cpu.gpr[2]._16);
+      printf("bx\t 0x%x \t%d\n",cpu.gpr[3]._16,cpu.gpr[2]._16);
+      printf("sp\t 0x%x \t%d\n",cpu.gpr[4]._16,cpu.gpr[4]._16);
+      printf("bp\t 0x%x \t%d\n",cpu.gpr[5]._16,cpu.gpr[5]._16);
+      printf("si\t 0x%x \t%d\n",cpu.gpr[6]._16,cpu.gpr[6]._16);
+      printf("di\t 0x%x \t%d\n",cpu.gpr[7]._16,cpu.gpr[7]._16);
+      
+      printf("al\t 0x%x \t%d\n",cpu.gpr[0]._8[0],cpu.gpr[0]._8[0]);
+      printf("cl\t 0x%x \t%d\n",cpu.gpr[1]._8[0],cpu.gpr[1]._8[0]);
+      printf("dl\t 0x%x \t%d\n",cpu.gpr[2]._8[0],cpu.gpr[2]._8[0]);
+      printf("bl\t 0x%x \t%d\n",cpu.gpr[3]._8[0],cpu.gpr[3]._8[0]);
+       
+      printf("ah\t 0x%x \t%d\n",cpu.gpr[0]._8[1],cpu.gpr[0]._8[1]);
+      printf("ch\t 0x%x \t%d\n",cpu.gpr[1]._8[1],cpu.gpr[1]._8[1]); 
+      printf("dh\t 0x%x \t%d\n",cpu.gpr[2]._8[1],cpu.gpr[2]._8[1]);
+      printf("bh\t 0x%x \t%d\n",cpu.gpr[3]._8[1],cpu.gpr[3]._8[1]);
+      
     }
 return 0;
 };
