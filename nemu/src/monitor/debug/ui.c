@@ -107,15 +107,16 @@ static int cmd_info(char *args){
      const char s[2]="r";
     if(strcmp(args,s)==0)
     {
-      printf("eax\t 0x%x  %d\n",cpu.eax,cpu.eax);
-      printf("ecx\t 0x%x  %d\n",cpu.ecx,cpu.ecx);     
-      printf("edx\t 0x%x  %d\n",cpu.edx,cpu.edx);
-      printf("ebx\t 0x%x  %d\n",cpu.ebx,cpu.ebx);
-      printf("esp\t 0x%x  %d\n",cpu.esp,cpu.esp);
-      printf("ebp\t 0x%x  %d\n",cpu.ebp,cpu.ebp);
-      printf("esi\t 0x%x  %d\n",cpu.esi,cpu.esi);
-      printf("ebi\t 0x%x  %d\n",cpu.edi,cpu.edi);
-      printf("eip\t 0x%x  %d\n",cpu.eip,cpu.eip);
+      printf("eax\t 0x%x \t%d\n",cpu.eax,cpu.eax);
+      printf("ecx\t 0x%x \t%d\n",cpu.ecx,cpu.ecx);     
+      printf("edx\t 0x%x \t%d\n",cpu.edx,cpu.edx);
+      printf("ebx\t 0x%x \t%d\n",cpu.ebx,cpu.ebx);
+      printf("esp\t 0x%x \t%d\n",cpu.esp,cpu.esp);
+      printf("ebp\t 0x%x \t%d\n",cpu.ebp,cpu.ebp);
+      printf("esi\t 0x%x \t%d\n",cpu.esi,cpu.esi);
+      printf("ebi\t 0x%x \t%d\n",cpu.edi,cpu.edi);
+      printf("eip\t 0x%x \t%d\n",cpu.eip,cpu.eip);
+       
     }
 return 0;
 };
