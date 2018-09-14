@@ -144,7 +144,7 @@ static int cmd_p(char *args){
        char* useless;
        long num=strtol(args,&useless,16);
        static long cnt=1;
-       printf("$%ld = %ld",cnt,num);
+       printf("$%ld = %ld\n",cnt,num);
   return (int) num;
 }
 
