@@ -142,32 +142,16 @@ return 0;
 //now the cmd_p is not completed
 
 static int cmd_p(char *args){
-       char* aft_num;
-       long num=0;
-       static long cnt=0;
-       char* tst;
-       char* _cmd;
-       tst=strtok(args," ");
-       if(strcmp(tst,args)!=0)
-       {
-	   _cmd=tst+strlen(tst)+1;
-	   num=strtol(_cmd,&aft_num,16);
-	   return (int) num;
-       }
-       else
-       {
-	   _cmd=args;
-           num=strtol(_cmd,&aft_num,16);
-	   cnt++;
-	   printf("$%ld = %ld\n",cnt,num);
-	   return (int) num;
-       }
+    printf("11");
+return 0;    
 }
 
 static int cmd_x(char *args){
         char* s1=strtok(args," ");
 	int len=atoi(s1);
-	int addr=cmd_p(args);
+	char* s2=s1+strlen(s1)+1;
+	char* aft_num;
+        int addr=(int)strtol(s2,&aft_num,16);
         for(int i=0;i<len;++i)
 	{
           printf("0x%x: 0x%x\n",addr+i*4,vaddr_read(addr+i*4,4));
