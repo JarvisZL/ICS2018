@@ -167,8 +167,7 @@ static int cmd_p(char *args){
 static int cmd_x(char *args){
         char* s1=strtok(args," ");
 	int len=atoi(s1);
-	char* s2=args;
-	int addr=cmd_p(s2);
+	int addr=cmd_p(args);
         for(int i=0;i<len;++i)
 	{
           printf("0x%x: 0x%x\n",addr+i*4,vaddr_read(addr+i*4,4));
