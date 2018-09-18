@@ -140,9 +140,10 @@ static int cmd_info(char *args){
 return 0;
 };
 //now the cmd_p is not completed
-static long cnt=0;
+
 static int cmd_p(char *args){
        char* useless;
+       static long cnt=0;
        long num=strtol(args,&useless,16);
        cnt++;
        printf("$%ld = %ld\n",cnt,num);
