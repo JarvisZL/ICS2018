@@ -229,7 +229,7 @@ uint32_t eval(int p,int q)
 								      {
 									      if(j==q&&tokens[j].type==TK_DEM)
 									      {
-										      if(cnt/2==0) return eval(q,q);
+										      if(cnt%2==0) return eval(q,q);
 									              else return -eval(q,q);
 									      }
 								              else break; 	      
