@@ -143,12 +143,13 @@ bool check_parentheses(int p,int q,bool* le)
      return ok;
 }
 
-uint32_t eval(int p,int q)
+uint32_t eval(int p,int q,bool* LE)
 {
       bool legal=true;	
       if(p>q)
       {
-        printf("zzzz\n");
+	printf("it's illegal!");
+        *LE=false;
 	return 0;
       }
       else if(p==q)
@@ -158,12 +159,13 @@ uint32_t eval(int p,int q)
       }
       else if(check_parentheses(p,q,&legal)==true)
       {
-	      return eval(p+1,q-1);
+	      return eval(p+1,q-1,LE);
       }
       else
       {
              if(legal==false)
 	     {
+	       *LE=false;
                printf("the expression is illegal!\n");
 	       return 0; 
 	     }
@@ -229,8 +231,8 @@ uint32_t eval(int p,int q)
 								      {
 									      if(j==q&&tokens[j].type==TK_DEM)
 									      {
-										      if(cnt%2==0) return eval(q,q);
-									              else return -eval(q,q);
+										      if(cnt%2==0) return eval(q,q,LE);
+									              else return -eval(q,q,LE);
 									      }
 								              else break; 	      
 								      }
@@ -251,8 +253,8 @@ uint32_t eval(int p,int q)
 			  }
 		  }
                   
-	          uint32_t val1=eval(p,op.posi-1);
-	          uint32_t val2=eval(op.posi+1,q);
+	          uint32_t val1=eval(p,op.posi-1,LE);
+	          uint32_t val2=eval(op.posi+1,q,LE);
 	          switch(tokens[op.posi].type)
 		  {
 			  case '+': return val1+val2;
@@ -276,7 +278,8 @@ uint32_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
  uint32_t result;
- result=eval(0,nr_token-1); 
+ bool LEGAL=true;
+ result=eval(0,nr_token-1,&LEGAL); 
  return result;
  //printf("%d\n",result);
  // TODO();
