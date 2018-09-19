@@ -142,7 +142,8 @@ return 0;
 //now the cmd_p is not completed
 
 static int cmd_p(char *args){
-    printf("11");
+      bool success;
+      expr(args,&success); 
 return 0;    
 }
 
