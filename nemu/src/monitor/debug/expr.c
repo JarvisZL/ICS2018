@@ -1,5 +1,5 @@
 #include "nemu.h"
-
+#include "stdlib.h"
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
@@ -111,6 +111,163 @@ static bool make_token(char *e) {
   return true;
 }
 
+bool check_parentheses(int p,int q,bool* le)
+{
+     bool ok=true;
+     *le=true;
+     int stack=0;
+     for(int i=p;i<=q;++i)
+     {
+         if(tokens[i].type=='(') 
+	      stack++;
+	 else if(tokens[i].type==')')
+	 {
+		if(stack==0)
+		{
+			ok=false;
+			le=false;
+			break;
+		}
+		else
+		{
+			stack--;
+		}
+	 }
+	 else
+	 {
+	         if(stack==0)
+	          {
+			  ok=false;
+		  }
+	 }   
+     }
+     return ok;
+}
+
+uint32_t eval(int p,int q)
+{
+      bool legal;	
+      if(p>q)
+      {
+          assert(0); 
+      }
+      else if(p==q)
+      {
+          char* useless;
+	  return (uint32_t) strtol(tokens[p].str,&useless,10);
+      }
+      else if(check_parentheses(p,q,&legal)==true)
+      {
+	      return eval(p+1,q-1);
+      }
+      else
+      {
+             if(legal==false)
+	     {
+               printf("the expression is illegal!\n");
+	       return 83557; 
+	     }
+	     else
+	     {
+		  int par_cnt=0;//let it know whether operater is in pars
+                 typedef struct OP{
+			  int posi;
+                          int prio;//define priority about '+'(1) '-'(1) '*'(2) '/'(2)
+		  } O_P;
+		 O_P op; 
+                 op.posi=-1;
+		 op.prio=100;
+                  for(int i=p;i<=q;++i)
+		  {
+			  if(tokens[i].type!='+'&&tokens[i].type!='-'&&tokens[i].type!='*'&&tokens[i].type!='/'&&tokens[i].type!='('&&tokens[i].type!=')')
+				  continue;
+			  else
+			  {
+                                   if(tokens[i].type=='(')
+					  par_cnt++;
+				   else if(tokens[i].type==')')
+					  par_cnt--;
+				   else if(tokens[i].type=='+')
+				  {
+                                       if(par_cnt==0&&op.prio>=1)
+				       {
+					       op.posi=i;
+					       op.prio=1;
+				       }
+				       else continue;
+				  }
+				   else if(tokens[i].type=='*')
+				   {
+					   if(par_cnt==0&&op.prio>=2)
+					   {
+						   op.posi=i;
+						   op.prio=2;
+					   }
+					   else continue;
+				   }
+				   else if(tokens[i].type=='/')
+				   {
+					   if(par_cnt==0&&op.prio>=2)
+					   {
+						   op.posi=i;
+						   op.prio=2;
+					   }
+                                           else continue;
+				   }
+				   else if(tokens[i].type=='-')
+				   {
+                                          if(i==p||tokens[i-1].type!=TK_DEM)
+                                               {
+						       if(i==p)
+						       {
+							      int cnt=1;
+							      for(int j=p+1;j<=q;j++)
+							      {
+								      if(tokens[j].type=='-')
+									      cnt++;
+								      else
+								      {
+									      if(j==q&&tokens[j].type==TK_DEM)
+									      {
+										      if(cnt/2==0) return eval(q,q);
+									              else return -eval(q,q);
+									      }
+								              else break; 	      
+								      }
+							      }
+
+						       }
+					       }
+					  else
+					  {
+                                                  if(par_cnt==0&&op.prio>=1)
+						  {
+							  op.posi=i;
+							  op.prio=1;
+						  }
+					  }
+
+				   }
+			  }
+		  }
+                  
+	          uint32_t val1=eval(p,op.posi-1);
+	          uint32_t val2=eval(op.posi+1,q);
+	          switch(tokens[op.posi].type)
+		  {
+			  case '+': return val1+val2;
+			  case '-': return val1-val2;
+			  case '*': return val1*val2;
+			  case '/': return val1/val2;
+		          default: assert(0);
+		  }	  
+	     }
+
+      }
+
+}
+
+
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
@@ -118,7 +275,10 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
-
-  return 0;
+ uint32_t result;
+ result=eval(0,nr_token-1); 
+ return result;
+ //printf("%d\n",result);
+ // TODO();
+ // return 0;
 }

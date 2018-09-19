@@ -143,7 +143,10 @@ return 0;
 
 static int cmd_p(char *args){
       bool success;
-      expr(args,&success); 
+      uint32_t re;
+      static int cnt=0;
+      re=expr(args,&success);
+      printf("$%d=\t%d\n",++cnt,re); 
 return 0;    
 }
 
