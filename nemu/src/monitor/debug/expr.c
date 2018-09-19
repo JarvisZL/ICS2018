@@ -114,7 +114,6 @@ static bool make_token(char *e) {
 bool check_parentheses(int p,int q,bool* le)
 {
      bool ok=true;
-     *le=true;
      int stack=0;
      for(int i=p;i<=q;++i)
      {
@@ -125,7 +124,7 @@ bool check_parentheses(int p,int q,bool* le)
 		if(stack==0)
 		{
 			ok=false;
-			le=false;
+			*le=false;
 			break;
 		}
 		else
@@ -146,7 +145,7 @@ bool check_parentheses(int p,int q,bool* le)
 
 uint32_t eval(int p,int q)
 {
-      bool legal;	
+      bool legal=true;	
       if(p>q)
       {
 
