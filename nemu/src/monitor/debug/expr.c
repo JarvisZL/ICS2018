@@ -149,7 +149,8 @@ uint32_t eval(int p,int q)
       bool legal;	
       if(p>q)
       {
-        assert(0); 
+        printf("zzzz\n"); 
+	return 0;
       }
       else if(p==q)
       {
