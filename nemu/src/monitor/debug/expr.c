@@ -278,7 +278,7 @@ uint32_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
  uint32_t result;
- bool LEGAL;
+ bool LEGAL=true;
  result=eval(0,nr_token-1,&LEGAL);
  *success=LEGAL; 
  return result;
