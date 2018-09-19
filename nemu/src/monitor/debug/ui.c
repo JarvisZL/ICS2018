@@ -142,11 +142,14 @@ return 0;
 //now the cmd_p is not completed
 
 static int cmd_p(char *args){
-      bool success;
+      bool success=true;
       uint32_t re;
       static int cnt=0;
       re=expr(args,&success);
-      printf("$%d=\t%d\n",++cnt,re); 
+      if(success==true)
+      {
+      printf("$%d=\t%d\n",++cnt,re);
+      }
 return 0;    
 }
 
