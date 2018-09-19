@@ -166,7 +166,7 @@ uint32_t eval(int p,int q)
              if(legal==false)
 	     {
                printf("the expression is illegal!\n");
-	       return 83557; 
+	       return 0; 
 	     }
 	     else
 	     {
