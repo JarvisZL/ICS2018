@@ -23,6 +23,10 @@ void tst(){
    //bool succ;
    //char s[200];
    FILE *fp=fopen("/nemu/tools/gen-expr/input","r");
+   if(fp==NULL)
+   {
+	   assert(0);
+   } 
    while(!feof(fp))
    {
 	// memset(s,0,sizeof(s));
