@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <memory.h>
-#include "monitor/expr.h"
+#include <monitor/expr.h>
 
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
