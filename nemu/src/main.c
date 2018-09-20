@@ -1,7 +1,7 @@
 
 #include </home/jarviszly/ics2018/nemu/include/monitor/expr.h>
 
-__EXPR_H__
+
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
 void tst();
