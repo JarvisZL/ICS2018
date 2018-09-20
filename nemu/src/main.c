@@ -29,7 +29,7 @@ void tst_cmd_p(){
    {
 	 memset(s,0,sizeof(s));
 	// fscanf(fp,"%s",old_re);
-         fgets(s,1000,fp);
+        // fgets(s,1000,fp);
        	 re=expr(s,&succ);
 	 printf("%u\n",re);
    }
