@@ -31,7 +31,7 @@ void tst(){
 	// fscanf(fp,"%s",old_re);
         // fgets(s,1000,fp);
       // 	 re=expr(s,&succ);
-	 printf("11\n");
+	// printf("11\n");
    }
    fclose(fp);
 
