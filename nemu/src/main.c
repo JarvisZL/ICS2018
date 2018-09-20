@@ -24,7 +24,7 @@ void tst(){
    //bool succ;
    //char s[200];
    FILE *fp=NULL;
-   fp=fopen("/nemu/tools/gen-expr/input","r");
+   fp=fopen("/tools/gen-expr/input","r");
    while(!feof(fp))
    {
 	// memset(s,0,sizeof(s));
