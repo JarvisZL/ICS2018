@@ -24,7 +24,7 @@ void tst_cmd_p(){
    bool succ;
    char s[1000];
    FILE *fp=NULL;
-   fp=fopen("/ics2018/nemu/tools/gen-expr/input","r");
+   fp=fopen("/nemu/tools/gen-expr/input","r");
    while(!feof(fp))
    {
 	 memset(s,0,sizeof(s));
