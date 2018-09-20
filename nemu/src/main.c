@@ -32,6 +32,7 @@ void tst(){
    {
         do{
 	  c=fgetc(fp);
+	  printf("%c",c);
 	}while(c!=' ');
         
         do{
