@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
 void tst(){
    char c;
-   int cnt=0;
+   int cnt;
 //   unsigned int re;
   // bool succ;
    char s[200];
@@ -30,6 +30,8 @@ void tst(){
    } 
    while(!feof(fp))
    {
+	memset(s,0,sizeof(s));
+	cnt=0;
         do{
 	  c=fgetc(fp);
 	}while(c!=' ');
