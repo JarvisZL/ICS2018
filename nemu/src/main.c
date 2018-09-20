@@ -34,6 +34,6 @@ void tst(){
 	 printf("11\n");
    }
    fclose(fp);
-
+   return;
 }
 
