@@ -20,18 +20,18 @@ int main(int argc, char *argv[]) {
 
 void tst_cmd_p(){
   // char old_re[50];
-   unsigned int re;
-   bool succ;
-   char s[200];
+ //  unsigned int re;
+   //bool succ;
+   //char s[200];
    FILE *fp=NULL;
-   fp=fopen("/nemu/tools/gen-expr/input","r+");
+   fp=fopen("/nemu/tools/gen-expr/input","r");
    while(!feof(fp))
    {
 	// memset(s,0,sizeof(s));
 	// fscanf(fp,"%s",old_re);
         // fgets(s,1000,fp);
-       	 re=expr(s,&succ);
-	 printf("%u\n",re);
+      // 	 re=expr(s,&succ);
+	 printf("11\n");
    }
    fclose(fp);
 
