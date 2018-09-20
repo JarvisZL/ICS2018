@@ -4,26 +4,29 @@
 #include <time.h>
 #include <assert.h>
 #include <string.h>
-#include <math.h>
+
 
 // this should be enough
 static char buf[65536];
 int buf_num=0;
 int token_num=0;
-
+static int dem_if=0;
 uint32_t choose(uint32_t x)
-{
+{    
       return (rand() %(x-0))+0; 
 }
 
 static void gen_num(){
-     int lenth=(rand() %(50-1+1))+1;
-     for(int i=0;i<lenth;++i)
+     int lenth=(rand()%(4-1+1))+1;
+     buf[buf_num]=(rand()%(9-1+1))+1+48;
+     for(int i=1;i<lenth;++i)
      {
-             buf[buf_num+i]=(rand() %(9-0+1))+0;
+             buf[buf_num+i]=(rand() %(9-0+1))+0+48;
      }
+     buf_num+=lenth;
+     buf[buf_num++]='u';
      token_num++;
-
+     dem_if=1;
 }
 
 static inline void gen(char c){
@@ -32,6 +35,7 @@ static inline void gen(char c){
 }
 
 static inline void gen_rand_op(){
+   
        int sel;
        sel=(rand() % (3-0+1))+0;
        switch(sel){
@@ -43,7 +47,7 @@ static inline void gen_rand_op(){
       token_num++;    
 }
 
-static  void gen_rand_space(){
+static  void gen_space(){
       int sp_num;
       sp_num=(rand()%(5-0+1))+0;
       for(int i=0;i<sp_num;i++)
@@ -55,11 +59,14 @@ static  void gen_rand_space(){
 
 
 static inline void gen_rand_expr() {
-         switch(choose(3)){
-		 case 0: gen_rand_space(); gen_num(); gen_rand_space(); break;
-                 case 1: gen_rand_space(); gen('('); gen_rand_expr(); gen(')'); gen_rand_space(); break;
-	         default: gen_rand_expr(); gen_rand_op(); gen_rand_expr(); break;
-         }	
+          switch (choose(8)) {
+		        case 0:
+			case 1: gen_rand_expr(); gen_rand_op(); gen_rand_expr(); break;
+		        case 2:
+			case 3: gen_space(); gen('('); gen_rand_expr(); gen(')'); gen_space(); break;
+		        default: gen_space(); gen_num(); gen_space(); break;
+		             }
+	  buf[buf_num]='\0';
 }
 
 static char code_buf[65536];
@@ -79,10 +86,12 @@ int main(int argc, char *argv[]) {
     sscanf(argv[1], "%d", &loop);
   }
   int i;
+  buf[0]='\0';
   for (i = 0; i < loop; i ++) {
     gen_rand_expr();
     while(token_num>100)
     {
+
 	    token_num=0;
 	    buf_num=0;
 	    buf[0]='\0';
@@ -104,7 +113,8 @@ int main(int argc, char *argv[]) {
     assert(fp != NULL);
 
     int result;
-    fscanf(fp, "%d", &result);
+   if(fscanf(fp, "%d", &result)==1)
+   {
     pclose(fp);
 
     printf("%u %s\n", result, buf);
@@ -112,6 +122,14 @@ int main(int argc, char *argv[]) {
     token_num=0;
     buf_num=0;
     buf[0]='\0';
+   }
+  else
+   {
+	   pclose(fp);
+	   token_num=0;
+	   buf_num=0;
+	   buf[0]='\0';
+   }
   }
   return 0;
 }
