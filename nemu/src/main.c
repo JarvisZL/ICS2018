@@ -18,10 +18,10 @@ int main(int argc, char *argv[]) {
 }
 
 void tst(){
-  // char old_re[50];
- //  unsigned int re;
-   //bool succ;
-   //char s[200];
+   char old_re[50];
+   unsigned int re;
+   bool succ;
+   char s[200];
    FILE *fp=fopen("/home/jarviszly/ics2018/nemu/tools/gen-expr/input","r");
    if(fp==NULL)
    {
@@ -29,11 +29,11 @@ void tst(){
    } 
    while(!feof(fp))
    {
-	// memset(s,0,sizeof(s));
-	// fscanf(fp,"%s",old_re);
-        // fgets(s,1000,fp);
-      // 	 re=expr(s,&succ);
-	 printf("11\n");
+          memset(s,0,sizeof(s));
+	 fscanf(fp,"%s",old_re);
+         fgets(s,1000,fp);
+       	 re=expr(s,&succ);
+	 printf("%u\n",re);
    }
    fclose(fp);
    return;
