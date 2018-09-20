@@ -148,7 +148,7 @@ uint32_t eval(int p,int q,bool* LE)
       bool legal=true;	
       if(p>q)
       {
-	printf("it's illegal!");
+	printf("it's illegal!\n");
         *LE=false;
 	return 0;
       }
