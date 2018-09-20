@@ -3,7 +3,7 @@
 
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
-void tst();
+static void tst();
 
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 }
 
 
-void tst(){
+static void tst(){
   // char old_re[50];
  //  unsigned int re;
    //bool succ;
@@ -31,7 +31,7 @@ void tst(){
 	// fscanf(fp,"%s",old_re);
         // fgets(s,1000,fp);
       // 	 re=expr(s,&succ);
-	// printf("11\n");
+	 printf("11\n");
    }
    fclose(fp);
 
