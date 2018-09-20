@@ -3,19 +3,24 @@
 
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
-//static void tst();
+void tst();
 
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
   int is_batch_mode = init_monitor(argc, argv);
   
-  //tst();
-  printf("hello\n");
+  tst();
+
 
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
 
   return 0;
+}
+
+void tst()
+{
+	printf("hello\n");
 }
 
 
