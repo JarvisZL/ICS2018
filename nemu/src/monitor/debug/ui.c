@@ -148,7 +148,7 @@ static int cmd_p(char *args){
       re=expr(args,&success);
       if(success==true)
       {
-      printf("$%d=\t%d\n",++cnt,re);
+      printf("$%d=\t%u\n",++cnt,re);
       }
 return 0;    
 }
