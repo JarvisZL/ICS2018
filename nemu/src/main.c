@@ -22,7 +22,7 @@ void tst(){
  //  unsigned int re;
    //bool succ;
    //char s[200];
-   FILE *fp=fopen("/nemu/tools/gen-expr/input","r");
+   FILE *fp=fopen("/home/jarviszly/ics2018/nemu/tools/gen-expr/input","r");
    if(fp==NULL)
    {
 	   assert(0);
