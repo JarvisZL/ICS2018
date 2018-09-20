@@ -19,10 +19,10 @@ int main(int argc, char *argv[]) {
 
 void tst(){
    char c;
-//   int cnt=0;
-//  unsigned int re;
-  // bool succ;
-  // char s[200];
+   int cnt=0;
+   unsigned int re;
+   bool succ;
+   char s[200];
    FILE *fp=fopen("/home/jarviszly/ics2018/nemu/tools/gen-expr/input","r");
    if(fp==NULL)
    {
@@ -32,14 +32,15 @@ void tst(){
    {
         do{
 	  c=fgetc(fp);
-	  printf("%c",c);
 	}while(c!=' ');
         
         do{
 	  c=fgetc(fp);
-//	  s[cnt++]=c;
+	  s[cnt++]=c;
 	}while(c!='\n');
-
+         
+	re=expr(s,&succ);
+	printf("%u\n",re);
 
    }
    fclose(fp);
