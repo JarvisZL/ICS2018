@@ -18,16 +18,7 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-void tst()
-{
-	FILE *fp=NULL;
-	fp=fopen("/nemu/tools/gen-expr/input","r");
-	printf("hello\n");
-	fclose(fp);
-}
-
-
-/*static void tst(){
+void tst(){
   // char old_re[50];
  //  unsigned int re;
    //bool succ;
@@ -44,5 +35,5 @@ void tst()
    }
    fclose(fp);
 
-}*/
+}
 
