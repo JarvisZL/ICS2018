@@ -20,7 +20,10 @@ int main(int argc, char *argv[]) {
 
 void tst()
 {
+	FILE *fp=NULL;
+	fp=fopen("/nemu/tools/gen-expr/input","r");
 	printf("hello\n");
+	fclose(fp);
 }
 
 
