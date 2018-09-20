@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
 void tst_cmd_p(){
    unsigned int ore;
    unsigned int re;
-   bool succ;
+ //  bool succ;
    char s[500];
    FILE *fp=NULL;
    fp=fopen("/ics2018/nemu/tools/gen-expr/input","r");
@@ -31,7 +31,8 @@ void tst_cmd_p(){
 	 memset(s,0,sizeof(s));
 	 fscanf(fp,"%u",&ore);
          fgets(s,500,fp);
-	 re=expr(s,&succ);
+	 re=0;
+	// re=expr(s,&succ);
 	 printf("%u\n",re);
    }
    fclose(fp);
