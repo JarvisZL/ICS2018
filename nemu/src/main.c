@@ -22,7 +22,7 @@ void tst_cmd_p(){
   // char old_re[50];
    unsigned int re;
    bool succ;
-   char s[1000];
+   char s[200];
    FILE *fp=NULL;
    fp=fopen("/nemu/tools/gen-expr/input","r");
    while(!feof(fp))
