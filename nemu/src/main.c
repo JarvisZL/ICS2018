@@ -3,13 +3,14 @@
 
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
-static void tst();
+//static void tst();
 
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
   int is_batch_mode = init_monitor(argc, argv);
   
-  tst();
+  //tst();
+  printf("hello\n");
 
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
@@ -18,7 +19,7 @@ int main(int argc, char *argv[]) {
 }
 
 
-static void tst(){
+/*static void tst(){
   // char old_re[50];
  //  unsigned int re;
    //bool succ;
@@ -35,5 +36,5 @@ static void tst(){
    }
    fclose(fp);
 
-}
+}*/
 
