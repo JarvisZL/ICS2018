@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
 
 void tst_cmd_p(){
-   unsigned int ore;
+   char old_re[50];
    unsigned int re;
    bool succ;
    char s[500];
@@ -29,7 +29,7 @@ void tst_cmd_p(){
    while(!feof(fp))
    {
 	 memset(s,0,sizeof(s));
-	 fscanf(fp,"%u",&ore);
+	 fscanf(fp,"%s",old_re);
          fgets(s,500,fp);
        	 re=expr(s,&succ);
 	 printf("%u\n",re);

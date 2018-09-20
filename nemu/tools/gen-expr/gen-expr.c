@@ -8,9 +8,11 @@
 
 // this should be enough
 static char buf[65536];
+
 int buf_num=0;
 int token_num=0;
-static int dem_if=0;
+//static int dem_if=0;
+
 uint32_t choose(uint32_t x)
 {    
       return (rand() %(x-0))+0; 
