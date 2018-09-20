@@ -36,10 +36,14 @@ void tst(){
 	  c=fgetc(fp);
 	}while(c!=' ');
         
-        do{
-	  c=fgetc(fp);
-	  s[cnt++]=c;
-	}while(c!='\n');
+        c=fgetc(fp);
+
+	while(c!='\n')
+	{
+            s[cnt++]=c;
+	    c=fgetc(fp);
+	}
+
         
           printf("%s\n",s);
 //	re=expr(s,&succ);
