@@ -57,7 +57,7 @@ void init_regex() {
 
 typedef struct token {
   int type;
-  char str[100];
+  char str[150];
 } Token;
 
 Token tokens[150];
@@ -274,7 +274,6 @@ uint32_t eval(int p,int q,bool* LE)
 					    if(val2==0)
 					    {
 						    *LE=false;
-						    printf("div 0 error!\n");
 						    return 0;
 					    }
 					    else return val1/val2;
