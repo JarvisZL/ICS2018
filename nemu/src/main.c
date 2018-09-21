@@ -43,7 +43,7 @@ void tst(){
 	    c=fgetc(fp);
 	}
 
-        
+        printf("%s\n", s);
 
 
    }
