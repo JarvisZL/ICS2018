@@ -48,7 +48,10 @@ void tst(){
 
 	bool succ = true;
 	re=expr(s, &succ);
+	if(succ==true)
+	{
 	printf("%u\n",re);
+	}
 	re=0;
 	
 
