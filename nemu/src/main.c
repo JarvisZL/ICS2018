@@ -20,6 +20,7 @@ int main(int argc, char *argv[]) {
 }
 
 void tst(){
+   unsigned int re;
    char c;
    int cnt;
    char s[200];
@@ -43,7 +44,7 @@ void tst(){
 	    c=fgetc(fp);
 	}
 
-	unsigned int re;
+
 	bool succ = true;
 	re=expr(s, &succ);
 	printf("%u\n",re);
