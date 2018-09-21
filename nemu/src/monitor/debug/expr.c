@@ -295,6 +295,7 @@ uint32_t eval(int p,int q,bool* LE)
 uint32_t expr(char *e, bool *success) {
   memset(tokens,0,sizeof(tokens));
   if_ze=false;
+
   if (!make_token(e)) {
     *success = false;
     if(*success==false)
@@ -305,8 +306,10 @@ uint32_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
  uint32_t result;
  bool LEGAL=true;
+
  result=eval(0,nr_token-1,&LEGAL);
  *success=LEGAL; 
+
  if(if_ze==true)
 	 printf("div zero error!\n");
 

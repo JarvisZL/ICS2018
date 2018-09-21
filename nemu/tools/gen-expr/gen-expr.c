@@ -91,6 +91,8 @@ int main(int argc, char *argv[]) {
   buf[0]='\0';
   for (i = 0; i < loop; i ++) {
     gen_rand_expr();
+   
+    //my
     while(token_num>100)
     {
 
