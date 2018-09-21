@@ -269,7 +269,17 @@ uint32_t eval(int p,int q,bool* LE)
 			  case '+': return val1+val2;
 			  case '-': return val1-val2;
 			  case '*': return val1*val2;
-			  case '/': return val1/val2;
+			  case '/': 
+				    {
+					    if(val2==0)
+					    {
+						    *LE=false;
+						    printf("div 0 error!\n");
+						    return 0;
+					    }
+					    else return val1/val2;
+					    break;
+				    }
 		          default: assert(0);
 		  }	  
 	     }
