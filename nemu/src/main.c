@@ -23,7 +23,7 @@ void tst(){
    unsigned int re;
    char c;
    int cnt;
-   char s[100];
+   char s[300];
    FILE *fp=fopen("/home/jarviszly/ics2018/nemu/tools/gen-expr/input","r");
    if(fp==NULL)
    {
