@@ -51,7 +51,7 @@ static inline void gen_rand_op(){
 
 static  void gen_space(){
       int sp_num;
-      sp_num=(rand()%(5-0+1))+0;
+      sp_num=(rand()%(3-0+1))+0;
       for(int i=0;i<sp_num;i++)
       {
 	      buf[buf_num+i]=' ';
