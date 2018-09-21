@@ -49,7 +49,7 @@ void tst(){
 	printf("%u\n",re);
 
    }
-   printf("hello");
+
    fclose(fp);
    return;
 }
