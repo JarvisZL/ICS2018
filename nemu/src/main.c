@@ -8,7 +8,7 @@ void tst();
 
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
-  tst();
+  //tst();
 	
   int is_batch_mode = init_monitor(argc, argv);
 
