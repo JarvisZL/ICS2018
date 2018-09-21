@@ -45,6 +45,8 @@ void tst(){
 
         printf("%s\n", s);
 
+	bool succ = true;
+	expr(s, &succ);
 
    }
    fclose(fp);
