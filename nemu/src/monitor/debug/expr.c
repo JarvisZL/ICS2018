@@ -31,7 +31,7 @@ static struct rule {
   {"\\)", ')'},        //')'
   {"==", TK_EQ},        // equal
   {"[0-9]+",TK_DEM},    //demical number
-  {"u|U", TK_U32}     // uint32_t
+  {"[Uu]", TK_U32}     // uint32_t
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
