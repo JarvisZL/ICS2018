@@ -150,6 +150,7 @@ static int cmd_p(char *args){
       {
          printf("$%d= %u\n",++cnt,res);
       }
+      res=0;
 return 0;    
 }
 
