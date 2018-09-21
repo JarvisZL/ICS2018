@@ -28,13 +28,12 @@ void tst(){
    {
 	   assert(0);
    } 
-   while(!feof(fp))
+   while((c=fgetc(fp))!=EOF)
    {
 	memset(s,0,sizeof(s));
 	cnt=0;
-        do{
+        while(c!=' ')
 	  c=fgetc(fp);
-	}while(c!=' ');
         
         c=fgetc(fp);
 
