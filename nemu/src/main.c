@@ -44,10 +44,10 @@ void tst(){
 	    c=fgetc(fp);
 	}
 
-        printf("%s\n", s);
-
+	unsigned int re;
 	bool succ = true;
-	expr(s, &succ);
+	re=expr(s, &succ);
+	printf("%u\n",re);
 
    }
    fclose(fp);
