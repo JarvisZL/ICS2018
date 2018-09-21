@@ -77,8 +77,8 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-//       Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
-  //       i, rules[i].regex, position, substr_len, substr_len, substr_start);
+       Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+        i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
@@ -150,6 +150,8 @@ bool check_parentheses(int p,int q,bool* le)
 
      return ok;
 }
+
+bool if_ze=false;
 
 uint32_t eval(int p,int q,bool* LE)
 {
@@ -274,6 +276,7 @@ uint32_t eval(int p,int q,bool* LE)
 					    if(val2==0)
 					    {
 						    *LE=false;
+						    if_ze=true;
 						    return 0;
 					    }
 					    else return val1/val2;
@@ -286,6 +289,7 @@ uint32_t eval(int p,int q,bool* LE)
       }
 
 }
+
 
 
 uint32_t expr(char *e, bool *success) {
@@ -302,6 +306,8 @@ uint32_t expr(char *e, bool *success) {
  bool LEGAL=true;
  result=eval(0,nr_token-1,&LEGAL);
  *success=LEGAL; 
+ if(if_ze==true)
+	 printf("div zero error!\n");
 
  return result;
  //TODO();
