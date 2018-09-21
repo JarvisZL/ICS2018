@@ -21,8 +21,6 @@ int main(int argc, char *argv[]) {
 void tst(){
    char c;
    int cnt;
-  unsigned int re;
-   bool succ=true;
    char s[200];
    FILE *fp=fopen("/home/jarviszly/ics2018/nemu/tools/gen-expr/input","r");
    if(fp==NULL)
@@ -47,8 +45,6 @@ void tst(){
 
         
 
-	re=expr(s,&succ);
-	printf("%u\n",re);
 
    }
    fclose(fp);
