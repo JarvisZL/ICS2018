@@ -143,7 +143,7 @@ return 0;
 
 static int cmd_p(char *args){
       bool success=true;
-      uint32_t res;
+     unsigned int res;
       static int cnt=0;
       res=expr(args,&success);
       if(success==true)
