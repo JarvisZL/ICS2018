@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
 	
   int is_batch_mode = init_monitor(argc, argv);
 
-  tst();
+//  tst();
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
 
