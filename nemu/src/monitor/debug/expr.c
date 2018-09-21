@@ -180,10 +180,10 @@ uint32_t eval(int p,int q,bool* LE)
 	     }
 	     else
 	     {
-		  int par_cnt=0;//let it know whether operater is in pars
+		  uint32_t par_cnt=0;//let it know whether operater is in pars
                  typedef struct OP{
 			  int posi;
-                          int prio;//define priority about '+'(1) '-'(1) '*'(2) '/'(2)
+                          uint32_t prio;//define priority about '+'(1) '-'(1) '*'(2) '/'(2)
 		  } O_P;
 		 O_P op; 
                  op.posi=-1;
