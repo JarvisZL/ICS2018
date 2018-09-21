@@ -143,12 +143,12 @@ return 0;
 
 static int cmd_p(char *args){
       bool success=true;
-      uint32_t re;
+      uint32_t res;
       static int cnt=0;
-      re=expr(args,&success);
+      res=expr(args,&success);
       if(success==true)
       {
-      printf("$%d=\t%u\n",++cnt,re);
+      printf("$%d=\t%u\n",++cnt,res);
       }
 return 0;    
 }
