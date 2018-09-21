@@ -49,6 +49,7 @@ void tst(){
 	re=expr(s, &succ);
 	printf("%u\n",re);
 	re=0;
+	cnt=0;
 
    }
 
