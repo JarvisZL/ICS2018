@@ -28,7 +28,7 @@ static void gen_num(){
      buf_num+=lenth;
      buf[buf_num++]='u';
      token_num++;
-     dem_if=1;
+
 }
 
 static inline void gen(char c){
