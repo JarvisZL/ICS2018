@@ -142,6 +142,12 @@ bool check_parentheses(int p,int q,bool* le)
 		  }
 	 }   
      }
+     if(stack!=0)
+     {
+	     ok=false;
+	     *le=false;
+     }
+
      return ok;
 }
 
