@@ -34,8 +34,9 @@ void tst(){
 	memset(s,0,sizeof(s));
 	cnt=0;
         while(c!=' ')
+	{
 	  c=fgetc(fp);
-        
+	}
         c=fgetc(fp);
 
 	while(c!='\n')
@@ -49,7 +50,7 @@ void tst(){
 	re=expr(s, &succ);
 	printf("%u\n",re);
 	re=0;
-	cnt=0;
+	
 
    }
 
