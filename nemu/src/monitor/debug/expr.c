@@ -153,6 +153,7 @@ bool check_parentheses(int p,int q,bool* le)
 
 uint32_t eval(int p,int q,bool* LE)
 {
+
       bool legal=true;	
       if(p>q)
       {
@@ -279,6 +280,7 @@ uint32_t eval(int p,int q,bool* LE)
 
 
 uint32_t expr(char *e, bool *success) {
+  memset(tokens,0,sizeof(tokens));
   if (!make_token(e)) {
     *success = false;
     if(*success==false)
