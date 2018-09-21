@@ -19,7 +19,7 @@ uint32_t choose(uint32_t x)
 }
 
 static void gen_num(){
-     int lenth=(rand()%(4-1+1))+1;
+     int lenth=(rand()%(6-1+1))+1;
      buf[buf_num]=(rand()%(9-1+1))+1+48;
      for(int i=1;i<lenth;++i)
      {
