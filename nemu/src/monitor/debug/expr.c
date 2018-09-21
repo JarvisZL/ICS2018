@@ -284,8 +284,7 @@ uint32_t expr(char *e, bool *success) {
  uint32_t result;
  bool LEGAL=true;
  result=eval(0,nr_token-1,&LEGAL);
- *success=LEGAL;
-printf("%u\n",result); 
+ *success=LEGAL; 
  return result;
  //TODO();
 }
