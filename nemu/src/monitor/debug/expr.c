@@ -264,8 +264,8 @@ uint32_t eval(int p,int q,bool* LE)
 			  }
 		  }
                   
-	          uint32_t val1=eval(p,op.posi-1,LE);
-	          uint32_t val2=eval(op.posi+1,q,LE);
+	          int  val1=eval(p,op.posi-1,LE);
+	          int  val2=eval(op.posi+1,q,LE);
 	          switch(tokens[op.posi].type)
 		  {
 			  case '+': return val1+val2;
