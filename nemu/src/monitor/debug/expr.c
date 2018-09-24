@@ -31,7 +31,7 @@ static struct rule {
   {"\\(", '('},        //'('
   {"\\)", ')'},        //')'
   {"==", TK_EQ},        // equal
-  {"[0-9]+",TK_DEM},    //demical number
+  {"[1-9][0-9]+",TK_DEM},    //demical number
   {"[Uu]", TK_U32},     // uint32_t
   {"0x[0-9a-f]+", TK_HEX} //16
 };
