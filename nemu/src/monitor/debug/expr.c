@@ -31,9 +31,9 @@ static struct rule {
   {"\\(", '('},        //'('
   {"\\)", ')'},        //')'
   {"==", TK_EQ},        // equal
+  {"0[Xx][0-9a-fA-F]+",TK_HEX}, //16
   {"[0-9]+",TK_DEM},    //demical number
-  {"[Uu]", TK_U32},     // uint32_t
-  {"0[xX][0-9a-fA-F]+", TK_HEX} //16
+  {"[Uu]", TK_U32}     // uint32_t
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
