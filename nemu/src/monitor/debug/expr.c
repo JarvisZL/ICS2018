@@ -1,5 +1,6 @@
 #include "nemu.h"
 #include <stdlib.h>
+#include <stdio.h>
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
@@ -7,7 +8,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_DEM,TK_U32
+  TK_NOTYPE = 256, TK_EQ,TK_DEM,TK_HEX,TK_U32
 
   /* TODO: Add more token types */
 
@@ -31,7 +32,8 @@ static struct rule {
   {"\\)", ')'},        //')'
   {"==", TK_EQ},        // equal
   {"[0-9]+",TK_DEM},    //demical number
-  {"[Uu]", TK_U32}     // uint32_t
+  {"[Uu]", TK_U32},     // uint32_t
+  {"0x[0-9a-f]+", TK_HEX} //16
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -97,6 +99,16 @@ static bool make_token(char *e) {
           case '/': tokens[nr_token++].type=rules[i].token_type; break;
 	  case '(': tokens[nr_token++].type=rules[i].token_type; break;
           case ')': tokens[nr_token++].type=rules[i].token_type; break;
+	  case TK_HEX:
+		     {
+			     char *s=NULL;
+			     strncpy(s,substr_start,substr_len);
+			     char *useless;
+			     int temple=strtol(s,&useless,16);
+			     sprintf(tokens[nr_token].str,"%d",temple);
+			     tokens[nr_token++].type=TK_DEM;
+			     break;
+                     }
           default: TODO();
         }
 
