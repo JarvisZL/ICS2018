@@ -8,7 +8,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_DEM,TK_HEX,TK_U32
+  TK_NOTYPE = 256, TK_EQ,TK_DEM,TK_HEX,TK_REG,TK_U32
 
   /* TODO: Add more token types */
 
@@ -33,6 +33,7 @@ static struct rule {
   {"==", TK_EQ},        // equal
   {"0[Xx][0-9a-fA-F]+",TK_HEX}, //16
   {"[0-9]+",TK_DEM},    //demical number
+  {"\\$(eax|ebx|ecx|edx|esp|ebp|ebi|esi|eip|ax|bx|cx|dx|sp|bp|si|di|al|ah|bl|bh|cl|ch|dl|dh)",TK_REG},//regs
   {"[Uu]", TK_U32}     // uint32_t
 };
 
@@ -100,6 +101,7 @@ static bool make_token(char *e) {
 	  case '(': tokens[nr_token++].type=rules[i].token_type; break;
           case ')': tokens[nr_token++].type=rules[i].token_type; break;
 	  case TK_HEX: tokens[nr_token].type=rules[i].token_type; strncpy(tokens[nr_token++].str,substr_start,substr_len); break;
+	  case TK_REG: break;
           default: TODO();
         }
 
@@ -173,7 +175,7 @@ uint32_t eval(int p,int q,bool* LE)
 	   return (uint32_t) strtol(tokens[p].str,&useless,10);
 	  else if(tokens[p].type==TK_HEX)
 		  return (uint32_t) strtol(tokens[p].str,&useless,16);
-	  else return 0;
+	  else return -1;//actually it's impossilble,but without it, gcc think it may not have return value.
       }
       else if(check_parentheses(p,q,&legal)==true)
       {
