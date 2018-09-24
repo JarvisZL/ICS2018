@@ -139,7 +139,6 @@ static int cmd_info(char *args){
     }
 return 0;
 };
-//now the cmd_p is not completed
 
 static int cmd_p(char *args){
       bool success=true;

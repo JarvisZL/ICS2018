@@ -101,7 +101,7 @@ static bool make_token(char *e) {
 	  case '(': tokens[nr_token++].type=rules[i].token_type; break;
           case ')': tokens[nr_token++].type=rules[i].token_type; break;
 	  case TK_HEX: tokens[nr_token].type=rules[i].token_type; strncpy(tokens[nr_token++].str,substr_start,substr_len); break;
-	  case TK_REG: break;
+	  case TK_REG:tokens[nr_token].type=rules[i].token_type; strncpy(tokens[nr_token++].str,substr_start+1,substr_len); break;
           default: TODO();
         }
 
