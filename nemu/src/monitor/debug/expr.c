@@ -31,9 +31,9 @@ static struct rule {
   {"\\(", '('},        //'('
   {"\\)", ')'},        //')'
   {"==", TK_EQ},        // equal
-  {"[1-9][0-9]*",TK_DEM},    //demical number
+  {"[0-9]+",TK_DEM},    //demical number
   {"[Uu]", TK_U32},     // uint32_t
-  {"0x[0-9a-f]+", TK_HEX} //16
+  {"0[xX][0-9a-fA-F]+", TK_HEX} //16
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -99,16 +99,7 @@ static bool make_token(char *e) {
           case '/': tokens[nr_token++].type=rules[i].token_type; break;
 	  case '(': tokens[nr_token++].type=rules[i].token_type; break;
           case ')': tokens[nr_token++].type=rules[i].token_type; break;
-	  case TK_HEX:
-		     {
-			     char *s=NULL;
-			     strncpy(s,substr_start,substr_len);
-			     char *useless;
-			     int temple=strtol(s,&useless,16);
-			     sprintf(tokens[nr_token].str,"%d",temple);
-			     tokens[nr_token++].type=TK_DEM;
-			     break;
-                     }
+	  case TK_HEX: tokens[nr_token].type=rules[i].token_type; strncpy(tokens[nr_token++].str,substr_start,substr_len); break;
           default: TODO();
         }
 
@@ -178,7 +169,11 @@ uint32_t eval(int p,int q,bool* LE)
       else if(p==q)
       {
           char* useless;
-	  return (uint32_t) strtol(tokens[p].str,&useless,10);
+	  if(tokens[p].type==TK_DEM)
+	   return (uint32_t) strtol(tokens[p].str,&useless,10);
+	  else if(tokens[p].type==TK_HEX)
+		  return (uint32_t) strtol(tokens[p].str,&useless,16);
+	  else return 0;
       }
       else if(check_parentheses(p,q,&legal)==true)
       {
@@ -241,7 +236,7 @@ uint32_t eval(int p,int q,bool* LE)
 				   }
 				   else if(tokens[i].type=='-')
 				   {
-                                          if(i==p||(tokens[i-1].type!=TK_DEM&&tokens[i-1].type!='('&&tokens[i-1].type!=')'))
+                                          if(i==p||(tokens[i-1].type!=TK_DEM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!='('&&tokens[i-1].type!=')'))
                                                {
 						       if(i==p)
 						       {
@@ -252,7 +247,7 @@ uint32_t eval(int p,int q,bool* LE)
 									      cnt++;
 								      else
 								      {
-									      if(j==q&&tokens[j].type==TK_DEM)
+									      if(j==q&&(tokens[j].type==TK_DEM||tokens[j].type==TK_HEX))
 									      {
 										      if(cnt%2==0) return eval(q,q,LE);
 									              else return 0-eval(q,q,LE);
