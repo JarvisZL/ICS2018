@@ -326,7 +326,7 @@ uint32_t eval(int p,int q,bool* LE)
 				   }
 				   else if(tokens[i].type=='-')
 				   {
-                                          if(i==p||(tokens[i-1].type!=TK_DEM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!='('&&tokens[i-1].type!=')'))
+                                          if(i==p||(tokens[i-1].type!=TK_DEM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=')'))
                                                {
 						       if(i==p)
 						       {
