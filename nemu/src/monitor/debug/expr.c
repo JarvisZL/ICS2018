@@ -199,36 +199,36 @@ uint32_t eval(int p,int q,bool* LE)
 		  else if(!strcmp(tokens[p].str,"$ax"))
 			  return  cpu.gpr[0]._16;
 		  else if(!strcmp(tokens[p].str,"$cx"))
-			  return (uint32_t) cpu.gpr[1]._16;
+			  return  cpu.gpr[1]._16;
 		  else if(!strcmp(tokens[p].str,"$dx"))
-			  return (uint32_t) cpu.gpr[2]._16;
+			  return  cpu.gpr[2]._16;
 		  else if(!strcmp(tokens[p].str,"$bx"))
-			  return (uint32_t) cpu.gpr[3]._16;
+			  return  cpu.gpr[3]._16;
 		  else if(!strcmp(tokens[p].str,"$sp"))
-			  return (uint32_t) cpu.gpr[4]._16;
+			  return  cpu.gpr[4]._16;
 		  else if(!strcmp(tokens[p].str,"$bp"))
-			  return (uint32_t) cpu.gpr[5]._16;
+			  return  cpu.gpr[5]._16;
 		  else if(!strcmp(tokens[p].str,"$si"))
-			  return (uint32_t) cpu.gpr[6]._16;
+			  return  cpu.gpr[6]._16;
 		  else if(!strcmp(tokens[p].str,"$di"))
-			  return (uint32_t) cpu.gpr[7]._16;
+			  return  cpu.gpr[7]._16;
 
 		  else if(!strcmp(tokens[p].str,"$al"))
-			  return (uint32_t) cpu.gpr[0]._8[0];
+			  return  cpu.gpr[0]._8[0];
 		  else if(!strcmp(tokens[p].str,"$ah"))
-			  return (uint32_t) cpu.gpr[0]._8[1];
+			  return  cpu.gpr[0]._8[1];
 		  else if(!strcmp(tokens[p].str,"$cl"))
-			  return (uint32_t) cpu.gpr[1]._8[0];
+			  return  cpu.gpr[1]._8[0];
 		  else if(!strcmp(tokens[p].str,"$ch"))
-			  return (uint32_t) cpu.gpr[1]._8[1];
+			  return  cpu.gpr[1]._8[1];
 		  else if(!strcmp(tokens[p].str,"$dl"))
-			  return (uint32_t) cpu.gpr[2]._8[0];
+			  return  cpu.gpr[2]._8[0];
 		  else if(!strcmp(tokens[p].str,"$dh"))
-			  return (uint32_t) cpu.gpr[2]._8[1];
+			  return  cpu.gpr[2]._8[1];
 		  else if(!strcmp(tokens[p].str,"$bl"))
-			  return (uint32_t) cpu.gpr[3]._8[0];
+			  return  cpu.gpr[3]._8[0];
 		  else if(!strcmp(tokens[p].str,"$bh"))
-			  return (uint32_t) cpu.gpr[3]._8[1];
+			  return  cpu.gpr[3]._8[1];
 
 		  else return -1;// actually, it's also impossible!!!
 	  }
