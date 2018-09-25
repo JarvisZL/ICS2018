@@ -194,7 +194,7 @@ uint32_t eval(int p,int q,bool* LE)
 		  else if(!strcmp(tokens[p].str,"$edi"))
 			  return (uint32_t) cpu.edi;
 		  else if(strcmp(tokens[p].str,"$eip"))
-			  return (uint32_t) cpu.eip;
+			  return  cpu.eip;
 		  
 		  else if(!strcmp(tokens[p].str,"$ax"))
 			  return (uint32_t) cpu.gpr[0]._16;
