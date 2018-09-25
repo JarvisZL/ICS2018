@@ -114,7 +114,7 @@ static int cmd_info(char *args){
       printf("esp\t 0x%x \t%d\n",cpu.esp,cpu.esp);
       printf("ebp\t 0x%x \t%d\n",cpu.ebp,cpu.ebp);
       printf("esi\t 0x%x \t%d\n",cpu.esi,cpu.esi);
-      printf("ebi\t 0x%x \t%d\n",cpu.edi,cpu.edi);
+      printf("edi\t 0x%x \t%d\n",cpu.edi,cpu.edi);
       printf("eip\t 0x%x \t%d\n",cpu.eip,cpu.eip);
        
       printf("ax\t 0x%x \t%d\n",cpu.gpr[0]._16,cpu.gpr[0]._16);
