@@ -120,7 +120,7 @@ static int cmd_info(char *args){
       printf("ax\t 0x%x \t%d\n",cpu.gpr[0]._16,cpu.gpr[0]._16);
       printf("cx\t 0x%x \t%d\n",cpu.gpr[1]._16,cpu.gpr[1]._16);
       printf("dx\t 0x%x \t%d\n",cpu.gpr[2]._16,cpu.gpr[2]._16);
-      printf("bx\t 0x%x \t%d\n",cpu.gpr[3]._16,cpu.gpr[2]._16);
+      printf("bx\t 0x%x \t%d\n",cpu.gpr[3]._16,cpu.gpr[3]._16);
       printf("sp\t 0x%x \t%d\n",cpu.gpr[4]._16,cpu.gpr[4]._16);
       printf("bp\t 0x%x \t%d\n",cpu.gpr[5]._16,cpu.gpr[5]._16);
       printf("si\t 0x%x \t%d\n",cpu.gpr[6]._16,cpu.gpr[6]._16);
