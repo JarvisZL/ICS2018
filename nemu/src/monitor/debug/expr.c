@@ -180,24 +180,24 @@ uint32_t eval(int p,int q,bool* LE)
 		  if(!strcmp(tokens[p].str,"$eax"))
 			  return  cpu.eax;
 		  else if(!strcmp(tokens[p].str,"$ecx"))
-			  return (uint32_t) cpu.ecx;
+			  return  cpu.ecx;
 		  else if(!strcmp(tokens[p].str,"$edx"))
-			  return (uint32_t) cpu.edx;
+			  return  cpu.edx;
 		  else if(!strcmp(tokens[p].str,"$ebx"))
-			  return (uint32_t) cpu.ebx;
+			  return  cpu.ebx;
 		  else if(!strcmp(tokens[p].str,"$esp"))
-			  return (uint32_t) cpu.esp;
+			  return cpu.esp;
 		  else if(!strcmp(tokens[p].str,"$ebp"))
-			  return (uint32_t) cpu.ebp;
+			  return  cpu.ebp;
 		  else if(!strcmp(tokens[p].str,"$esi"))
-			  return (uint32_t) cpu.esi;
+			  return  cpu.esi;
 		  else if(!strcmp(tokens[p].str,"$edi"))
-			  return (uint32_t) cpu.edi;
+			  return  cpu.edi;
 		  else if(strcmp(tokens[p].str,"$eip"))
 			  return  cpu.eip;
 		  
 		  else if(!strcmp(tokens[p].str,"$ax"))
-			  return (uint32_t) cpu.gpr[0]._16;
+			  return  cpu.gpr[0]._16;
 		  else if(!strcmp(tokens[p].str,"$cx"))
 			  return (uint32_t) cpu.gpr[1]._16;
 		  else if(!strcmp(tokens[p].str,"$dx"))
