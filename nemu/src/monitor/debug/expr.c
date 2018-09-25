@@ -8,7 +8,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_DEM,TK_HEX,TK_REG,TK_U32
+  TK_NOTYPE = 256, TK_EQ,TK_NEQ,TK_LAND,TK_DEM,TK_HEX,TK_REG,TK_U32
 
   /* TODO: Add more token types */
 
@@ -31,6 +31,8 @@ static struct rule {
   {"\\(", '('},        //'('
   {"\\)", ')'},        //')'
   {"==", TK_EQ},        // equal
+  {"!=", TK_NEQ},        //not equal
+  {"&&", TK_LAND},       //logic and
   {"0[Xx][0-9a-fA-F]+",TK_HEX}, //16
   {"[0-9]+",TK_DEM},    //demical number
   {"\\$(eax|ebx|ecx|edx|esp|ebp|edi|esi|eip|ax|bx|cx|dx|sp|bp|si|di|al|ah|bl|bh|cl|ch|dl|dh)",TK_REG},//regs
@@ -94,6 +96,8 @@ static bool make_token(char *e) {
 	  case TK_DEM: tokens[nr_token].type=rules[i].token_type; strncpy(tokens[nr_token++].str,substr_start,substr_len); break;
 	  case TK_EQ: tokens[nr_token++].type=rules[i].token_type; break;
 	  case TK_U32: break;
+	  case TK_NEQ: tokens[nr_token++].type=rules[i].token_type; break;
+	  case TK_LAND: tokens[nr_token++].type=rules[i].token_type; break;
           case '+': tokens[nr_token++].type=rules[i].token_type; break;
 	  case '-': tokens[nr_token++].type=rules[i].token_type; break;
 	  case '*': tokens[nr_token++].type=rules[i].token_type; break;
