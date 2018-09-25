@@ -178,7 +178,7 @@ uint32_t eval(int p,int q,bool* LE)
 	  else if(tokens[p].type==TK_REG)
 	  {
 		  if(!strcmp(tokens[p].str,"$eax"))
-			  return (uint32_t) cpu.eax;
+			  return  cpu.eax;
 		  else if(!strcmp(tokens[p].str,"$ecx"))
 			  return (uint32_t) cpu.ecx;
 		  else if(!strcmp(tokens[p].str,"$edx"))
