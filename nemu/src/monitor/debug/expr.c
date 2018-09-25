@@ -8,8 +8,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NEQ,TK_LAND,TK_DEM,TK_HEX,TK_REG,TK_U32
-
+  TK_NOTYPE = 256, TK_EQ,TK_NEQ,TK_LAND,TK_DEM,TK_HEX,TK_REG,TK_U32,TK_DERE
   /* TODO: Add more token types */
 
 };
@@ -160,12 +159,12 @@ bool check_parentheses(int p,int q,bool* le)
      return ok;
 }
 
-bool if_ze=false;
+bool if_ze=false;//if there's a div 0 error!
 
 uint32_t eval(int p,int q,bool* LE)
 {
 
-      bool legal=true;	
+      bool legal=true;//whether the expression is legal	
       if(p>q)
       {
 	printf("it's illegal!\n");
@@ -255,14 +254,14 @@ uint32_t eval(int p,int q,bool* LE)
 		  uint32_t par_cnt=0;//let it know whether operater is in pars
                  typedef struct OP{
 			  int posi;
-                          uint32_t prio;//define priority about'==','!=','&&'(1), '+'(2) '-'(2) '*'(3) '/'(3)
+                          uint32_t prio;//define priority about'==','!=','&&'(1), '+'(2) '-'(2) '*'(3) '/'(3) dere(4)
 		  } O_P;
 		 O_P op; 
                  op.posi=-1;
 		 op.prio=100;
                   for(int i=p;i<=q;++i)
 		  {
-			  if(tokens[i].type!='+' && tokens[i].type!='-' && tokens[i].type!='*' && tokens[i].type!='/' && tokens[i].type!='(' && tokens[i].type!=')' && tokens[i].type!=TK_EQ && tokens[i].type!=TK_NEQ && tokens[i].type!=TK_LAND)
+			  if(tokens[i].type!=TK_DERE && tokens[i].type!='+' && tokens[i].type!='-' && tokens[i].type!='*' && tokens[i].type!='/' && tokens[i].type!='(' && tokens[i].type!=')' && tokens[i].type!=TK_EQ && tokens[i].type!=TK_NEQ && tokens[i].type!=TK_LAND)
 				  continue;
 			  else
 			  {
@@ -270,9 +269,15 @@ uint32_t eval(int p,int q,bool* LE)
 					  par_cnt++;
 				   else if(tokens[i].type==')')
 					  par_cnt--;
+				   else if(tokens[i].type==TK_DERE)
+				   {
+                                           if(i==p)
+						return vaddr_read(eval(p+1,q,LE),4);
+					   else continue;
+				   }
 				   else if(tokens[i].type==TK_EQ)
 				   {
-					   if(par_cnt==0)
+					   if(par_cnt==0&&op.prio>=0)
 					   {
                                             op.posi=i;
 					    op.prio=0;
@@ -281,7 +286,7 @@ uint32_t eval(int p,int q,bool* LE)
 				   }
 				   else if(tokens[i].type==TK_NEQ)
 				   {
-					   if(par_cnt==0)
+					   if(par_cnt==0&&op.prio>=0)
 					   {
 					   op.posi=i;
 					   op.prio=0;
@@ -393,7 +398,7 @@ uint32_t eval(int p,int q,bool* LE)
 
 
 uint32_t expr(char *e, bool *success) {
-  init_regex();
+ // init_regex();
   memset(tokens,0,sizeof(tokens));
   if_ze=false;
 
@@ -405,6 +410,13 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
+//deal with deref and multy
+ for(int i=0;i<nr_token;++i)
+ {
+	 if(tokens[i].type=='*' && (i=0 || tokens[i-1].type=='+' || tokens[i-1].type=='-' || tokens[i-1].type=='*' || tokens[i-1].type=='/' || tokens[i-1].type=='(' || tokens[i-1].type==TK_EQ || tokens[i-1].type==TK_NEQ || tokens[i-1].type==TK_LAND || tokens[i-1].type==TK_DERE))
+		 tokens[i].type=TK_DERE;
+ }
+//deal over.
  uint32_t result;
  bool LEGAL=true;
 
