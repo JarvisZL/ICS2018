@@ -193,7 +193,7 @@ uint32_t eval(int p,int q,bool* LE)
 			  return  cpu.esi;
 		  else if(!strcmp(tokens[p].str,"$edi"))
 			  return  cpu.edi;
-		  else if(strcmp(tokens[p].str,"$eip"))
+		  else if(!strcmp(tokens[p].str,"$eip"))
 			  return  cpu.eip;
 		  
 		  else if(!strcmp(tokens[p].str,"$ax"))
