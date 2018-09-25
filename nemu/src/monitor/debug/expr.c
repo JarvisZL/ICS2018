@@ -262,7 +262,7 @@ uint32_t eval(int p,int q,bool* LE)
 		 op.prio=100;
                   for(int i=p;i<=q;++i)
 		  {
-			  if(tokens[i].type!='+'&&tokens[i].type!='-'&&tokens[i].type!='*'&&tokens[i].type!='/'&&tokens[i].type!='('&&tokens[i].type!=')')
+			  if(tokens[i].type!='+' && tokens[i].type!='-' && tokens[i].type!='*' && tokens[i].type!='/' && tokens[i].type!='(' && tokens[i].type!=')' && tokens[i].type!=TK_EQ && tokens[i].type!=TK_NEQ && tokens[i].type!=TK_LAND)
 				  continue;
 			  else
 			  {
@@ -270,6 +270,33 @@ uint32_t eval(int p,int q,bool* LE)
 					  par_cnt++;
 				   else if(tokens[i].type==')')
 					  par_cnt--;
+				   else if(tokens[i].type==TK_EQ)
+				   {
+					   if(par_cnt==0)
+					   {
+                                            op.posi=i;
+					    op.prio=0;
+					   }
+					   else continue;
+				   }
+				   else if(tokens[i].type==TK_NEQ)
+				   {
+					   if(par_cnt==0)
+					   {
+					   op.posi=i;
+					   op.prio=0;
+					   }
+					   else continue;
+				   }
+				   else if(tokens[i].type==TK_LAND)
+				   {
+					   if(par_cnt==0&&op.prio>=1)
+					   {
+						   op.posi=i;
+						   op.prio=1;
+					   }
+					   else continue;
+				   }
 				   else if(tokens[i].type=='+')
 				  {
                                        if(par_cnt==0&&op.prio>=2)
@@ -352,6 +379,9 @@ uint32_t eval(int p,int q,bool* LE)
 					    else return val1/val2;
 					    break;
 				    }
+			  case TK_EQ:    return val1==val2; break;
+		          case TK_NEQ:   return val1!=val2; break;
+		          case TK_LAND:  return val1&&val2; break;	    
 		          default: assert(0);
 		  }	  
 	     }
