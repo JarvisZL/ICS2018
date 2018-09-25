@@ -413,7 +413,7 @@ uint32_t expr(char *e, bool *success) {
 //deal with deref and multy
  for(int i=0;i<nr_token;++i)
  {
-	 if(tokens[i].type=='*' && (i=0 || tokens[i-1].type=='+' || tokens[i-1].type=='-' || tokens[i-1].type=='*' || tokens[i-1].type=='/' || tokens[i-1].type=='(' || tokens[i-1].type==TK_EQ || tokens[i-1].type==TK_NEQ || tokens[i-1].type==TK_LAND || tokens[i-1].type==TK_DERE))
+	 if(tokens[i].type=='*' && (i==0 || tokens[i-1].type=='+' || tokens[i-1].type=='-' || tokens[i-1].type=='*' || tokens[i-1].type=='/' || tokens[i-1].type=='(' || tokens[i-1].type==TK_EQ || tokens[i-1].type==TK_NEQ || tokens[i-1].type==TK_LAND || tokens[i-1].type==TK_DERE))
 		 tokens[i].type=TK_DERE;
  }
 //deal over.
