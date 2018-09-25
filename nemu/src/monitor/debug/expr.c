@@ -230,7 +230,7 @@ uint32_t eval(int p,int q,bool* LE)
 		  else if(!strcmp(tokens[p].str,"$bh"))
 			  return (uint32_t) cpu.gpr[3]._8[1];
 
-		  else return -1;
+		  else return -1;// actually, it's also impossible!!!
 	  }
 	  else return -1;//actually it's impossilble,but without it, gcc think it may not have return value.
       }
