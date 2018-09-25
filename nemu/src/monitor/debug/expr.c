@@ -254,7 +254,7 @@ uint32_t eval(int p,int q,bool* LE)
 		  uint32_t par_cnt=0;//let it know whether operater is in pars
                  typedef struct OP{
 			  int posi;
-                          uint32_t prio;//define priority about'==','!=','&&'(1), '+'(2) '-'(2) '*'(3) '/'(3) dere(4)
+                          uint32_t prio;//define priority about'==','!=','&&'(1), '+'(2) '-'(2) '*'(3) '/'(3) 
 		  } O_P;
 		 O_P op; 
                  op.posi=-1;
@@ -269,6 +269,7 @@ uint32_t eval(int p,int q,bool* LE)
 					  par_cnt++;
 				   else if(tokens[i].type==')')
 					  par_cnt--;
+				   //pars are the important preconditions
 				   else if(tokens[i].type==TK_DERE)
 				   {
                                            if(i==p)
