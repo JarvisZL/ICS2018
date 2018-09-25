@@ -33,7 +33,7 @@ static struct rule {
   {"==", TK_EQ},        // equal
   {"0[Xx][0-9a-fA-F]+",TK_HEX}, //16
   {"[0-9]+",TK_DEM},    //demical number
-  {"\\$(eax|ebx|ecx|edx|esp|ebp|ebi|esi|eip|ax|bx|cx|dx|sp|bp|si|di|al|ah|bl|bh|cl|ch|dl|dh)",TK_REG},//regs
+  {"\\$(eax|ebx|ecx|edx|esp|ebp|edi|esi|eip|ax|bx|cx|dx|sp|bp|si|di|al|ah|bl|bh|cl|ch|dl|dh)",TK_REG},//regs
   {"[Uu]", TK_U32}     // uint32_t
 };
 
