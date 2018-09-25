@@ -101,7 +101,7 @@ static bool make_token(char *e) {
 	  case '(': tokens[nr_token++].type=rules[i].token_type; break;
           case ')': tokens[nr_token++].type=rules[i].token_type; break;
 	  case TK_HEX: tokens[nr_token].type=rules[i].token_type; strncpy(tokens[nr_token++].str,substr_start,substr_len); break;
-	  case TK_REG:tokens[nr_token].type=rules[i].token_type; strncpy(tokens[nr_token++].str,substr_start+1,substr_len); break;
+	  case TK_REG:tokens[nr_token].type=rules[i].token_type; strncpy(tokens[nr_token++].str,substr_start,substr_len); break;
           default: TODO();
         }
 
@@ -175,6 +175,63 @@ uint32_t eval(int p,int q,bool* LE)
 	   return (uint32_t) strtol(tokens[p].str,&useless,10);
 	  else if(tokens[p].type==TK_HEX)
 		  return (uint32_t) strtol(tokens[p].str,&useless,16);
+	  else if(tokens[p].type==TK_REG)
+	  {
+		  if(!strcmp(tokens[p].str,"$eax"))
+			  return (uint32_t) cpu.eax;
+		  else if(!strcmp(tokens[p].str,"$ecx"))
+			  return (uint32_t) cpu.ecx;
+		  else if(!strcmp(tokens[p].str,"$edx"))
+			  return (uint32_t) cpu.edx;
+		  else if(!strcmp(tokens[p].str,"$ebx"))
+			  return (uint32_t) cpu.ebx;
+		  else if(!strcmp(tokens[p].str,"$esp"))
+			  return (uint32_t) cpu.esp;
+		  else if(!strcmp(tokens[p].str,"$ebp"))
+			  return (uint32_t) cpu.ebp;
+		  else if(!strcmp(tokens[p].str,"$esi"))
+			  return (uint32_t) cpu.esi;
+		  else if(!strcmp(tokens[p].str,"$edi"))
+			  return (uint32_t) cpu.edi;
+		  else if(strcmp(tokens[p].str,"$eip"))
+			  return (uint32_t) cpu.eip;
+		  
+		  else if(!strcmp(tokens[p].str,"$ax"))
+			  return (uint32_t) cpu.gpr[0]._16;
+		  else if(!strcmp(tokens[p].str,"$cx"))
+			  return (uint32_t) cpu.gpr[1]._16;
+		  else if(!strcmp(tokens[p].str,"$dx"))
+			  return (uint32_t) cpu.gpr[2]._16;
+		  else if(!strcmp(tokens[p].str,"$bx"))
+			  return (uint32_t) cpu.gpr[3]._16;
+		  else if(!strcmp(tokens[p].str,"$sp"))
+			  return (uint32_t) cpu.gpr[4]._16;
+		  else if(!strcmp(tokens[p].str,"$bp"))
+			  return (uint32_t) cpu.gpr[5]._16;
+		  else if(!strcmp(tokens[p].str,"$si"))
+			  return (uint32_t) cpu.gpr[6]._16;
+		  else if(!strcmp(tokens[p].str,"$di"))
+			  return (uint32_t) cpu.gpr[7]._16;
+
+		  else if(!strcmp(tokens[p].str,"$al"))
+			  return (uint32_t) cpu.gpr[0]._8[0];
+		  else if(!strcmp(tokens[p].str,"$ah"))
+			  return (uint32_t) cpu.gpr[0]._8[1];
+		  else if(!strcmp(tokens[p].str,"$cl"))
+			  return (uint32_t) cpu.gpr[1]._8[0];
+		  else if(!strcmp(tokens[p].str,"$ch"))
+			  return (uint32_t) cpu.gpr[1]._8[1];
+		  else if(!strcmp(tokens[p].str,"$dl"))
+			  return (uint32_t) cpu.gpr[2]._8[0];
+		  else if(!strcmp(tokens[p].str,"$dh"))
+			  return (uint32_t) cpu.gpr[2]._8[1];
+		  else if(!strcmp(tokens[p].str,"$bl"))
+			  return (uint32_t) cpu.gpr[3]._8[0];
+		  else if(!strcmp(tokens[p].str,"$bh"))
+			  return (uint32_t) cpu.gpr[3]._8[1];
+
+		  else return -1;
+	  }
 	  else return -1;//actually it's impossilble,but without it, gcc think it may not have return value.
       }
       else if(check_parentheses(p,q,&legal)==true)
