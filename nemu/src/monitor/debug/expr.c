@@ -255,7 +255,7 @@ uint32_t eval(int p,int q,bool* LE)
 		  uint32_t par_cnt=0;//let it know whether operater is in pars
                  typedef struct OP{
 			  int posi;
-                          uint32_t prio;//define priority about '+'(1) '-'(1) '*'(2) '/'(2)
+                          uint32_t prio;//define priority about'==','!=','&&'(1), '+'(2) '-'(2) '*'(3) '/'(3)
 		  } O_P;
 		 O_P op; 
                  op.posi=-1;
@@ -272,28 +272,28 @@ uint32_t eval(int p,int q,bool* LE)
 					  par_cnt--;
 				   else if(tokens[i].type=='+')
 				  {
-                                       if(par_cnt==0&&op.prio>=1)
+                                       if(par_cnt==0&&op.prio>=2)
 				       {
 					       op.posi=i;
-					       op.prio=1;
+					       op.prio=2;
 				       }
 				       else continue;
 				  }
 				   else if(tokens[i].type=='*')
 				   {
-					   if(par_cnt==0&&op.prio>=2)
+					   if(par_cnt==0&&op.prio>=3)
 					   {
 						   op.posi=i;
-						   op.prio=2;
+						   op.prio=3;
 					   }
 					   else continue;
 				   }
 				   else if(tokens[i].type=='/')
 				   {
-					   if(par_cnt==0&&op.prio>=2)
+					   if(par_cnt==0&&op.prio>=3)
 					   {
 						   op.posi=i;
-						   op.prio=2;
+						   op.prio=3;
 					   }
                                            else continue;
 				   }
@@ -323,10 +323,10 @@ uint32_t eval(int p,int q,bool* LE)
 					       }
 					  else
 					  {
-                                                  if(par_cnt==0&&op.prio>=1)
+                                                  if(par_cnt==0&&op.prio>=2)
 						  {
 							  op.posi=i;
-							  op.prio=1;
+							  op.prio=2;
 						  }
 					  }
 
