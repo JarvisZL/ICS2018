@@ -143,7 +143,7 @@ void wp_print()
      tem=head;
      while(tem!=NULL)
      {
-	     printf("%d\twatchpoint\tkeep  y\t      \t%s\n",tem->NO,tem->str);
+	     printf("%d\twatchpoint\tkeep\ty\t      \t%s\n",tem->NO,tem->str);
 	     printf("  \tbreakpoint already hit %d times\n",tem->ht);
 	     tem=tem->next;
      }

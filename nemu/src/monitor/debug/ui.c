@@ -142,7 +142,7 @@ static int cmd_info(char *args){
     extern void wp_print();
     if(!strcmp(args,"w"))
     {
-        printf("Num\tType\t\tDisp  Enb\tAddress\tWhat\n");
+        printf("Num\tType\t\tDisp\tEnb\tAddress\tWhat\n");
         wp_print();
     }
 return 0;
