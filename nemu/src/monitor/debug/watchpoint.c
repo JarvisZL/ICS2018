@@ -11,7 +11,7 @@ void init_wp_pool() {
   for (i = 0; i < NR_WP; i ++) {
     wp_pool[i].NO = i;
     wp_pool[i].next = &wp_pool[i + 1];
-   // wp_pool[i].str="\0";
+    wp_pool[i].str[0]='\0';
   }
   wp_pool[NR_WP - 1].next = NULL;
   head = NULL;
@@ -125,9 +125,9 @@ bool checkwp()
 	   if(tem->new_v!=tem->old_v)
 	   {
 		   printf("watchpoint %d:  %s\n",tem->NO,tem->str);
-		   printf("\n");
 		   printf("old value: %d\n",tem->old_v);
 		   printf("new value: %d\n",tem->new_v);
+		   printf("\n");
 		   all=true;
 	   }
 	  tem=tem->next; 
