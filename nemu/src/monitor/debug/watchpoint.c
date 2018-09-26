@@ -129,6 +129,7 @@ bool checkwp()
 		   printf("new value: %d\n",tem->new_v);
 		   printf("\n");
 		   all=true;
+		   tem->old_v=tem->new_v;
 	   }
 	  tem=tem->next; 
 	}
