@@ -48,6 +48,8 @@ static int cmd_x(char *args);
 
 static int cmd_w(char *args);
 
+static int cmd_d(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -61,9 +63,8 @@ static struct {
   { "p", "print express", cmd_p},
   { "x", "scan memory", cmd_x},
   { "w","watch point", cmd_w},
+  { "d","delete points",cmd_d},
 
-
-  
   /* TODO: Add more commands */
 
 };
@@ -175,6 +176,7 @@ static int cmd_x(char *args){
 }
 
 extern WP* new_wp();
+
 static int cmd_w(char *args){
        	WP* w_p=new_wp();
 	strcpy(w_p->str,args);
@@ -182,6 +184,18 @@ static int cmd_w(char *args){
 	return 0;
 }
 
+extern WP* find_wp(uint32_t); 
+extern void free_wp(WP*);
+
+static int cmd_d(char *args)
+{
+	 char *useless;
+         uint32_t range;
+         range=(uint32_t) strtol(args,&useless,10);
+	 WP* d_wp=find_wp(range);
+	 free_wp(d_wp);
+	 return 0;
+}
 
 void ui_mainloop(int is_batch_mode) {
   if (is_batch_mode) {
