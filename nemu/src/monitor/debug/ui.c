@@ -60,7 +60,7 @@ static struct {
   { "info", "print program status", cmd_info}, 
   { "p", "print express", cmd_p},
   { "x", "scan memory", cmd_x},
-  {"w","watch point", cmd_w},
+  { "w","watch point", cmd_w},
 
 
   
