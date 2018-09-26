@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
+#include <string.h>
 void cpu_exec(uint64_t);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
@@ -172,7 +172,7 @@ static int cmd_x(char *args){
 extern WP* new_wp();
 static int cmd_w(char *args){
        	WP* w_p=new_wp();
-        w_p->str=strtok(args," ");	
+	strncpy(w_p->str,args,strlen(args));
 	printf("watchpoint %d:  %s\n",w_p->NO,w_p->str);
 	return 0;
 }
