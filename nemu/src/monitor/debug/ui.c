@@ -169,10 +169,11 @@ static int cmd_x(char *args){
   return 0;
 }
 
+extern WP* new_wp();
 static int cmd_w(char *args){
        static int cnot=0;
        	WP* w_p=new_wp();
-        strncpy(w_p->str,args,strlen(args));
+        strcpy(w_p->str,args);
 	printf("watchpoint %d:  %s",++cnot,w_p->str);
 	return 0;
 }
@@ -216,3 +217,4 @@ void ui_mainloop(int is_batch_mode) {
     if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
   }
 }
+
