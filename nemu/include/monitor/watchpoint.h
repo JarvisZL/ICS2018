@@ -9,6 +9,7 @@ typedef struct watchpoint {
   struct watchpoint *next;
   uint32_t old_v;
   uint32_t new_v;
+  uint32_t ht;
   /* TODO: Add more members if necessary */
 
 

@@ -12,6 +12,7 @@ void init_wp_pool() {
     wp_pool[i].NO = i;
     wp_pool[i].next = &wp_pool[i + 1];
     wp_pool[i].str[0]='\0';
+    wp_pool[i].ht=0;
   }
   wp_pool[NR_WP - 1].next = NULL;
   head = NULL;
@@ -130,9 +131,20 @@ bool checkwp()
 		   printf("\n");
 		   all=true;
 		   tem->old_v=tem->new_v;
+		   tem->ht++;
 	   }
 	  tem=tem->next; 
 	}
 	return all;
 }
 
+void wp_print()
+{
+     tem=head;
+     while(tem!=NULL)
+     {
+	     printf("%d\twatchpoint\tkeep\ty\t      \t%s\n",tem->NO,tem->str);
+	     printf("  \tbreakpoint already hit %d times\n",tem->ht);
+	     tem=tem->next;
+     }
+}

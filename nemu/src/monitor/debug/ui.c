@@ -138,7 +138,12 @@ static int cmd_info(char *args){
       printf("ch\t 0x%x \t%d\n",cpu.gpr[1]._8[1],cpu.gpr[1]._8[1]); 
       printf("dh\t 0x%x \t%d\n",cpu.gpr[2]._8[1],cpu.gpr[2]._8[1]);
       printf("bh\t 0x%x \t%d\n",cpu.gpr[3]._8[1],cpu.gpr[3]._8[1]);
-      
+    }
+    extern void wp_print();
+    if(!strcmp(args,"w"))
+    {
+        printf("Num\tType\tDisp\tEnb\tAddress\tWhat\n");
+        wp_print();
     }
 return 0;
 };
