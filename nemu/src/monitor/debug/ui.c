@@ -193,6 +193,7 @@ static int cmd_d(char *args)
          uint32_t range;
          range=(uint32_t) strtol(args,&useless,10);
 	 WP* d_wp=find_wp(range);
+	 printf("delete point %d:  %s\n",d_wp->NO,d_wp->str);
 	 free_wp(d_wp);
 	 return 0;
 }
