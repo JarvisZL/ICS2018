@@ -51,7 +51,7 @@ WP* find_wp(uint32_t no)
 	if(head==NULL)
 	{
 		printf("no such a watchpoint!\n");
-	        return NULL;
+		assert(0);
 	}
 	else
 	{
@@ -96,8 +96,7 @@ WP* find_wp(uint32_t no)
 
 void free_wp(WP* wp)
 {       
-	if(wp==NULL)
-		return;
+	assert(wp!=NULL);
 	if(head==NULL)
 	{
 		printf("no using watchpoint!\n");
