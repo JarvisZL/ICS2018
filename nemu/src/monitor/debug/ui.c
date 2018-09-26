@@ -46,6 +46,8 @@ static int cmd_p(char *args);
 
 static int cmd_x(char *args);
 
+static int cmd_w(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -58,6 +60,7 @@ static struct {
   { "info", "print program status", cmd_info}, 
   { "p", "print express", cmd_p},
   { "x", "scan memory", cmd_x},
+  {"w","watch point", cmd_w},
 
 
   
@@ -166,7 +169,9 @@ static int cmd_x(char *args){
   return 0;
 }
 
-
+static int cmd_w(char *args){
+	return 0;
+}
 
 
 void ui_mainloop(int is_batch_mode) {
