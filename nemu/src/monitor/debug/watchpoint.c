@@ -1,7 +1,7 @@
 #include "monitor/watchpoint.h"
 #include "monitor/expr.h"
 
-#define NR_WP 32
+#define NR_WP 100
 
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
@@ -68,31 +68,6 @@ WP* find_wp(uint32_t no)
 	}
 }
 
-
-/* WP* find_wp(char* s)
-{
-      if(head==NULL)
-      {
-            printf("no such a watchpoint!\n");
-	    return head;
-      }
-      else
-      {
-           tem=head;
-	   while(strcmp(tem->str,s)&&tem->next!=NULL)
-	   {
-		   tem=tem->next;
-	   }
-	   if(!strcmp(tem->str,s))
-	   {
-                  return tem;
-	   }
-	   else
-	   {
-                 return tem->next; 
-	   }
-      }
-}*/
 
 void free_wp(WP* wp)
 {       
