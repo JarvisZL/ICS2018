@@ -131,7 +131,7 @@ void free_wp(WP* wp)
                       wp->next=free_;
 		      free_=wp;
 	      }
-	      if(tem->next==NULL)
+	      else if(tem->next==NULL)
 	      {
 		      printf("the watchpoint isn't using!\n");
 	      }
