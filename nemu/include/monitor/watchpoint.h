@@ -5,7 +5,7 @@
 
 typedef struct watchpoint {
   int NO;
-  char str[200];
+  char str[200];//cannot use pointers as the things in this addrs maybe change
   struct watchpoint *next;
   uint32_t old_v;
   uint32_t new_v;
