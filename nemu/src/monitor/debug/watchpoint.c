@@ -114,4 +114,23 @@ void free_wp(WP* wp)
 	}
 }
 
+bool checkwp()
+{      
+	bool all=false;
+	bool succ;
+	tem=head;
+	while(tem!=NULL)
+	{
+           tem->new_v=expr(tem->str,&succ);
+	   if(tem->new_v!=tem->old_v)
+	   {
+		   printf("watchpoint %d:  %s\n",tem->NO,tem->str);
+		   printf("\n");
+		   printf("old value: %d\n",tem->old_v);
+		   printf("new value: %d\n",tem->new_v);
+		   all=true;
+	   } 
+	}
+	return all;
+}
 
