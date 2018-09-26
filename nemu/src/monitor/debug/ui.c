@@ -172,7 +172,7 @@ static int cmd_x(char *args){
 extern WP* new_wp();
 static int cmd_w(char *args){
        	WP* w_p=new_wp();
-	strncpy(w_p->str,args,strlen(args));
+	w_p->str=strtok(args,"");
 	printf("watchpoint %d:  %s\n",w_p->NO,w_p->str);
 	return 0;
 }
