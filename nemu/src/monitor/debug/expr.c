@@ -278,9 +278,6 @@ uint32_t eval(int p,int q,bool* LE)
 						   op.prio=4;
 					   }
 					   else continue;
-                                          /* if(i==p)
-						return vaddr_read(eval(p+1,q,LE),4);
-					   else continue;*/
 				   }
 				   else if(tokens[i].type==TK_EQ)
 				   {
@@ -372,7 +369,8 @@ uint32_t eval(int p,int q,bool* LE)
 				   }
 			  }
 		  }
-
+                  
+		  //dere neednot val1
 		  if(tokens[op.posi].type==TK_DERE)
 		  {
 			  return vaddr_read(eval(p+1,q,LE),4);
