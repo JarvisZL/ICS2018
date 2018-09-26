@@ -46,7 +46,30 @@ WP* new_wp()
 	}
 }
 
-WP* find_wp(char* s)
+WP* find_wp(uint32_t no)
+{
+	if(head==NULL)
+	{
+		printf("no such a watchpoint!\n");
+	        return head;
+	}
+	else
+	{
+		tem=head;
+		while(tem->NO!=no&&tem->next!=NULL)
+		{
+			tem=tem->next;
+		}
+                if(tem->NO==no)
+		{
+			return tem;
+		}
+		else return tem->next;
+	}
+}
+
+
+/* WP* find_wp(char* s)
 {
       if(head==NULL)
       {
@@ -69,7 +92,7 @@ WP* find_wp(char* s)
                  return tem->next; 
 	   }
       }
-}
+}*/
 
 void free_wp(WP* wp)
 {       
