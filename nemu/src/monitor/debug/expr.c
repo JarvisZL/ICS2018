@@ -254,7 +254,7 @@ uint32_t eval(int p,int q,bool* LE)
 		  uint32_t par_cnt=0;//let it know whether operater is in pars
                  typedef struct OP{
 			  int posi;
-                          uint32_t prio;//define priority about'==','!=','&&'(1), '+'(2) '-'(2) '*'(3) '/'(3) 
+                          uint32_t prio;//define priority about'==','!=','&&'(1), '+'(2) '-'(2) '*'(3) '/'(3)  dere(4) 
 		  } O_P;
 		 O_P op; 
                  op.posi=-1;
@@ -272,9 +272,15 @@ uint32_t eval(int p,int q,bool* LE)
 				   //pars are the important preconditions
 				   else if(tokens[i].type==TK_DERE)
 				   {
-                                           if(i==p)
-						return vaddr_read(eval(p+1,q,LE),4);
+					   if(par_cnt==0&&op.prio>=4)
+					   {
+						   op.posi=i;
+						   op.prio=4;
+					   }
 					   else continue;
+                                          /* if(i==p)
+						return vaddr_read(eval(p+1,q,LE),4);
+					   else continue;*/
 				   }
 				   else if(tokens[i].type==TK_EQ)
 				   {
@@ -366,6 +372,11 @@ uint32_t eval(int p,int q,bool* LE)
 				   }
 			  }
 		  }
+
+		  if(tokens[op.posi].type==TK_DERE)
+		  {
+			  return vaddr_read(eval(p+1,q,LE),4);
+		  }
                   
 	          int  val1=eval(p,op.posi-1,LE);
 	          int  val2=eval(op.posi+1,q,LE);
@@ -387,7 +398,7 @@ uint32_t eval(int p,int q,bool* LE)
 				    }
 			  case TK_EQ:    return val1==val2; break;
 		          case TK_NEQ:   return val1!=val2; break;
-		          case TK_LAND:  return val1&&val2; break;	    
+		          case TK_LAND:  return val1&&val2; break;	   
 		          default: assert(0);
 		  }	  
 	     }
