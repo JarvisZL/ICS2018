@@ -43,7 +43,8 @@ void cpu_exec(uint64_t n) {
     /* TODO: check watchpoints here. */
     extern bool checkwp();
     if(checkwp())
-    {    if(nemu_state==NEMU_RUNNING)
+    {
+	    if(nemu_state==NEMU_RUNNING)//we need to exit normally
 	    {
 	    nemu_state=NEMU_STOP;
 	    return;
