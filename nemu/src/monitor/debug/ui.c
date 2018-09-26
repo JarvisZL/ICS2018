@@ -170,6 +170,10 @@ static int cmd_x(char *args){
 }
 
 static int cmd_w(char *args){
+       static int cnot=0;
+       	WP* w_p=new_wp();
+        strncpy(w_p->str,args,strlen(args));
+	printf("watchpoint %d:  %s",++cnot,w_p->str);
 	return 0;
 }
 
