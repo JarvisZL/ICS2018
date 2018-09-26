@@ -51,7 +51,7 @@ WP* find_wp(uint32_t no)
 	if(head==NULL)
 	{
 		printf("no such a watchpoint!\n");
-	        return head;
+	        return NULL;
 	}
 	else
 	{
