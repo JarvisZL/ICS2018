@@ -215,9 +215,9 @@ static make_EHelper(2byte_esc) {
 
 
 make_EHelper(call_rel32){
-    uint32_t addr;
-    addr=instr_fetch(eip,4);
-    rtl_j(addr+*eip);  
+    uint32_t tar;
+    tar=instr_fetch(eip,4);
+    rtl_j(tar+*eip);  
 }
 
 make_EHelper(real) {
