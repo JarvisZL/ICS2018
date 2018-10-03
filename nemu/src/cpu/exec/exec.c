@@ -130,7 +130,7 @@ opcode_entry opcode_table [512] = {
   /* 0xdc */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xe0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xe4 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0xe8 */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0xe8 */	EMPTY/*IDEX(J,call_rel32)*/, EMPTY, EMPTY, EMPTY,
   /* 0xec */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xf0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xf4 */	EMPTY, EMPTY, IDEXW(E, gp3, 1), IDEX(E, gp3),
@@ -211,6 +211,11 @@ static make_EHelper(2byte_esc) {
   set_width(opcode_table[opcode].width);
   idex(eip, &opcode_table[opcode]);
 }
+
+
+//make_EHelper(call_rel32){
+
+//}
 
 make_EHelper(real) {
   uint32_t opcode = instr_fetch(eip, 1);
