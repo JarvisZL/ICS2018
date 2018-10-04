@@ -14,7 +14,8 @@ make_EHelper(and) {
 }
 
 make_EHelper(xor) {
-  rtl_xor(&(id_dest->val),&(id_dest->val),&(id_src->val));
+  rtl_xor(&t2,&(id_dest->val),&(id_src->val));
+  operand_write(id_dest,&t2);
   rtl_update_ZFSF(&(id_dest->val),id_dest->width);
   cpu.EFLAGS.OF=0;
   cpu.EFLAGS.CF=0;
