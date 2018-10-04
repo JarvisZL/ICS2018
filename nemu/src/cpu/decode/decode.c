@@ -58,7 +58,6 @@ static inline make_DopHelper(SI) {
 		}
 	case 4:  op->simm=tem;
   }
-  printf("%d\n",op->simm);
 // TODO();
 
   rtl_li(&op->val, op->simm);
