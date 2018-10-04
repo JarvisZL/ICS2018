@@ -29,7 +29,6 @@ static inline void idex(vaddr_t *eip, opcode_entry *e) {
 }
 
 static make_EHelper(2byte_esc);
-make_EHelper(call_rel32);
 
 #define make_group(name, item0, item1, item2, item3, item4, item5, item6, item7) \
   static opcode_entry concat(opcode_table_, name) [8] = { \
@@ -131,7 +130,7 @@ opcode_entry opcode_table [512] = {
   /* 0xdc */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xe0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xe4 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0xe8 */  	IDEX(J,call_rel32), EMPTY, EMPTY, EMPTY,
+  /* 0xe8 */  	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xec */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xf0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xf4 */	EMPTY, EMPTY, IDEXW(E, gp3, 1), IDEX(E, gp3),
@@ -213,12 +212,6 @@ static make_EHelper(2byte_esc) {
   idex(eip, &opcode_table[opcode]);
 }
 
-
-make_EHelper(call_rel32){
-    uint32_t tar;
-    tar=instr_fetch(eip,4);
-    rtl_j(tar+*eip);  
-}
 
 make_EHelper(real) {
   uint32_t opcode = instr_fetch(eip, 1);
