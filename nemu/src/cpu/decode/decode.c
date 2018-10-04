@@ -45,23 +45,15 @@ static inline make_DopHelper(SI) {
    uint32_t tem=instr_fetch(eip,op->width);
    switch(op->width){
 	   case 1:{
-			  int s=(tem&0x80)<<1;
-                          for(int i=0;i<32-op->width*8;i++)
-			  {
-				  tem=tem|s;
-				  s=s<<1;
-			  }
-			  op->simm=tem;
-			  break;
+		      bool f=tem&0x80;
+		      if(f) op->simm=tem|0xffffff00;
+		      else op->simm=tem|0x0;
+		      break;
 		  }
 	  case 2: { 
-                          int s=(tem&0x8000)<<1;
-			  for(int i=0;i<32-op->width*8;++i)
-		 	  {
-				  tem=tem|s;
-				  s=s<<1;
-			  }
-			  op->simm=tem;
+                          bool f=tem&0x8000;
+			  if(f) op->simm=tem|0xffff0000;
+			  else op->simm=tem|0x0;
 			  break;
 		  }
 	  case 4:  op->simm=tem; break;
