@@ -161,8 +161,8 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 static inline void rtl_push(const rtlreg_t* src1) {
   // esp <- esp - 4
   // M[esp] <- src1
-  
-  cpu.esp-=4;
+  rtl_subi(&cpu.esp,&cpu.esp,4); 
+ // cpu.esp-=4;
   vaddr_write(cpu.esp,*src1,4); 
 //  TODO();
 }
@@ -184,7 +184,8 @@ static inline void rtl_setrelopi(uint32_t relop, rtlreg_t *dest,
 
 static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
-  *dest=(*src1>>(width*8-1));
+ assert(width);
+ *dest=(*src1>>(width*8-1))&0x1;
 //  TODO();
 }
 
@@ -213,7 +214,7 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
  // TODO();
-  if((*result)>>(8*width-1)==0)
+  if(((*result)>>(8*width-1)&0x1)==0)
 	  cpu.EFLAGS.SF=0;
   else cpu.EFLAGS.SF=1;
 }
