@@ -8,7 +8,11 @@ make_EHelper(test) {
 }
 
 make_EHelper(and) {
-  TODO();
+   rtl_andi(&(id_dest->val),&(id_dest->val),id_src->val);
+   cpu.EFLAGS.OF=0;
+   cpu.EFLAGS.CF=0;
+   rtl_update_ZFSF(&(id_dest->val),id_dest->width);
+    // TODO();
 
   print_asm_template2(and);
 }

@@ -10,3 +10,4 @@ make_EHelper(inv);
 make_EHelper(xor);
 make_EHelper(nemu_trap);
 make_EHelper(lea);
+make_EHelper(and);
