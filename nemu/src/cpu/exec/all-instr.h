@@ -12,3 +12,4 @@ make_EHelper(nemu_trap);
 make_EHelper(lea);
 make_EHelper(and);
 make_EHelper(add);
+make_EHelper(inv);
