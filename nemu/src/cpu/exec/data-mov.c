@@ -6,7 +6,10 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push) {
-    rtl_push(&(id_dest->reg));
+    if(id_dest->type==OP_TYPE_REG)
+       rtl_push(&(id_dest->reg));
+    else if(id_dest->type==OP_TYPE_MEM)
+       rtl_push(&(id_dest->addr));
 //  TODO();
 
   print_asm_template1(push);
