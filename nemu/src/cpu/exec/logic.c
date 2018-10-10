@@ -6,7 +6,7 @@ make_EHelper(test) {
     operand_write(id_dest,&t2);
     cpu.EFLAGS.OF=0;
     cpu.EFLAGS.CF=0;
-    rtl_update_ZFSF(&t2,id_dest->width);
+    rtl_update_ZFSF(&id_dest->val,id_dest->width);
     //TODO();
 
   print_asm_template2(test);
