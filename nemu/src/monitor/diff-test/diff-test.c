@@ -109,6 +109,6 @@ void difftest_step(uint32_t eip) {
    }
    printflog("------------------------------serious sepatated line--------------------------------\n");
    printflog("REGS:\teax\tecx\tedx\tebx\tesp\tebp\tesi\tedi\teip\n");
-   printflog("QEMU:\t%8x  %8x  %8x  %8x  %8x  %8x  %8x  %8x  %8x\n",ref_r.eax,ref_r.ecx,ref_r.edx,ref_r.ebx,ref_r.esp,ref_r.ebp,ref_r.esi,ref_r.edi,ref_r.eip);
+   printflog("QEMU:\t%-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x\n",ref_r.eax,ref_r.ecx,ref_r.edx,ref_r.ebx,ref_r.esp,ref_r.ebp,ref_r.esi,ref_r.edi,ref_r.eip);
   //TODO();
 }
