@@ -126,6 +126,13 @@ static inline make_DopHelper(O) {
 #endif
 }
 
+/* Gv <- Eb*/
+make_DHelper(movz_Eb2Gv)
+{
+    id_src->width=1;
+    decode_op_rm(eip,id_src,true,id_dest,false);
+}
+
 /* Eb <- Gb
  * Ev <- Gv
  */
