@@ -108,7 +108,7 @@ void difftest_step(uint32_t eip) {
        nemu_state=NEMU_ABORT;
    }
    printflog("------------------------------serious sepatated line--------------------------------\n");
-   printflog("REGS:\teax  \tecx\t  edx  \tebx  \tesp  \tebp  \tesi  \tedi  \teip\n");
-   printflog("QEMU:\t%x\t%x\t%x\t%x\t%x\t%x\t%x\t%x\t%x\n",ref_r.eax,ref_r.ecx,ref_r.edx,ref_r.ebx,ref_r.esp,ref_r.ebp,ref_r.esi,ref_r.edi,ref_r.eip);
+   printflog("REGS:\teax    \tecx    \tedx    \tebx    \tesp    \tebp    \tesi    \tedi    \teip\n");
+   printflog("QEMU:\t%8x\t%8x\t%8x\t%8x\t%8x\t%8x\t%8x\t%8x\t%8x\n",ref_r.eax,ref_r.ecx,ref_r.edx,ref_r.ebx,ref_r.esp,ref_r.ebp,ref_r.esi,ref_r.edi,ref_r.eip);
   //TODO();
 }
