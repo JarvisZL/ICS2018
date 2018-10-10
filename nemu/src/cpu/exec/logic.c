@@ -35,7 +35,12 @@ make_EHelper(xor) {
 }
 
 make_EHelper(or) {
-  TODO();
+   rtl_or(&t2,&(id_dest->val),&(id_src->val));
+   operand_write(id_dest,&t2);
+   cpu.EFLAGS.OF=0;
+   cpu.EFLAGS.CF=0;
+   rtl_update_ZFSF(&(id_dest->val),id_dest->width);
+//TODO();
 
   print_asm_template2(or);
 }
