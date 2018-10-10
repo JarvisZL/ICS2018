@@ -35,7 +35,11 @@ make_EHelper(popa) {
 }
 
 make_EHelper(leave) {
-  TODO();
+    
+    rtl_lr(&t2,5,4);//move ebp to t2;
+    vaddr_write(cpu.esp,t2,4);
+    rtl_pop(&(cpu.ebp));
+    //TODO();
 
   print_asm("leave");
 }
