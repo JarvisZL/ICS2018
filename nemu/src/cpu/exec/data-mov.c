@@ -7,16 +7,16 @@ make_EHelper(mov) {
 
 make_EHelper(push) {
     if(id_dest->type==OP_TYPE_REG)
-       rtl_push(&(id_dest->reg));
+       rtl_push(&(id_dest->val));
     else if(id_dest->type==OP_TYPE_MEM)
-       rtl_push(&(id_dest->addr));
+       rtl_push(&(id_dest->val));
 //  TODO();
 
   print_asm_template1(push);
 }
 
 make_EHelper(pop) {
-    rtl_pop(&(id_dest->reg));
+    rtl_pop(&(id_dest->val));
 //  TODO();
 
   print_asm_template1(pop);
