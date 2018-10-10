@@ -38,7 +38,7 @@ void cpu_exec(uint64_t n) {
      * instruction decode, and the actual execution. */
     exec_wrapper(print_flag);
     nr_guest_instr_add(1);
-    printf("--------------serious separate-line-----------");
+    printf("-----------------------serious separate-line--------------------------\n");
 #ifdef DEBUG
     /* TODO: check watchpoints here. */
     extern bool checkwp();
