@@ -111,5 +111,7 @@ void difftest_step(uint32_t eip) {
    printflog("REGS:\teax       ecx       edx       ebx       esp       ebp       esi       edi       eip\n");
    printflog("QEMU:\t%-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x\n",ref_r.eax,ref_r.ecx,ref_r.edx,ref_r.ebx,ref_r.esp,ref_r.ebp,ref_r.esi,ref_r.edi,ref_r.eip);
    printflog("NEMU:\t%-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x\n",cpu.eax,cpu.ecx,cpu.edx,cpu.ebx,cpu.esp,cpu.ebp,cpu.esi,cpu.edi,cpu.eip);
+   printflog("EFLAGS:\tCF\tOF\tSF\tZF\n");
+   printflog("NEMU:\t%d\t%d\t%d\t%d\n",cpu.EFLAGS.CF,cpu.EFLAGS.OF,cpu.EFLAGS.SF,cpu.EFLAGS.ZF);
    //TODO();
 }
