@@ -37,6 +37,7 @@ make_EHelper(popa) {
 make_EHelper(leave) {
     
     rtl_lr(&t2,5,4);//move ebp to t2;
+    printf("%d\n",t2);
     vaddr_write(cpu.esp,t2,4);
     rtl_pop(&(cpu.ebp));
     //TODO();
