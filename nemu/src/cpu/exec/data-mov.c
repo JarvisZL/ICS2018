@@ -6,9 +6,6 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push) {
-    if(id_dest->type==OP_TYPE_REG)
-       rtl_push(&(id_dest->val));
-    else if(id_dest->type==OP_TYPE_MEM)
        rtl_push(&(id_dest->val));
 //  TODO();
 
