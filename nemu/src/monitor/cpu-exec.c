@@ -38,7 +38,9 @@ void cpu_exec(uint64_t n) {
      * instruction decode, and the actual execution. */
     exec_wrapper(print_flag);
     nr_guest_instr_add(1);
-    printf("-----------------------serious separate-line--------------------------\n");
+//    printflog("-----------------------serious separate-line--------------------------\n");
+  //  printflog("REGS:\teax\tecx\tedx\tebx\tesp\tebp\tesi\tedi\teip\n");
+   // printflog("QEMU:\t%x\t%x\t%x\t%x\t%x\t%x\t%x\t%x\t%x\n",ref_r.eax,ref_r.ecx,ref_r.edx,ref_r.ebx,ref_r.esp,ref_r.ebp,ref_r.esi,ref_r.edi,ref_r.eip);
 #ifdef DEBUG
     /* TODO: check watchpoints here. */
     extern bool checkwp();
