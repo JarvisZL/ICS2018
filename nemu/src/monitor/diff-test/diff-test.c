@@ -71,14 +71,7 @@ void difftest_step(uint32_t eip) {
 
   // TODO: Check the registers state with the reference design.
   // Set `nemu_state` to `NEMU_ABORT` if they are not the same.
-  
-  // printflog("--  --  --  --  --  --  --serious sepatated line--  --  --  --  --  --  --\n");
-   printflog("REGS:eax       ecx       edx       ebx       esp       ebp       esi       edi       eip\n");
-   printflog("QEMU:%-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x\n",ref_r.eax,ref_r.ecx,ref_r.edx,ref_r.ebx,ref_r.esp,ref_r.ebp,ref_r.esi,ref_r.edi,ref_r.eip);
-   printflog("NEMU:%-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x\n",cpu.eax,cpu.ecx,cpu.edx,cpu.ebx,cpu.esp,cpu.ebp,cpu.esi,cpu.edi,cpu.eip);
-   printflog("EFLAGS:\tCF\tOF\tSF\tZF\n");
-   printflog("NEMU:\t%d\t%d\t%d\t%d\n",cpu.EFLAGS.CF,cpu.EFLAGS.OF,cpu.EFLAGS.SF,cpu.EFLAGS.ZF);
-  if(ref_r.eax!=cpu.eax)
+   if(ref_r.eax!=cpu.eax)
    {
        nemu_state=NEMU_ABORT;
    }
@@ -114,5 +107,11 @@ void difftest_step(uint32_t eip) {
    {
        nemu_state=NEMU_ABORT;
    }
+  // printflog("--  --  --  --  --  --  --serious sepatated line--  --  --  --  --  --  --\n");
+   printflog("REGS:eax       ecx       edx       ebx       esp       ebp       esi       edi       eip\n");
+   printflog("QEMU:%-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x\n",ref_r.eax,ref_r.ecx,ref_r.edx,ref_r.ebx,ref_r.esp,ref_r.ebp,ref_r.esi,ref_r.edi,ref_r.eip);
+   printflog("NEMU:%-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x\n",cpu.eax,cpu.ecx,cpu.edx,cpu.ebx,cpu.esp,cpu.ebp,cpu.esi,cpu.edi,cpu.eip);
+   printflog("EFLAGS:\tCF\tOF\tSF\tZF\n");
+   printflog("NEMU:\t%d\t%d\t%d\t%d\n",cpu.EFLAGS.CF,cpu.EFLAGS.OF,cpu.EFLAGS.SF,cpu.EFLAGS.ZF);
    //TODO();
 }
