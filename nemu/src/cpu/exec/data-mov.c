@@ -6,7 +6,36 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push) {
-       rtl_push(&(id_dest->val));
+     if(id_dest->width==1)
+     {
+         if(decoding.is_operand_size_16)
+         {
+              if(((id_dest->val>>7)&0x1)==1)
+              {
+                  t0=id_dest->val|0xff00;
+                  id_dest->val=t0;
+              }
+              else
+              {
+                  t0=id_dest->val&0x00ff;
+                  id_dest->val=t0;
+              }
+         }
+         else
+         {
+              if(((id_dest->val>>7)&0x1)==1)
+              {
+                  t0=id_dest->val|0xffffff00;
+                  id_dest->val=t0;
+              }
+              else
+              {
+                  t0=id_dest->val&0x000000ff;
+                  id_dest->val=t0;
+              }
+         }
+     }
+    rtl_push(&(id_dest->val));
 //  TODO();
 
   print_asm_template1(push);
