@@ -41,7 +41,7 @@ make_EHelper(ret) {
 }
 
 make_EHelper(call_rm) {
- //  decoding.jmp_eip=id_dest->val;
+   decoding.jmp_eip=1;
    rtl_push(&decoding.seq_eip);
    rtl_j(decoding.jmp_eip);
     //TODO();
