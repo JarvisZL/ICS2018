@@ -1,6 +1,7 @@
 #include "cpu/exec.h"
 make_EHelper(add);
 make_EHelper(sub);
+make_EHelper(sbb);
 make_EHelper(mov);
 make_EHelper(call);
 make_EHelper(call_rm);
