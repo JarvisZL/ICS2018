@@ -22,6 +22,7 @@ make_EHelper(movsx);
 make_EHelper(test);
 make_EHelper(jcc);
 make_EHelper(jmp);
+make_EHelper(jmp_rm);
 make_EHelper(leave);
 make_EHelper(adc);
 make_EHelper(or);
