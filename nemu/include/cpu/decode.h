@@ -114,5 +114,4 @@ make_DHelper(out_a2I);
 make_DHelper(out_a2dx);
 
 
-make_DHelper(movz_Eb2Gv);
 #endif
