@@ -2,8 +2,18 @@
 
 #ifndef __ISA_NATIVE__
 
+static int num;
+//static int just;
+
 size_t strlen(const char *s) {
-  return 0;
+    num=0;
+    int index=0;
+    while(s[index]!='\0')
+    {
+        num++;
+        index++;
+    }
+    return num;
 }
 
 char *strcpy(char* dst,const char* src) {
