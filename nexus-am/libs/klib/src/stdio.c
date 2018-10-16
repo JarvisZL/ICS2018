@@ -44,7 +44,7 @@ int sprintf(char *out, const char *fmt,...){
     char *tem=NULL;
    // char *s=NULL;
 
-    while(*str!='\0')
+    while((*str)!='\0')
     {
         if(*str=='%')
         {
@@ -55,8 +55,9 @@ int sprintf(char *out, const char *fmt,...){
                             tem=va_arg(ap,char*);
                             strcat(out,tem);
                             cnt+=strlen(tem);
+                            break;
                          }
-                         break;
+                        
                 case 'd': break;
             }
         }
