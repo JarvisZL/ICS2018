@@ -61,6 +61,8 @@ int sprintf(char *out, const char *fmt,...){
                 case 'd': break;
             }
         }
+        else
+            str++;
     }
     return cnt;
 }
