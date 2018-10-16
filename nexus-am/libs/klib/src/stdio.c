@@ -34,6 +34,36 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   return 0;
 }
 
+
+int sprintf(char *out, const char *fmt,...){
+    assert(fmt);
+    va_list ap;
+    va_start(ap,fmt);
+    cnt=0;
+    const char *str=fmt;
+    char *ptr=out;
+    char *tem=NULL;
+   // char *s=NULL;
+
+    while(*str!='\0')
+    {
+        if(*str=='%')
+        {
+            str++;
+            switch(*str)
+            {
+                case 's':{
+                            tem=va_arg(ap,char*);
+                            strcat(ptr,tem);
+                            cnt+=strlen(tem);
+                         }
+                         break;
+            }
+        }
+    }
+    return cnt;
+}
+/*
 int sprintf(char *out, const char *fmt, ...) {
     assert(fmt);
     va_list ap;
@@ -55,8 +85,8 @@ int sprintf(char *out, const char *fmt, ...) {
                               cnt+=strlen(tem);
                           }
                           break;
-              /*
-               *
+             
+               
                 case 'd': {
                               int x=va_arg(ap,int);
                               char *tem=NULL;
@@ -85,7 +115,7 @@ int sprintf(char *out, const char *fmt, ...) {
                                   cnt+=strlen(tem);
                               }
                               break;
-                          } */
+                          } 
             }
         }
       else
@@ -100,7 +130,7 @@ int sprintf(char *out, const char *fmt, ...) {
     va_end(ap);
     return cnt;
 }
-
+*/
 int snprintf(char *out, size_t n, const char *fmt, ...) {
   return 0;
 }
