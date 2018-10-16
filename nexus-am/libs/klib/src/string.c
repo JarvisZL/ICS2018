@@ -1,6 +1,7 @@
 #include "klib.h"
 
-#ifndef __ISA_NATIVE__
+//#ifndef __ISA_NATIVE__
+#if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 static size_t num;
 static int just;

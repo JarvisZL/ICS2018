@@ -1,7 +1,8 @@
 #include "klib.h"
 #include <stdarg.h>
 
-#ifndef __ISA_NATIVE__
+//#ifndef __ISA_NATIVE__
+#if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 static int cnt;
 
@@ -105,75 +106,6 @@ int sprintf(char *out, const char *fmt,...){
     return cnt;
 }
 
-/*
-int sprintf(char *out, const char *fmt, ...) {
-    assert(fmt);
-    va_list ap;
-    va_start(ap,fmt);
-    cnt=0;
-    const char *str=fmt;
-    char *ptr=out;
-
-    while(*str!='\0')
-    {
-        if(*str=='%')
-        {
-            str++;
-            switch(*str)
-            {
-                case 's': {
-                              char *tem=va_arg(ap, char*);
-                              strcat(ptr,tem);
-                              cnt+=strlen(tem);
-                          }
-                          break;
-             
-               
-                case 'd': {
-                              int x=va_arg(ap,int);
-                              char *tem=NULL;
-                              char *ss=NULL;
-                              if(x==-2147483648)
-                              {
-                                  char temp[12]="-2147483648";
-                                  strcat(ptr,temp);
-                                  cnt+=strlen(temp);
-                              }
-                              else if(x<0)
-                              {
-                                  x=-x;
-                                  *ss='-';
-                                  tem=ss;
-                                  ss++;
-                                  itos(ss,x);
-                                  strcat(ptr,tem);
-                                  cnt+=strlen(tem);
-                              }
-                              else if(x>=0)
-                              {
-                                  tem=ss;
-                                  itos(ss,x);
-                                  strcat(ptr,tem);
-                                  cnt+=strlen(tem);
-                              }
-                              break;
-                          } 
-            }
-        }
-      else
-      {
-          char *tem=NULL;
-          *tem=*str;
-          *(tem+1)='\0';
-          strcat(ptr,tem);
-          cnt++;
-          str++;
-      }
-    }
-    va_end(ap);
-    return cnt;
-}
-*/
 int snprintf(char *out, size_t n, const char *fmt, ...) {
   return 0;
 }
