@@ -19,7 +19,7 @@ static void itos(char s[],int x)
    
     for(int i=0;i<=num;i++)
     {
-        s[i]=a[num-i]-'0';
+        s[i]=a[num-i]+'0';
     }
     s[num+1]='\0';
     return;
