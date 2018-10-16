@@ -5,7 +5,7 @@
 
 static int cnt;
 
-static void itos(char* s,int x)
+static void itos(char s[],int x)
 {
     int a[20];
     int num=0;
@@ -19,10 +19,9 @@ static void itos(char* s,int x)
    
     for(int i=0;i<=num;i++)
     {
-        *s=a[num-i]-'0';
-        s++;
+        s[i]=a[num-i]-'0';
     }
-    *s='\0';
+    s[num+1]='\0';
     return;
 }
 
