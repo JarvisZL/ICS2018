@@ -50,7 +50,7 @@ int sprintf(char *out, const char *fmt, ...) {
             switch(*str)
             {
                 case 's': {
-                              char *tem=va_arg(ap,char*);
+                             const char *tem=va_arg(ap,const char*);
                               strcat(ptr,tem);
                               cnt+=strlen(tem);
                               break;
