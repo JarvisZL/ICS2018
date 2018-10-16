@@ -117,7 +117,41 @@ make_EHelper(dec) {
 }
 
 make_EHelper(neg) {
-  TODO();
+    if(id_dest->val==0)
+    {
+        cpu.EFLAGS.CF=0;
+    }
+    else
+    {
+        cpu.EFLAGS.CF=1;
+        switch(id_dest->width){
+            case 1:{
+                       if(id_dest->val==-128)
+                           cpu.EFLAGS.OF=1;
+                       else 
+                           cpu.EFLAGS.OF=0;
+                       break;
+                   }
+            case 2:{
+                       if(id_dest->val==-32768)
+                           cpu.EFLAGS.OF=1;
+                       else 
+                           cpu.EFLAGS.OF=0;
+                       break;
+                   }
+            case 4:{
+                       if(id_dest->val==-2147483648)
+                           cpu.EFLAGS.OF=1;
+                       else 
+                           cpu.EFLAGS.OF=0;
+                       break;
+                   }
+        }
+        t2=-id_dest->val;
+        operand_write(id_dest,&t2);
+        rtl_update_ZFSF(&t2,id_dest->width);
+    }
+    // TODO();
 
   print_asm_template1(neg);
 }
