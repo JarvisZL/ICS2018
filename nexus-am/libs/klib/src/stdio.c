@@ -42,7 +42,8 @@ int sprintf(char *out, const char *fmt,...){
     cnt=0;
     const char *str=fmt;
     char *tem=NULL;
-   // char *s=NULL;
+//    char *s=NULL;
+    int x;
 
     while((*str)!='\0')
     {
@@ -58,7 +59,16 @@ int sprintf(char *out, const char *fmt,...){
                             break;
                          }
                         
-                case 'd': break;
+                case 'd': {
+                               x=va_arg(ap,int);
+                               if(x==-2147483648)
+                               {
+                                    tem="-2147483648";
+                                    strcat(out,tem);
+                                    cnt+=strlen(tem);
+                               }
+                               break;
+                          }
             }
         }
         else
