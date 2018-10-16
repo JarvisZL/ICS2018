@@ -42,6 +42,7 @@ int sprintf(char *out, const char *fmt,...){
     cnt=0;
     const char *str=fmt;
     char *tem=NULL;
+    char temp[40];
 //    char *s=NULL;
     int x;
 
@@ -63,9 +64,9 @@ int sprintf(char *out, const char *fmt,...){
                                x=va_arg(ap,int);
                                if(x==-2147483648)
                                {
-                                    tem="-2147483648";
-                                    strcat(out,tem);
-                                    cnt+=strlen(tem);
+                                    strcpy(temp,"-2147483648");
+                                    strcat(out,temp);
+                                    cnt+=strlen(temp);
                                }
                                break;
                           }
