@@ -4,7 +4,7 @@
 #ifndef __ISA_NATIVE__
 
 static int cnt;
-/*
+
 static void itos(char* s,int x)
 {
     int a[20];
@@ -25,7 +25,7 @@ static void itos(char* s,int x)
     *s='\0';
     return;
 }
-*/
+
 int printf(const char *fmt, ...) {
   return 0;
 }
@@ -43,7 +43,7 @@ int sprintf(char *out, const char *fmt,...){
     const char *str=fmt;
     char *tem=NULL;
     char temp[40];
-//    char *s=NULL;
+    char s[40];
     int x;
     memset(out,0,sizeof(out));
 
@@ -62,12 +62,24 @@ int sprintf(char *out, const char *fmt,...){
                          }
                         
                 case 'd': {
+                               memset(s,0,sizeof(s));
+                               memset(temp,0,sizeof(temp));
                                x=va_arg(ap,int);
                                if(x==-2147483648)
                                {
                                     strcpy(temp,"-2147483648");
                                     strcat(out,temp);
                                     cnt+=strlen(temp);
+                               }
+                               else if(x<0)
+                               {
+                                  x=-x;
+                                  temp[0]='-';
+                                  itos(s,x);
+                                  strcat(temp,s);
+                                  strcat(out,temp);
+                                  cnt+=strlen(temp);
+
                                }
                                break;
                           }

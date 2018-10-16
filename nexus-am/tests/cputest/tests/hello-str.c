@@ -9,6 +9,9 @@ int main() {
     sprintf(buf,"%d",-2147483648);
     nemu_assert(strcmp(buf,"-2147483648")==0);
     
+    sprintf(buf,"%d",-2);
+    nemu_assert(strcmp(buf,"-2")==0);
+    
     /*
 	sprintf(buf, "%d + %d = %d\n", 1, 1, 2);
 	nemu_assert(strcmp(buf, "1 + 1 = 2\n") == 0);
