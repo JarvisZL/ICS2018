@@ -41,7 +41,6 @@ int sprintf(char *out, const char *fmt,...){
     va_start(ap,fmt);
     cnt=0;
     const char *str=fmt;
-    char *ptr=out;
     char *tem=NULL;
    // char *s=NULL;
 
@@ -54,7 +53,7 @@ int sprintf(char *out, const char *fmt,...){
             {
                 case 's':{
                             tem=va_arg(ap,char*);
-                            strcat(ptr,tem);
+                            strcat(out,tem);
                             cnt+=strlen(tem);
                          }
                          break;
