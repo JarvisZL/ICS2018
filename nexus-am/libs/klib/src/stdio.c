@@ -79,7 +79,13 @@ int sprintf(char *out, const char *fmt,...){
                                   strcat(temp,s);
                                   strcat(out,temp);
                                   cnt+=strlen(temp);
-
+                                 
+                               }
+                               else 
+                               {
+                                   itos(s,x);
+                                   strcat(out,s);
+                                   cnt+=strlen(s);
                                }
                                break;
                           }
