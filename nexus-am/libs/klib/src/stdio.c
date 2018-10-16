@@ -62,9 +62,9 @@ int sprintf(char *out, const char *fmt,...){
                         
                 case 'd': {
                                x=va_arg(ap,int);
-                               if(x==-2147483648)
+                               if(x==1)
                                {
-                                    strcpy(temp,"-2147483648");
+                                    strcpy(temp,"1");
                                     strcat(out,temp);
                                     cnt+=strlen(temp);
                                }
