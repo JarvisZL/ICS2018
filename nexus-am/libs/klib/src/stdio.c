@@ -4,6 +4,7 @@
 #ifndef __ISA_NATIVE__
 
 static int cnt;
+/*
 static void itos(char* s,int x)
 {
     int a[20];
@@ -24,7 +25,7 @@ static void itos(char* s,int x)
     *s='\0';
     return;
 }
-
+*/
 int printf(const char *fmt, ...) {
   return 0;
 }
@@ -38,7 +39,7 @@ int sprintf(char *out, const char *fmt, ...) {
     va_list ap;
     va_start(ap,fmt);
     cnt=0;
-   const char *str=fmt;
+    const char *str=fmt;
     char *ptr=out;
 
     while(*str!='\0')
@@ -54,7 +55,7 @@ int sprintf(char *out, const char *fmt, ...) {
                               cnt+=strlen(tem);
                               break;
                           }
-
+              /*
                 case 'd': {
                               int x=va_arg(ap,int);
                               char *tem=NULL;
@@ -83,7 +84,7 @@ int sprintf(char *out, const char *fmt, ...) {
                                   cnt+=strlen(tem);
                               }
                               break;
-                          }
+                          } */
             }
         }
       else
