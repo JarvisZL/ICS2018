@@ -89,6 +89,7 @@ int sprintf(char *out, const char *fmt,...){
                                break;
                           }
             }
+            str++;
         }
         else
         {
