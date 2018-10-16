@@ -57,6 +57,7 @@ int sprintf(char *out, const char *fmt,...){
                             cnt+=strlen(tem);
                          }
                          break;
+                case 'd': break;
             }
         }
     }
