@@ -45,6 +45,7 @@ int sprintf(char *out, const char *fmt,...){
     char temp[40];
 //    char *s=NULL;
     int x;
+    memset(out,0,sizeof(out));
 
     while((*str)!='\0')
     {
