@@ -91,7 +91,15 @@ int sprintf(char *out, const char *fmt,...){
             }
         }
         else
-            str++;
+        {
+           memset(temp,0,sizeof(temp));
+           temp[0]=*str;
+           temp[1]='\0';
+           strcat(out,temp);
+           cnt++;
+           str++;
+        }
+            
     }
     return cnt;
 }
