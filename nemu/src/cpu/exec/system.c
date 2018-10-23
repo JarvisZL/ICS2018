@@ -41,8 +41,17 @@ make_EHelper(iret) {
   print_asm("iret");
 }
 
+extern uint32_t pio_read_w(ioaddr_t addr);
+extern uint32_t pio_read_l(ioaddr_t addr);
+extern uint32_t pio_read_b(ioaddr_t addr);
 make_EHelper(in) {
-  TODO();
+ switch(id_dest->width)
+ {
+     case 1: pio_read_b(id_dest->reg); break;
+     case 2: pio_read_w(id_dest->reg); break;
+     case 4: pio_read_l(id_dest->reg); break;
+ }
+    // TODO();
 
   print_asm_template2(in);
 
