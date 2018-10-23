@@ -3,7 +3,6 @@
 
 make_EHelper(test) {
     rtl_and(&t2,&(id_dest->val),&(id_src->val));
-   // operand_write(id_dest,&t2);
     cpu.EFLAGS.OF=0;
     cpu.EFLAGS.CF=0;
     rtl_update_ZFSF(&t2,id_dest->width);
