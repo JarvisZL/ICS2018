@@ -36,7 +36,6 @@ int printf(const char *fmt, ...) {
     char *tem;
     char s[50];
     int x;
-    char c;
 
     while((*str)!='\0')
     {
@@ -56,8 +55,8 @@ int printf(const char *fmt, ...) {
                              break;
                          }
                 case 'c':{
-                             c=va_arg(ap,char);
-                             _putc(c);
+                             tem=va_arg(ap,char*);
+                             _putc(*tem);
                              cnt++;
                              break;
                          }
