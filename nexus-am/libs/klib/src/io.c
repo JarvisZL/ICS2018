@@ -12,7 +12,7 @@ static _Device *getdev(_Device **ptr, uint32_t id) {
     if (!cur) break;
   }
   assert(0);
-  return NULL;
+  return *ptr;
 }
 
 static _Device *input_dev;
