@@ -167,6 +167,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         if(*str=='%')
         {
             str++;
+            //control width
             while(*str==48)
             {
                 flag=1;
@@ -185,8 +186,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                 stoi(num,n);
             }
 
-
-
+// begin to check what to print
             switch(*str)
             {
                 case 's':{
