@@ -2,6 +2,8 @@
 #include <x86.h>
 #include <amdev.h>
 
+static _UptimeReg initime;
+
 size_t timer_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_TIMER_UPTIME: {
@@ -25,5 +27,8 @@ size_t timer_read(uintptr_t reg, void *buf, size_t size) {
   return 0;
 }
 
+
 void timer_init() {
+    initime.hi=0;
+    initime.lo=0;
 }
