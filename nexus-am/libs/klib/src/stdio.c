@@ -335,8 +335,44 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                 case 'c':{
                             tem=va_arg(ap,char*);
                             assert(strlen(tem)==1);
-                            strcat(out,tem);
-                            cntvs++;
+                             if(flag)
+                             {
+                                if(strlen(tem)>=n)
+                                {
+                                   strcat(out,tem);
+                                   cntvs+=strlen(tem);
+                                }
+                                else
+                                {
+                                    char s1[10]="";
+                                    for(int i=0;i<n-strlen(tem);i++)
+                                        s1[i]='0';
+                                    s1[n-strlen(tem)]='\0';
+                                    strcat(out,s1);
+                                    cntvs+=strlen(s1);
+                                    strcat(out,tem);
+                                    cntvs+=strlen(tem);
+                                }
+                             }
+                             else
+                             {
+                                if(strlen(tem)>=n)
+                                {
+                                   strcat(out,tem);
+                                   cntvs+=strlen(tem);
+                                }
+                                else
+                                {
+                                    char s1[10]="";
+                                    for(int i=0;i<n-strlen(tem);i++)
+                                        s1[i]=' ';
+                                    s1[n-strlen(tem)]='\0';
+                                    strcat(out,s1);
+                                    cntvs+=strlen(s1);
+                                    strcat(out,tem);
+                                    cntvs+=strlen(tem);
+                                }
+                            }
                             break;
                          }
             }
