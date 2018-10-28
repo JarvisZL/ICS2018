@@ -62,10 +62,18 @@ make_EHelper(cltd) {
 
 make_EHelper(cwtl) {
   if (decoding.is_operand_size_16) {
-    TODO();
+      if(((cpu.gpr[0]._8[0]>>7)&0x1)==1)
+          cpu.gpr[0]._8[1]=0xff;
+      else
+          cpu.gpr[0]._8[1]=0x00;
+      // TODO();
   }
   else {
-    TODO();
+      if(((cpu.gpr[0]._16>>15)&0x1)==1)
+         cpu.gpr[0]._32|=0xffff0000;
+      else
+         cpu.gpr[0]._32&=0x0000ffff;
+   // TODO();
   }
 
   print_asm(decoding.is_operand_size_16 ? "cbtw" : "cwtl");
