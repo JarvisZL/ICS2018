@@ -90,3 +90,44 @@ make_EHelper(not) {
 
   print_asm_template1(not);
 }
+
+make_EHelper(rol){
+   for(int i=0;i<id_src->val;i++)
+   {
+       switch(id_dest->width){
+           case 1: {
+                      t2=(id_dest->val>>7)&0x1;
+                      t1=1;
+                      rtl_shl(&t0,&id_dest->val,&t1);
+                      t0=t0|t2;
+                      operand_write(id_dest,&t0);
+                      break;
+                   }
+           case 2 :{
+                       t2=(id_dest->val>>15)&0x1;
+                       t1=1;
+                       rtl_shl(&t0,&id_dest->val,&t1);
+                       t0=t0|t2;
+                       operand_write(id_dest,&t0);
+                       break;
+                   }
+           case 4 :{
+                       t2=(id_dest->val>>31)&0x1;
+                       t1=1;
+                       rtl_shl(&t0,&id_dest->val,&t1);
+                       t0=t0|t2;
+                       operand_write(id_dest,&t0);
+                       break;
+                   }
+          default: assert(0);
+       }
+   }
+   if(id_src->val==1)
+   {
+       if(t2==cpu.EFLAGS.CF)
+           cpu.EFLAGS.OF=1;
+       else
+           cpu.EFLAGS.OF=0;
+   }
+   // print_asm_templatel(rol);
+}
