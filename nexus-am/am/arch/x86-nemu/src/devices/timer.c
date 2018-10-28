@@ -2,15 +2,15 @@
 #include <x86.h>
 #include <amdev.h>
 
-static _UptimeReg initime;
+static uint32_t initime;
 
 size_t timer_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_TIMER_UPTIME: {
       uint32_t tem=inl(0x48); 
       _UptimeReg *uptime = (_UptimeReg *)buf;
-      uptime->hi = 0-initime.hi;
-      uptime->lo = tem-initime.lo;
+      uptime->hi = 0;
+      uptime->lo = tem-initime;
       return sizeof(_UptimeReg);
     }
     case _DEVREG_TIMER_DATE: {
@@ -29,6 +29,5 @@ size_t timer_read(uintptr_t reg, void *buf, size_t size) {
 
 
 void timer_init() {
-    initime.hi=0;
-    initime.lo=0;
+    initime=inl(0x48);
 }
