@@ -7,7 +7,6 @@
 #define SCREEN_H 300
 static uint32_t* const fb __attribute__((used)) = (uint32_t *)0x40000;
 
-//static uint32_t info0;
 static uint32_t info1;
 
 static inline int min(int x,int y)
@@ -20,8 +19,8 @@ size_t video_read(uintptr_t reg, void *buf, size_t size) {
     case _DEVREG_VIDEO_INFO: {
       info1=inl(SCREEN_PORT);
       _VideoInfoReg *info = (_VideoInfoReg *)buf;
-      info->width = ((info1>>16)&0xffff);//-((info0>>16)&0xffff);
-      info->height =(info1&0xffff);//-(info0&0xffff);
+      info->width = ((info1>>16)&0xffff);
+      info->height =(info1&0xffff);
       return sizeof(_VideoInfoReg);
     }
   }
@@ -32,7 +31,8 @@ size_t video_write(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_FBCTL: {
       _FBCtlReg *ctl = (_FBCtlReg *)buf;
-    /*
+    // the following is test code
+      /*
       int i;
       int size =screen_width()*screen_height();
       for(i=0; i<size; i++) fb[i]=i;
@@ -55,5 +55,4 @@ size_t video_write(uintptr_t reg, void *buf, size_t size) {
 }
 
 void vga_init() {
-    //info0=inl(SCREEN_PORT);
 }
