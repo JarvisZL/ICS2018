@@ -7,7 +7,7 @@
 #define SCREEN_H 300
 static uint32_t* const fb __attribute__((used)) = (uint32_t *)0x40000;
 
-static uint32_t info0;
+//static uint32_t info0;
 static uint32_t info1;
 
 static inline int min(int x,int y)
@@ -55,5 +55,5 @@ size_t video_write(uintptr_t reg, void *buf, size_t size) {
 }
 
 void vga_init() {
-    info0=inl(SCREEN_PORT);
+    //info0=inl(SCREEN_PORT);
 }
