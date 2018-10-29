@@ -130,5 +130,5 @@ make_EHelper(rol){
        else
            cpu.EFLAGS.OF=0;
    }
-   // print_asm_templatel(rol);
+    print_asm_template2(rol);
 }
