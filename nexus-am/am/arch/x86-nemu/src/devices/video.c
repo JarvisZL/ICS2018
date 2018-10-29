@@ -6,14 +6,15 @@
 static uint32_t* const fb __attribute__((used)) = (uint32_t *)0x40000;
 
 static uint32_t info0;
+static uint32_t info1;
 
 size_t video_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_INFO: {
-      info0=inl(SCREEN_PORT);
+      info1=inl(SCREEN_PORT);
       _VideoInfoReg *info = (_VideoInfoReg *)buf;
-      info->width = (info0>>16)&0xffff;
-      info->height = info0&0xffff;
+      info->width = ((info1>>16)&0xffff)-((info0>>16)&0xffff);
+      info->height = (info1&0xffff)-(info0&0xffff);
       return sizeof(_VideoInfoReg);
     }
   }
@@ -35,4 +36,5 @@ size_t video_write(uintptr_t reg, void *buf, size_t size) {
 }
 
 void vga_init() {
+    info0=inl(SCREEN_PORT);
 }
