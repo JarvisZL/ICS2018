@@ -1,10 +1,10 @@
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
-#define DEBUG
-#define DIFF_TEST
+//#define DEBUG
+//#define DIFF_TEST
 
-volatile static int dummy;
+//volatile static int dummy;
 #if _SHARE
 // do not enable these features while building a reference design
 #undef DIFF_TEST
