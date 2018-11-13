@@ -9,6 +9,7 @@ make_EHelper(ret);
 make_EHelper(operand_size);
 make_EHelper(push);
 make_EHelper(pop);
+make_EHelper(pusha);
 make_EHelper(inv);
 make_EHelper(xor);
 make_EHelper(nemu_trap);
