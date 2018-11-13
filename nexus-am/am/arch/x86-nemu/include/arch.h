@@ -7,16 +7,13 @@
 #define PGSIZE    4096    // Bytes mapped by a page
 
 typedef uint32_t size_t;
-/*
-struct _Context {
-  uintptr_t esi, ebx, eax, eip, edx, err, eflags, ecx, cs, esp, edi, ebp;
-  struct _Protect *prot;
-  int       irq;
-};
-*/
+
+
+
+//more ealier ,addr more small --zly 
 struct _Context {
   struct _Protect *prot;
-  uintptr_t edi,esi,ebp,esp,ebx,edx,ecx,eax; //eax, ecx, edx, ebx, esp, ebp, esi, edi;
+  uintptr_t edi,esi,ebp,esp,ebx,edx,ecx,eax; 
   int irq;
   uintptr_t err;
   uintptr_t eflags, cs, eip;
