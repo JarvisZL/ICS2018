@@ -73,44 +73,55 @@ void difftest_step(uint32_t eip) {
   // Set `nemu_state` to `NEMU_ABORT` if they are not the same.
    if(ref_r.eax!=cpu.eax)
    {
+       printflog("the eax is different: NEMU  %-8x, QEMU  %-8x\n",cpu.eax,ref_r.eax);
        nemu_state=NEMU_ABORT;
    }
    else if(ref_r.ecx!=cpu.ecx)
    {
+       printflog("the ecx is different: NEMU  %-8x, QEMU  %-8x\n",cpu.ecx,ref_r.ecx);
        nemu_state=NEMU_ABORT;
    }
    else if(ref_r.edx!=cpu.edx)
    {
+       printflog("the edx is different: NEMU  %-8x, QEMU  %-8x\n",cpu.edx,ref_r.edx);
        nemu_state=NEMU_ABORT;
    }
    else if(ref_r.ebx!=cpu.ebx)
    {
+       printflog("the ebx is different: NEMU  %-8x, QEMU  %-8x\n",cpu.ebx,ref_r.ebx);
        nemu_state=NEMU_ABORT;
    }
    else if(ref_r.esp!=cpu.esp)
    {
+       printflog("the esp is different: NEMU  %-8x, QEMU  %-8x\n",cpu.esp,ref_r.esp);
        nemu_state=NEMU_ABORT;
    }
    else if(ref_r.ebp!=cpu.ebp)
    {
+       printflog("the ebp is different: NEMU  %-8x, QEMU  %-8x\n",cpu.ebp,ref_r.ebp);
        nemu_state=NEMU_ABORT;
    }
    else if(ref_r.esi!=cpu.esi)
    {
+       printflog("the esi is different: NEMU  %-8x, QEMU  %-8x\n",cpu.esi,ref_r.esi);
        nemu_state=NEMU_ABORT;
    }
    else if(ref_r.edi!=cpu.edi)
    {
+       printflog("the edi is different: NEMU  %-8x, QEMU  %-8x\n",cpu.edi,ref_r.edi);
        nemu_state=NEMU_ABORT;
    }
    else if(ref_r.eip!=cpu.eip)
    {
+       printflog("the eip is different: NEMU  %-8x, QEMU  %-8x\n",cpu.eip,ref_r.eip);
        nemu_state=NEMU_ABORT;
    }
+/*
    printflog("REGS:eax       ecx       edx       ebx       esp       ebp       esi       edi       eip\n");
    printflog("QEMU:%-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x\n",ref_r.eax,ref_r.ecx,ref_r.edx,ref_r.ebx,ref_r.esp,ref_r.ebp,ref_r.esi,ref_r.edi,ref_r.eip);
    printflog("NEMU:%-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x\n",cpu.eax,cpu.ecx,cpu.edx,cpu.ebx,cpu.esp,cpu.ebp,cpu.esi,cpu.edi,cpu.eip);
    printflog("EFLAGS:\tCF\tOF\tSF\tZF\n");
    printflog("NEMU:\t%d\t%d\t%d\t%d\n",cpu.EFLAGS.CF,cpu.EFLAGS.OF,cpu.EFLAGS.SF,cpu.EFLAGS.ZF);
    //TODO();
+   */
 }
