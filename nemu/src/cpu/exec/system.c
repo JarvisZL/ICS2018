@@ -37,8 +37,12 @@ make_EHelper(mov_cr2r) {
 #endif
 }
 
+extern  void raise_intr(uint8_t NO,vaddr_t ret_addr);
 make_EHelper(int) {
-    //store message
+ 
+    raise_intr(id_dest->val,decoding.seq_eip); 
+    
+    /*  //store message
     t0=cpu.eflags;
     rtl_push(&t0);
     t0=cpu.CS;
@@ -54,7 +58,8 @@ make_EHelper(int) {
     t1=t1&0x0000ffff;
     t2=t2&0xffff0000;
     t1=t1|t2;//offset
-    rtl_j(t1); 
+    rtl_j(t1);
+    */
     // TODO();
 
   print_asm("int %s", id_dest->str);
