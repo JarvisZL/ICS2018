@@ -8,7 +8,7 @@ void vecnull();
 
 _Context* irq_handle(_Context *tf) {
     //debug
-   printf("%d  %d  %d  %d  %d",tf->eax,tf->ecx,tf->edx,tf->ebx,tf->esp);
+//   printf("%d  %d  %d  %d  %d",tf->eax,tf->ecx,tf->edx,tf->ebx,tf->esp);
   _Context *next = tf;
   if (user_handler) {
     _Event ev;
