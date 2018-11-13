@@ -15,10 +15,10 @@ struct _Context {
 };
 */
 struct _Context {
-  uintptr_t err;
-  int irq;
-  uintptr_t  eax, ecx, edx, ebx, esp, ebp, esi, edi;
   struct _Protect *prot;
+  uintptr_t  eax, ecx, edx, ebx, esp, ebp, esi, edi;
+  int irq;
+  uintptr_t err;
   uintptr_t eflags, cs, eip;
 };
 
