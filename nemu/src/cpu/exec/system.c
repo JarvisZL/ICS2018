@@ -4,8 +4,20 @@ void difftest_skip_ref();
 void difftest_skip_dut();
 
 make_EHelper(lidt) {
-  TODO();
-
+    rtl_lm(&t0,&id_dest->addr,2);
+    cpu.IDTR.limit=t0;
+    t1=id_dest->addr+0x2;
+    if(id_dest->width==2)
+    {
+         rtl_lm(&t2,&t1,3);
+         cpu.IDTR.base=t2;
+    }
+    else if(id_dest->width==4)
+    {
+        rtl_lm(&t2,&t1,4);
+        cpu.IDTR.base=t2;
+    }
+    // TODO();
   print_asm_template1(lidt);
 }
 

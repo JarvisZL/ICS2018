@@ -54,6 +54,10 @@ typedef union{
     rtlreg_t no_use3: 10;
   }EFLAGS;
 
+  struct{
+      uint16_t limit;
+      uint32_t base;
+  }IDTR;
   };
 } CPU_state;
 
