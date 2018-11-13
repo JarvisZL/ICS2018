@@ -29,6 +29,7 @@ typedef union{
   struct{
   rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
   vaddr_t eip;
+  union{
   struct{
     rtlreg_t CF :1;
     rtlreg_t no_use:1;
@@ -53,11 +54,13 @@ typedef union{
     rtlreg_t ID :1;
     rtlreg_t no_use3: 10;
   }EFLAGS;
-
+  uint32_t eflags;
+  };
   struct{
       uint16_t limit;
       uint32_t base;
   }IDTR;
+  rtlreg_t CS;
   };
 } CPU_state;
 

@@ -38,7 +38,24 @@ make_EHelper(mov_cr2r) {
 }
 
 make_EHelper(int) {
-  TODO();
+    //store message
+    t0=cpu.eflags;
+    rtl_push(&t0);
+    t0=cpu.CS;
+    rtl_push(&t0);
+    rtl_push(&decoding.seq_eip);
+
+   //get the door
+    t0=cpu.IDTR.base+id_dest->val*8;
+    t1=vaddr_read(t0,4);//low 32
+    t0=t0+4;
+    t2=vaddr_read(t0,4);//high 32
+   // p==1 in linux
+    t1=t1&0x0000ffff;
+    t2=t2&0xffff0000;
+    t1=t1|t2;//offset
+    rtl_j(t1); 
+    // TODO();
 
   print_asm("int %s", id_dest->str);
 
