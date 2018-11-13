@@ -57,7 +57,7 @@ typedef struct _Context _Context;
 // and arch-dependent @ptr
 typedef struct _Protect {
   size_t pgsize;
-  _Area area;
+ _Area area;
   void *ptr;
 } _Protect;
 
