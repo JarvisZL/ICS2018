@@ -75,6 +75,7 @@ make_EHelper(popa) {
         cpu.gpr[6]._16=(uint16_t) t0;
         rtl_pop(&t0);
         cpu.gpr[5]._16=(uint16_t) t0;
+        rtl_pop(&t0);//useless esp
         rtl_pop(&t0);
         cpu.gpr[3]._16=(uint16_t) t0;
         rtl_pop(&t0);
@@ -89,6 +90,7 @@ make_EHelper(popa) {
         rtl_pop(&cpu.edi);
         rtl_pop(&cpu.esi);
         rtl_pop(&cpu.ebp);
+        rtl_pop(&t0);//useless esp;
         rtl_pop(&cpu.ebx);
         rtl_pop(&cpu.edx);
         rtl_pop(&cpu.ecx);
