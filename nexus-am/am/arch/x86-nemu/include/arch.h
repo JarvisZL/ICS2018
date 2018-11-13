@@ -16,10 +16,10 @@ struct _Context {
 */
 struct _Context {
   struct _Protect *prot;
-  uintptr_t eflags, cs, eip;
   uintptr_t err;
   int irq;
   uintptr_t  eax, ecx, edx, ebx, esp, ebp, esi, edi;
+  uintptr_t eflags, cs, eip;
 };
 
 #define GPR1 eax
