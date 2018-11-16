@@ -2,8 +2,16 @@
 
 #define DEFAULT_ENTRY 0x4000000
 
+
+static void* buff;
+extern size_t get_ramdisk_size();
+extern size_t ramdisk_read(void* buf, size_t offset,size_t len);
+
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
+    size_t length=get_ramdisk_size();
+    buff=(void *)DEFAULT_ENTRY;
+    ramdisk_read(buff,0,length);
+    // TODO();
   return DEFAULT_ENTRY;
 }
 
