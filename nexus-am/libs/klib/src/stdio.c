@@ -57,6 +57,15 @@ int printf(const char *fmt, ...) {
     return cnt;
 }
 
+int sprintf(char *out, const char *fmt,...){
+   assert(fmt);
+   va_list ap;
+   va_start(ap,fmt);
+   cnts=vsprintf(out,fmt,ap);
+   va_end(ap);
+   return cnts;
+}
+
 int vsprintf(char *out, const char *fmt, va_list ap) {
     assert(fmt);
     cntvs=0;
@@ -146,6 +155,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                              x=va_arg(ap,int);
                              if(x==-2147483648)
                              {
+                                 //not consider width!!!
                                  strcpy(temp,"-2147483648");
                                  strcat(out,temp);
                                  cntvs+=strlen(temp);
@@ -302,7 +312,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     return cntvs;
 }
 
-
+/*
 int sprintf(char *out, const char *fmt,...){
     assert(fmt);
     va_list ap;
@@ -374,7 +384,7 @@ int sprintf(char *out, const char *fmt,...){
     va_end(ap);
     return cnts;
 }
-
+*/
 int snprintf(char *out, size_t n, const char *fmt, ...) {
   return 0;
 }
