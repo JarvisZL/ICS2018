@@ -117,7 +117,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                              tem=&temp[31];
                              for(int i=0;i<8;++i)
                              {
-                                 *(--tem)=hextable_x[x&0xf];
+                                 *(--tem)=hextable_x[x&0x0f];
                                  x>>=4;
                              }
                              s[0]='0';
