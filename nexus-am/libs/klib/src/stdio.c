@@ -68,6 +68,10 @@ int sprintf(char *out, const char *fmt,...){
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
     assert(fmt);
+ 
+    char hextable_x[16]="0123456789abcdef";
+    //char hextable_X[16]="0123456789ABCDEF";
+
     cntvs=0;
     const char *str=fmt;
     char *tem=NULL;
@@ -107,6 +111,23 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 // begin to check what to print
             switch(*str)
             {
+                case 'p':{
+                             x=(int)va_arg(ap,void*);
+                             temp[31]='\0';
+                             tem=&temp[31];
+                             for(int i=0;i<8;++i)
+                             {
+                                 *(--tem)=hextable_x[x&0xf];
+                                 x>>=4;
+                             }
+                             s[0]='0';
+                             s[1]='x';
+                             s[2]='\0';
+                             strcat(out,s);
+                             strcat(out,temp);
+                             cntvs+=strlen(s)+strlen(temp);
+                             break;
+                         }
                 case 's':{
                              tem=va_arg(ap,char*);
                              if(flag)
