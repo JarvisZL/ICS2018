@@ -113,8 +113,8 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             {
                 case 'p':{
                              x=(int)va_arg(ap,void*);
-                             temp[31]='\0';
-                             tem=&temp[31];
+                             temp[8]='\0';
+                             tem=&temp[8];
                              for(int i=0;i<8;++i)
                              {
                                  *(--tem)=hextable_x[x&0x0f];
