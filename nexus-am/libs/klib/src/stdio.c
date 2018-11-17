@@ -78,7 +78,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     char temp[50];
     char s[50];
     int x;
-    long long y;//addr maybe 64
+    long y;//addr maybe 64
     int flag=0;
     memset(out,0,sizeof(out));
 
@@ -115,7 +115,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                 case 'p':{
                              if(sizeof(void*)==4)
                              {
-                             y=(long long)(int)va_arg(ap,void*);
+                             y=(long)va_arg(ap,void*);
                              temp[8]='\0';
                              tem=&temp[8];
                              for(int i=0;i<8;++i)
@@ -132,7 +132,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                              }
                              else if(sizeof(void*)==8)
                              {
-                                y=(long long)(int)va_arg(ap,void*);
+                                y=(long)va_arg(ap,void*);
                                 temp[16]='\0';
                                 tem=&temp[16];
                                 for(int i=0;i<16;++i)
