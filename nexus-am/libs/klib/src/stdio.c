@@ -78,11 +78,12 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     char temp[50];
     char s[50];
     int x;
+    long long y;//addr maybe 64
     int flag=0;
     memset(out,0,sizeof(out));
 
     char num[20];
-    int k,n=0;
+    int k,n=0;//k is the len of con-wid and n is the num of con-wid
 
     while((*str)!='\0')
     {
@@ -112,13 +113,15 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             switch(*str)
             {
                 case 'p':{
-                             x=(int)va_arg(ap,void*);
+                             if(sizeof(void*)==4)
+                             {
+                             y=(long long)(int)va_arg(ap,void*);
                              temp[8]='\0';
                              tem=&temp[8];
                              for(int i=0;i<8;++i)
                              {
-                                 *(--tem)=hextable_x[x&0x0f];
-                                 x>>=4;
+                                 *(--tem)=hextable_x[y&0x0f];
+                                 y>>=4;
                              }
                              s[0]='0';
                              s[1]='x';
@@ -126,6 +129,24 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                              strcat(out,s);
                              strcat(out,temp);
                              cntvs+=strlen(s)+strlen(temp);
+                             }
+                             else if(sizeof(void*)==8)
+                             {
+                                y=(long long)(int)va_arg(ap,void*);
+                                temp[16]='\0';
+                                tem=&temp[16];
+                                for(int i=0;i<16;++i)
+                                {
+                                    *(--tem)=hextable_x[y&0x0f];
+                                    y>>=4;
+                                }
+                                s[0]='0';
+                                s[1]='x';
+                                s[2]='\0';
+                                strcat(out,s);
+                                strcat(out,temp);
+                                cntvs+=strlen(s)+strlen(temp);
+                             }
                              break;
                          }
                 case 's':{
