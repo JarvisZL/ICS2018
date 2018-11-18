@@ -51,7 +51,7 @@ void *_sbrk(intptr_t increment){
      if(_syscall_(SYS_brk,now,0,0)==0)
          return old_pb;
      else
-         return (void *)-1;//now should not reach here
+         return (void *)-1;//pa3.2 should not reach here
 }
 
 int _read(int fd, void *buf, size_t count) {
