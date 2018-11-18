@@ -15,7 +15,7 @@ _Context* do_syscall(_Context *c) {
       case SYS_write: {
                           if(a[1]==1||a[1]==2)
                           {
-                             char * ptr=(char *)a[1];
+                             char * ptr=(void *)a[1];
                              for(int i=0;i<8*a[2];++i)
                              {
                                   _putc(*ptr);
