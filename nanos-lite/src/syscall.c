@@ -21,7 +21,7 @@ _Context* do_syscall(_Context *c) {
   a[3] = c->GPR4;
 
   switch (a[0]) {
-      case SYS_write: if(a[1]==1||a[1]==2){ out_write(a[2],a[3]); c->GPRx=a[3]; } else c->GPRx=-1; break;
+      case SYS_write: if(a[1]==1||a[1]==2) out_write(a[2],a[3]);  break;
     case SYS_exit: _halt(c->GPR2); break;
     case SYS_yield: _yield(); c->GPRx=0; break;
     default: panic("Unhandled syscall ID = %d", a[0]);
