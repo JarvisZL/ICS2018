@@ -47,10 +47,11 @@ void * old_pb;
 void *_sbrk(intptr_t increment){
     old_pb=program_break;
     intptr_t now=(intptr_t) program_break+increment;
-    _syscall_(SYS_brk,now,0,0);
-    program_break=(void *) now;
-    return old_pb;
-    // return (void *)-1;
+    program_break=(void *) now;//actually we let user to alter the stack
+     if(_syscall_(SYS_brk,now,0,0)==0)
+         return old_pb;
+     else
+         return (void *)-1;//now should not reach here
 }
 
 int _read(int fd, void *buf, size_t count) {
