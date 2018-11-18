@@ -16,7 +16,7 @@ _Context* do_syscall(_Context *c) {
                           if(a[1]==1||a[1]==2)
                           {
                              char * ptr=(char *)a[2];
-                             for(int i=0;i<8*a[3];++i)
+                             for(int i=0;i<a[3];++i)
                              {
                                   _putc(*ptr);
                                   ptr++;
