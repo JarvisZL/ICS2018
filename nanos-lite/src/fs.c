@@ -71,7 +71,6 @@ size_t fs_filesz(int fd)
 
 off_t fs_lseek(int fd,off_t offset,int whence)
 {
-   Log("hello!!!");
    switch(whence)
    {
        case SEEK_SET: {//SEEK_SET
