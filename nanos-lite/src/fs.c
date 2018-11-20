@@ -67,7 +67,7 @@ int fs_close(int fd)
 
 size_t fs_filesz(int fd)
 {
-    Log("return size ok");
+    Log("return size %d ok",file_table[fd].size);
     return file_table[fd].size;
 }
 
