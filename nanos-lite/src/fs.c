@@ -52,7 +52,6 @@ int fs_open(const char *pathname,int flags,int mode)
      {
          if(strcmp(pathname,file_table[index].name)==0)
          {
-             file_table[index].open_offset=0;
              return index;
          }
      }
@@ -75,7 +74,7 @@ off_t fs_lseek(int fd,off_t offset,int whence)
    {
        case SEEK_SET: {//SEEK_SET
                    assert(offset<=file_table[fd].size);
-                   file_table[fd].open_offset=offset-1;
+                   file_table[fd].open_offset=offset;
                    return file_table[fd].open_offset;
                }
        case SEEK_CUR: {//SEEK_CUR
