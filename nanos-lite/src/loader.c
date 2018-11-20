@@ -13,7 +13,7 @@ extern size_t fs_filesz(int fd);
 
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-    int fd=fs_open("/bin/hello");
+    int fd=fs_open("/bin/text");
     size_t length=fs_filesz(fd);
     
     
