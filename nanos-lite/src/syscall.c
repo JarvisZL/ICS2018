@@ -40,7 +40,7 @@ _Context* do_syscall(_Context *c) {
     case SYS_lseek: c->GPRx=fs_lseek(a[1],(off_t)a[2],a[3]); break;
     case SYS_close: c->GPRx=fs_close(a[1]); break;
     case SYS_open: c->GPRx=fs_open((const char*)a[1],a[2],a[2]); break;
-    case SYS_read: c->GPRx=fs_read(a[1],(void *)a[2],(size_t)a[3]); break;
+    case SYS_read: if(a[1]!=1&&a[1]!=2&&a[1]!=0) c->GPRx=fs_read(a[1],(void *)a[2],(size_t)a[3]); break;
     case SYS_brk:  c->GPRx=brk((void *)a[1]); break;    
     case SYS_write: if(a[1]==1||a[1]==2){ out_write(a[2],a[3]); /*Log("call!");*/}else if(a[1]!=1&&a[1]!=2&&a[1]!=0) c->GPRx=fs_write(a[1],(void*)a[2],(size_t)a[3]);  break;
     case SYS_exit: _halt(c->GPR2); break;
