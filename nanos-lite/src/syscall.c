@@ -17,7 +17,7 @@ static void out_write(uintptr_t index,uintptr_t len)
 extern char _end;
 void *program_break=&_end;
 */
-static int brk(void * addr)
+ int brk(void * addr)
 {
   //  program_break=addr;
     return 0;
