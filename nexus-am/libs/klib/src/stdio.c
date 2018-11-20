@@ -45,7 +45,7 @@ int printf(const char *fmt, ...) {
     assert(fmt);
     va_list ap;
     va_start(ap,fmt);
-    char s[200];
+    char s[300];
     cnt=vsprintf(s,fmt,ap);
     for(int i=0;;i++)
     {
