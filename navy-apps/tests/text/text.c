@@ -8,8 +8,8 @@ int main() {
 
   printf("1\n");
   fseek(fp, 0, SEEK_END);
-  //long size = ftell(fp);
-//  printf("%ld\n",size);
+  long size = ftell(fp);
+   printf("%ld\n",size);
 //  assert(size == 5000);
 
 
