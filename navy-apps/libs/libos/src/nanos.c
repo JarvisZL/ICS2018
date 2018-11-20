@@ -34,7 +34,7 @@ int _open(const char *path, int flags, mode_t mode) {
 }
 
 int _write(int fd, void *buf, size_t count){
-  return _syscall_(SYS_write,fd,(intptr_t)buf,(intptr_t)count);
+  return _syscall_(SYS_write,fd,(intptr_t)buf,count);
    // _exit(SYS_write);
 }
 
@@ -64,7 +64,7 @@ int _close(int fd) {
 }
 
 off_t _lseek(int fd, off_t offset, int whence) {
- return _syscall_(SYS_lseek,fd,(intptr_t) offset,whence);
+ return _syscall_(SYS_lseek,fd,offset,whence);
     //_exit(SYS_lseek);
 }
 
