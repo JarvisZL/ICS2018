@@ -92,9 +92,10 @@ off_t fs_lseek(int fd,off_t offset,int whence)
    }
 }
 
-static ssize_t ret_val; 
+
 ssize_t fs_read(int fd,void *buf,size_t len)
-{
+{  
+   static ssize_t ret_read;
    if(file_table[fd].open_offset==file_table[fd].size&&len!=0)
          return -1;
    if(len==0)
@@ -102,19 +103,20 @@ ssize_t fs_read(int fd,void *buf,size_t len)
    if(file_table[fd].open_offset+len>file_table[fd].size)
    {
        Log("len:%d",len);
-       len=file_table[fd].size-file_table[fd].open_offset-1;
+       len=file_table[fd].size-file_table[fd].open_offset;
        Log("len:%d",len);
    }
-   ret_val=ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len); 
-   file_table[fd].open_offset+=ret_val;
-   return ret_val;
+   ret_read=ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len); 
+   file_table[fd].open_offset+=ret_read;
+   return ret_read;
 }
 
 ssize_t fs_write(int fd,const void *buf,size_t len)
 {
+  static ssize_t ret_write;
   assert((file_table[fd].open_offset+len)<=file_table[fd].size);
-  ret_val= ramdisk_write(buf,file_table[fd].open_offset+file_table[fd].disk_offset,len);
-  file_table[fd].open_offset+=ret_val;
-  return ret_val;
+  ret_write= ramdisk_write(buf,file_table[fd].open_offset+file_table[fd].disk_offset,len);
+  file_table[fd].open_offset+=ret_write;
+  return ret_write;
 }
 
