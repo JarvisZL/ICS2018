@@ -103,7 +103,7 @@ ssize_t fs_read(int fd,void *buf,size_t len)
 
 ssize_t fs_write(int fd,const void *buf,size_t len)
 {
-  assert(file_table[fd].open_offset+len<=file_table[fd].size);
+  assert(file_table[fd].open_offset<=file_table[fd].size);
   ret_val= ramdisk_write(buf,file_table[fd].open_offset+file_table[fd].disk_offset,len);
   file_table[fd].open_offset+=ret_val;
   return ret_val;
