@@ -99,9 +99,7 @@ ssize_t fs_read(int fd,void *buf,size_t len)
    if(len==0)
          return 0;
    if(file_table[fd].open_offset+len>file_table[fd].size)
-   {
        len=file_table[fd].size-file_table[fd].open_offset;
-   }
    ret_read=ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len); 
    file_table[fd].open_offset+=ret_read;
    return ret_read;
@@ -110,7 +108,12 @@ ssize_t fs_read(int fd,void *buf,size_t len)
 ssize_t fs_write(int fd,const void *buf,size_t len)
 {
   static ssize_t ret_write;
-  assert((file_table[fd].open_offset+len)<=file_table[fd].size);
+  if(file_table[fd].open_offset==file_table[fd].size&&len!=0)
+      return -1;
+  if(len==0)
+      return 0;
+  if(file_table[fd].open_offset+len>file_table[fd].size)
+       len=file_table[fd].size-file_table[fd].open_offset;
   ret_write= ramdisk_write(buf,file_table[fd].open_offset+file_table[fd].disk_offset,len);
   file_table[fd].open_offset+=ret_write;
   return ret_write;
