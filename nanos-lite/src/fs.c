@@ -71,20 +71,19 @@ size_t fs_filesz(int fd)
 
 off_t fs_lseek(int fd,off_t offset,int whence)
 {
-   Log("this is lseek");
    switch(whence)
    {
-       case SEEK_SET: {Log("this is SET");
+       case SEEK_SET: {//SEEK_SET
                    assert(offset<=file_table[fd].size);
                    file_table[fd].open_offset=offset;
                    return file_table[fd].open_offset;
                }
-       case SEEK_CUR: {Log("this is CUR");
+       case SEEK_CUR: {//SEEK_CUR
                    assert(file_table[fd].open_offset+offset<=file_table[fd].size);
                    file_table[fd].open_offset+=offset;
                    return file_table[fd].open_offset;
                }
-       case SEEK_END: {Log("this is END");
+       case SEEK_END: {//SEEK_END
                   assert(file_table[fd].size+offset<=file_table[fd].size);
                   file_table[fd].open_offset=file_table[fd].size+offset;
                   return file_table[fd].open_offset;
@@ -93,16 +92,20 @@ off_t fs_lseek(int fd,off_t offset,int whence)
    }
 }
 
+static ssize_t ret_val; 
 ssize_t fs_read(int fd,void *buf,size_t len)
 {
    assert(file_table[fd].open_offset+len<=file_table[fd].size);
-   return ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len); 
+   ret_val=ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len); 
+   file_table[fd].open_offset+=ret_val;
+   return ret_val;
 }
 
 ssize_t fs_write(int fd,const void *buf,size_t len)
 {
   assert(file_table[fd].open_offset+len<=file_table[fd].size);
-   Log("openset: %d, diskset: %d",file_table[fd].open_offset,file_table[fd].disk_offset);
-  return ramdisk_write(buf,file_table[fd].open_offset+file_table[fd].disk_offset,len);
+  ret_val= ramdisk_write(buf,file_table[fd].open_offset+file_table[fd].disk_offset,len);
+  file_table[fd].open_offset+=ret_val;
+  return ret_val;
 }
 
