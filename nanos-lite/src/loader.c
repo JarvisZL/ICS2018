@@ -7,13 +7,13 @@ static void* buff;
 extern size_t get_ramdisk_size();
 extern size_t ramdisk_read(void* buf, size_t offset,size_t len);
 extern size_t fs_read(int fd,void * buf,size_t len);
-extern int fs_open(const char *pathname);
+extern int fs_open(const char *pathname,int flags,int mode);
 extern size_t fs_filesz(int fd);
 
 
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-    int fd=fs_open("/bin/text");
+    int fd=fs_open("/bin/text",0,0);
     size_t length=fs_filesz(fd);
     
  //   size_t length=get_ramdisk_size();
