@@ -95,9 +95,12 @@ off_t fs_lseek(int fd,off_t offset,int whence)
 static ssize_t ret_val; 
 ssize_t fs_read(int fd,void *buf,size_t len)
 {
-   assert((file_table[fd].open_offset+len)<=file_table[fd].size);
-   ret_val=(ssize_t)ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len); 
-   file_table[fd].open_offset+=(off_t)ret_val;
+   if(file_table[fd].open_offset==file_table[fd].size&&len!=0)
+         return -1;
+   if(file_table[fd].open_offset+len>file_table[fd].size)
+       len=file_table[fd].size-file_table[fd].open_offset;
+   ret_val=ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len); 
+   file_table[fd].open_offset+=ret_val;
    return ret_val;
 }
 
