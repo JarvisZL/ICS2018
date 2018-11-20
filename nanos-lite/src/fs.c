@@ -53,7 +53,7 @@ int fs_open(const char *pathname)
          if(strcmp(pathname,file_table[index].name)==0)
          {
              file_table[index].open_offset=0;
-             Log("open succeed\n");
+             Log("open succeed");
              return index;
          }
      }
@@ -67,7 +67,7 @@ int fs_close(int fd)
 
 size_t fs_filesz(int fd)
 {
-    Log("return size ok\n");
+    Log("return size ok");
     return file_table[fd].size;
 }
 
