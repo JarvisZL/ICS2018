@@ -23,7 +23,7 @@ void hello_fun(void *arg) {
 extern void naive_uload(PCB *pcb,const char *filename);
 
 void init_proc() {
-    naive_uload(NULL, NULL);
+    naive_uload(NULL, "/bin/text");
 }
 
 _Context* schedule(_Context *prev) {
