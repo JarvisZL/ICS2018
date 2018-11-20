@@ -53,7 +53,6 @@ int fs_open(const char *pathname)
          if(strcmp(pathname,file_table[index].name)==0)
          {
              file_table[index].open_offset=0;
-             Log("open succeed");
              return index;
          }
      }
@@ -67,7 +66,6 @@ int fs_close(int fd)
 
 size_t fs_filesz(int fd)
 {
-    Log("return size %d ok",file_table[fd].size);
     return file_table[fd].size;
 }
 
@@ -97,7 +95,6 @@ off_t fs_lseek(int fd,off_t offset,int whence)
 ssize_t fs_read(int fd,void *buf,size_t len)
 {
    assert(file_table[fd].open_offset+len<=file_table[fd].size);
-   Log("openset: %d, diskset: %d",file_table[fd].open_offset,file_table[fd].disk_offset);
    return ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len); 
 }
 
