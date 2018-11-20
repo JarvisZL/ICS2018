@@ -34,9 +34,8 @@ int _open(const char *path, int flags, mode_t mode) {
 }
 
 int _write(int fd, void *buf, size_t count){
-   _syscall_(SYS_write,fd,(intptr_t)buf,(intptr_t)count);
+  return _syscall_(SYS_write,fd,(intptr_t)buf,(intptr_t)count);
    // _exit(SYS_write);
-  return count;
 }
 
 extern char _end;
@@ -60,9 +59,8 @@ int _read(int fd, void *buf, size_t count) {
 }
 
 int _close(int fd) {
-   _syscall_(SYS_close,fd,0,0);
+ return _syscall_(SYS_close,fd,0,0);
     //_exit(SYS_close);
-  return 0;
 }
 
 off_t _lseek(int fd, off_t offset, int whence) {
