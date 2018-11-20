@@ -97,6 +97,7 @@ off_t fs_lseek(int fd,off_t offset,int whence)
 ssize_t fs_read(int fd,void *buf,size_t len)
 {
    assert(file_table[fd].open_offset+len<=file_table[fd].size);
+   Log("openset: %d, diskset: %d",file_table[fd].open_offset,file_table[fd].disk_offset);
    return ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len); 
 }
 
