@@ -10,13 +10,14 @@ off_t fs_lseek(int fd,off_t offset,int whence);
 ssize_t fs_read(int fd, void* buf,size_t len);
 ssize_t fs_write(int fd, void* buf,size_t len);
 
+/*
 static void out_write(uintptr_t index,uintptr_t len)
 {
     char *ptr=(char *)index;
     for(uintptr_t i=0;i<len;++i)
          _putc(ptr[i]);
 }
-
+*/
 //pa3.2 we can let user to control stack
 /*
 extern char _end;
@@ -48,15 +49,14 @@ _Context* do_syscall(_Context *c) {
                    break;
     case SYS_brk:  c->GPRx=brk((void *)a[1]); 
                    break;    
-    case SYS_write: if(a[1]==1||a[1]==2)
-                    { out_write(a[2],a[3]); /*there is no ret*/}
-                    else if(a[1]!=1&&a[1]!=2&&a[1]!=0) 
+    case SYS_write: /*if(a[1]==1||a[1]==2)
+                    { out_write(a[2],a[3]); }
+                    else if(a[1]!=1&&a[1]!=2&&a[1]!=0) */
                             c->GPRx=fs_write(a[1],(void*)a[2],(size_t)a[3]); 
                      break;
     case SYS_exit: _halt(c->GPR2); 
                    break;
-    case SYS_yield: _yield(); c->GPRx=0; 
-                    break;
+    case SYS_yield: _yield(); c->GPRx=0; break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
