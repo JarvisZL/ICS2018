@@ -295,7 +295,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                          }
                 case 'c':{
                             tem=va_arg(ap,char*);
-                            assert(strlen(tem)==1);
+                            //assert(strlen(tem)==1);
 
                              if(flag)
                              {
