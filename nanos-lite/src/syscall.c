@@ -49,7 +49,7 @@ _Context* do_syscall(_Context *c) {
                    break;
     case SYS_brk:  c->GPRx=brk((void *)a[1]); 
                    break;    
-    case SYS_write: /*if(a[1]==1||a[1]==2)
+    case SYS_write:/* if(a[1]==1||a[1]==2)
                     { out_write(a[2],a[3]); }
                     else if(a[1]!=1&&a[1]!=2&&a[1]!=0) */
                             c->GPRx=fs_write(a[1],(void*)a[2],(size_t)a[3]); 
