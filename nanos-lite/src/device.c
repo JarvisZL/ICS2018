@@ -26,10 +26,6 @@ static char dispinfo[128] __attribute__((used));
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
     assert(offset<=128);
-    Log("%d",len);
-    if(offset+len>128)
-        len=128-offset;
-    Log("%d",len);
     memcpy(buf,dispinfo+offset,len);
     return len;
 }
