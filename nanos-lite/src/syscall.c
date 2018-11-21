@@ -10,14 +10,6 @@ off_t fs_lseek(int fd,off_t offset,int whence);
 ssize_t fs_read(int fd, void* buf,size_t len);
 ssize_t fs_write(int fd, void* buf,size_t len);
 
-/*
-static void out_write(uintptr_t index,uintptr_t len)
-{
-    char *ptr=(char *)index;
-    for(uintptr_t i=0;i<len;++i)
-         _putc(ptr[i]);
-}
-*/
 //pa3.2 we can let user to control stack
 /*
 extern char _end;
