@@ -1,6 +1,8 @@
 #include "common.h"
 #include <amdev.h>
 #include "unistd.h"
+#include <math.h>
+
 size_t serial_write(const void *buf, size_t offset, size_t len) {
     char *ptr=(char*) buf;
     for(size_t i=0;i<len;++i)
@@ -36,7 +38,18 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
     int x=0, y=0;
     x=offset%(4*w);
     y=offset/(4*w);
-    draw_rect((uint32_t*)buf,x,y,w,1+len/(4*w)); 
+    int w0,h0;
+    if(x+len<=4*w)
+    {
+        w0=len;
+        h0=1;
+    }
+    if(x+len>4*w)
+    {
+        w0=4*w-x;
+        h0=ceil(len/w0);
+    }
+    draw_rect((uint32_t*)buf,x,y,w0,h0); 
     return len;
 }
 
