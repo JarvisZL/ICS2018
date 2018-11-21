@@ -128,6 +128,8 @@ ssize_t fs_write(int fd,const void *buf,size_t len)
   {
       Log("get!!");
       ret_write=file_table[fd].write(buf,file_table[fd].open_offset+file_table[fd].disk_offset,len);
+  file_table[fd].open_offset+=ret_write;
+  return ret_write;
   }
   else
       ret_write= ramdisk_write(buf,file_table[fd].open_offset+file_table[fd].disk_offset,len);
