@@ -118,6 +118,7 @@ ssize_t fs_write(int fd,const void *buf,size_t len)
   static ssize_t ret_write;
   if(file_table[fd].open_offset==file_table[fd].size&&len!=0)
       return -1;
+  assert(0);
   if(len==0)
       return 0;
   if(file_table[fd].open_offset+len>file_table[fd].size)
