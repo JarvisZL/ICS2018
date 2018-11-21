@@ -34,13 +34,19 @@ static Finfo file_table[] __attribute__((used)) = {
   {"stdin", 0, 0, 0,  invalid_read, invalid_write},
   {"stdout", 0, 0, 0,  invalid_read, serial_write},
   {"stderr", 0, 0, 0, invalid_read, serial_write},
+  {"/dev/fb"},
+  {"/proc/dispinfo"},
 #include "files.h"
 };
 
 #define NR_FILES (sizeof(file_table) / sizeof(file_table[0]))
 
 void init_fs() {
-  // TODO: initialize the size of /dev/fb
+    int w=screen_width();
+    int h=screen_height();
+    file_table[3].size=w*h*4;
+    file_table[3].disk_offset=0;
+    // TODO: initialize the size of /dev/fb
 }
 
 extern uint8_t ramdisk_start;
