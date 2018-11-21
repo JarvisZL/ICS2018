@@ -50,7 +50,6 @@ _Context* do_syscall(_Context *c) {
     case SYS_brk:  c->GPRx=brk((void *)a[1]); 
                    break;    
     case SYS_write: c->GPRx=fs_write(a[1],(void*)a[2],(size_t)a[3]); 
-                    Log("hello");
                     break;
     case SYS_exit: _halt(c->GPR2); 
                    break;
