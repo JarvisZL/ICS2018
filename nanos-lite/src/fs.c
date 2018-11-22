@@ -57,6 +57,7 @@ extern size_t ramdisk_write(const void* buf,size_t offset,size_t len);
 
 int fs_open(const char *pathname,int flags,int mode)
 {
+     Log("%s",pathname);
      static int index=0;
      for(index=0;index<NR_FILES;++index)
      {
