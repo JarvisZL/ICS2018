@@ -87,6 +87,7 @@ off_t fs_lseek(int fd,off_t offset,int whence)
    switch(whence)
    {
        case SEEK_SET: {//SEEK_SET
+                   Log("fd:%d,SET",fd);
                    assert(offset<=file_table[fd].size);
                    file_table[fd].open_offset=offset;
                    return file_table[fd].open_offset;

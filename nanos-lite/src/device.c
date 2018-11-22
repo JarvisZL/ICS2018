@@ -26,7 +26,7 @@ static char dispinfo[128] __attribute__((used));
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
     size_t slen=strlen(dispinfo);
-    if(offset==128*4||len==0)
+    if(offset==slen*4||len==0)
         return 0;
     if(offset+len>slen*4)
         len=slen*4-offset;
