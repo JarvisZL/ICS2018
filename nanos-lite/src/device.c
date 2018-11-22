@@ -46,6 +46,7 @@ extern ssize_t fs_read(int fd,void * buf,size_t len);
 void init_device() {
   Log("Initializing devices...");
   _ioe_init();
+  memset(dispinfo,0,sizeof(dispinfo));
    sprintf(dispinfo,"WIDTH:%d\nHEIGHT:%d\n",screen_width(),screen_height());
    Log("%s",dispinfo);
   // TODO: print the string to array `dispinfo` with the format
