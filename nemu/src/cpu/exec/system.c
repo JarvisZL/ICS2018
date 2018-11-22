@@ -8,6 +8,7 @@ make_EHelper(lidt) {
     cpu.IDTR.limit=t0;
     if(id_dest->width==2)
     {
+         assert(0);
          t1=id_dest->addr+0x1;
          rtl_lm(&t2,&t1,3);
          cpu.IDTR.base=t2;
