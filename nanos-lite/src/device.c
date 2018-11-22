@@ -40,19 +40,24 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
     int x=0, y=0;
     x=(offset%(4*w))/4;
     y=offset/(16*w);
-    int w0=0,h0=0;
+   /* int w0=0,h0=0;
     if(4*x+len<=4*w)
     {
         w0=len/4;
         h0=1;
-        Log("1");
     }
     else
     {
         w0=w-x;
         h0=((len/4)%w0==0)?(len/4)/w0:((len/4)/w0)+1;
-    }
-    draw_rect((uint32_t*)buf,x,y,w0,h0); 
+    }*/
+    int h=0;
+    if((len/4)%w==0)
+      h=(len/4)/w;
+    else
+     h=(len/4)/w+1;
+
+    draw_rect((uint32_t*)buf,x,y,w,h); 
     return len;
 }
 
