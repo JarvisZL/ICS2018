@@ -36,8 +36,7 @@ _Context* do_syscall(_Context *c) {
                     break;
     case SYS_open: c->GPRx=fs_open((const char*)a[1],a[2],a[2]); 
                    break;
-    case SYS_read: if(a[1]!=1&&a[1]!=2&&a[1]!=0) 
-                       c->GPRx=fs_read(a[1],(void *)a[2],(size_t)a[3]); 
+    case SYS_read: c->GPRx=fs_read(a[1],(void *)a[2],(size_t)a[3]); 
                    break;
     case SYS_brk:  c->GPRx=brk((void *)a[1]); 
                    break;    
