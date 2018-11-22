@@ -134,6 +134,7 @@ ssize_t fs_write(int fd,const void *buf,size_t len)
       if(len==0)
           return 0;
       ret_write=file_table[fd].write(buf,file_table[fd].open_offset+file_table[fd].disk_offset,len);
+      Log("write");
   }
   else
   {
