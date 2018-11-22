@@ -25,8 +25,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 static char dispinfo[128] __attribute__((used));
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-    memcpy(buf,dispinfo+offset,len);
-    Log("len:%d",len);
+    Log("%d,%d",offset,len);
     return len;
 }
 
@@ -47,7 +46,6 @@ extern ssize_t fs_read(int fd,void * buf,size_t len);
 void init_device() {
   Log("Initializing devices...");
   _ioe_init();
-  memset(dispinfo,0,sizeof(dispinfo));
    sprintf(dispinfo,"WIDTH:%d\nHEIGHT:%d",screen_width(),screen_height());
    Log("%s",dispinfo);
   // TODO: print the string to array `dispinfo` with the format
