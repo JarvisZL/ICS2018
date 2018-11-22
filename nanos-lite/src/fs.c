@@ -62,6 +62,7 @@ int fs_open(const char *pathname,int flags,int mode)
      {
          if(strcmp(pathname,file_table[index].name)==0)
          {
+             Log("%d",index);
              return index;
          }
      }
