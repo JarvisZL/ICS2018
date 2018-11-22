@@ -39,7 +39,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     else
     {
        timer=uptime();
-       sprintf(eve,"t %u",timer);
+       sprintf(eve,"t %u\n",timer);
     }
     if(strlen(eve)>len)
          memcpy(buf,eve,len);
