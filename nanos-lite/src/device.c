@@ -38,7 +38,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
     int w=screen_width();
    // int h=screen_height();
     int x=0, y=0;
-    x=(offset%(4*w))/4;
+    x=(offset%(4*w))/4;//offset and len are both bit
     y=offset/(4*w);
     int w0=0,h0=0;
     if(4*x+len<=4*w)
@@ -49,7 +49,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
     else
     {
         w0=w-x;
-        h0=((len/4)%w0==0)?(len/4)/w0:((len/4)/w0)+1;
+        h0=((len/4)%w0==0)?(len/4)/w0:((len/4)/w0)+1;//associated with pa2 vga
     }
 
     draw_rect((uint32_t*)buf,x,y,w0,h0); 

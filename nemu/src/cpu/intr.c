@@ -16,7 +16,8 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
    te1=vaddr_read(te0,4);
    te0=te0+4;
    te2=vaddr_read(te0,4);
-
+// 63:47 offset(31:16) .......
+// ...........offset(15:0)15:0
    te1=te1&0x0000ffff;
    te2=te2&0xffff0000;
    te1=te1|te2;
