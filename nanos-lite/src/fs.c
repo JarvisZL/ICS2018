@@ -66,7 +66,7 @@ int fs_open(const char *pathname,int flags,int mode)
              return index;
          }
      }
-     assert(0);
+     panic("cannot find the file");
 }
 
 int fs_close(int fd)
