@@ -18,22 +18,38 @@ static const char *keyname[256] __attribute__((used)) = {
   _KEYS(NAME)
 };
 
+static char eve[50];
 #define KEYDOWN_MASK 0x8000
 size_t events_read(void *buf, size_t offset, size_t len) {
-  /* Log("offset:%d,len:%d",offset,len);
-    int code;
-    static char eve[50];
+   Log("offset:%d,len:%d",offset,len);
+    memset(eve,0,sizeof(eve));
+    int code=0;
+    uint32_t timer=0;
     code=read_key();
     if(code!=0)
     {
       if(code&KEYDOWN_MASK)
       {
           sprintf(eve,"kd %s\n",keyname[code&(~KEYDOWN_MASK)]);
-          if(4*strlen(eve)>len)
-              strcpy(buf,)
       }
-    }*/
-    return 0;
+      else
+      {
+          sprintf(eve,"ku %s\n",keyname[code]);
+      }
+    }
+    else
+    {
+       timer=uptime();
+       sprintf(eve,"t %u",timer);
+    }
+    if(strlen(eve)>len)
+         memcpy(buf,eve,len);
+     else
+    {
+         len=strlen(eve);
+         memcpy(buf,eve,len);
+     }
+    return len;
 }
 
 static char dispinfo[128] __attribute__((used));

@@ -30,6 +30,26 @@ static void itos(char s[],int x)
     return;
 }
 
+static void utos(char s[],uint32_t u)
+{
+    uint32_t a[20];
+    int num=0;
+    while(u/10!=0)
+    {
+        uint32_t v=u%10;
+        a[num++]=v;
+        u=u/10;
+    }
+    a[num]=u;
+
+    for(int i=0;i<=num;i++)
+    {
+        s[i]=a[num-i]+'0';
+    }
+    s[num+1]='\0';
+    return;
+}
+
 static void stoi(char s[],int n)
 {
    int index=0;
@@ -78,6 +98,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     char temp[50];
     char s[50];
     int x;
+    uint32_t u;
     long y;//addr maybe 64
     int flag=0;
     memset(out,0,sizeof(out));
@@ -188,6 +209,51 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                                     strcat(out,tem);
                                     cntvs+=strlen(tem);
                                 }
+                             }
+                             break;
+                         }
+                case 'u':{
+                             memset(s,0,sizeof(s));
+                             memset(temp,0,sizeof(temp));
+                             u=va_arg(ap,uint32_t);
+                             utos(s,u);
+                             if(flag)
+                             {
+                                 if(strlen(s)>n)
+                                 {
+                                     strcat(out,s);
+                                     cntvs+=strlen(s);
+                                 }
+                                 else
+                                 {
+                                        char s1[10]="";
+                                        for(int i=0;i<n-strlen(s);i++)
+                                            s1[i]='0';
+                                        s1[n-strlen(s)]='\0';
+                                        strcat(out,s1);
+                                        cntvs+=strlen(s1);
+                                        strcat(out,s);
+                                        cntvs+=strlen(s);
+                                 }
+                             }
+                             else
+                             {
+                                     if(strlen(s)>=n)
+                                     {
+                                         strcat(out,s);
+                                         cntvs+=strlen(s);
+                                     }
+                                     else
+                                     {
+                                        char s1[10]="";
+                                        for(int i=0;i<n-strlen(s);i++)
+                                            s1[i]=' ';
+                                        s1[n-strlen(s)]='\0';
+                                        strcat(out,s1);
+                                        cntvs+=strlen(s1);
+                                        strcat(out,s);
+                                        cntvs+=strlen(s);
+                                     }
                              }
                              break;
                          }
