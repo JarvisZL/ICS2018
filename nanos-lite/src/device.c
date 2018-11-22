@@ -45,6 +45,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
     {
         w0=len/4;
         h0=1;
+        Log("1");
     }
     else
     {
