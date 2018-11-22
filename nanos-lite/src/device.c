@@ -18,8 +18,21 @@ static const char *keyname[256] __attribute__((used)) = {
   _KEYS(NAME)
 };
 
+#define KEYDOWN_MASK 0x8000
 size_t events_read(void *buf, size_t offset, size_t len) {
-   Log("offset:%d,len:%d",offset,len);  
+  /* Log("offset:%d,len:%d",offset,len);
+    int code;
+    static char eve[50];
+    code=read_key();
+    if(code!=0)
+    {
+      if(code&KEYDOWN_MASK)
+      {
+          sprintf(eve,"kd %s\n",keyname[code&(~KEYDOWN_MASK)]);
+          if(4*strlen(eve)>len)
+              strcpy(buf,)
+      }
+    }*/
     return 0;
 }
 
@@ -27,10 +40,10 @@ static char dispinfo[128] __attribute__((used));
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
     size_t slen=strlen(dispinfo);
-    if(offset==slen*4||len==0)
+    if(offset==slen||len==0)
         return 0;
-    if(offset+len>slen*4)
-        len=slen*4-offset;
+    if(offset+len>slen)
+        len=slen-offset;
     memcpy(buf,dispinfo+offset,len);
     return len;
 }
@@ -39,7 +52,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
     int w=screen_width();
    // int h=screen_height();
     int x=0, y=0;
-    x=(offset%(4*w))/4;//offset and len are both bit
+    x=(offset%(4*w))/4;//offset and len are both Byte
     y=offset/(4*w);
     int w0=0,h0=0;
     if(4*x+len<=4*w)
