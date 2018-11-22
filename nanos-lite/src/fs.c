@@ -144,7 +144,6 @@ ssize_t fs_write(int fd,const void *buf,size_t len)
   if(file_table[fd].open_offset+len>file_table[fd].size)
        len=file_table[fd].size-file_table[fd].open_offset;
   ret_write= ramdisk_write(buf,file_table[fd].open_offset+file_table[fd].disk_offset,len);
-  Log("nomalwrite");
   }
   file_table[fd].open_offset+=ret_write;
   return ret_write;
