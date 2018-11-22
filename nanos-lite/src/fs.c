@@ -46,7 +46,6 @@ void init_fs() {
     int w=screen_width();
     int h=screen_height();
     file_table[3].size=w*h*4;
-    file_table[3].disk_offset=0;
     // TODO: initialize the size of /dev/fb
 }
 
