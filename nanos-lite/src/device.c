@@ -21,7 +21,6 @@ static const char *keyname[256] __attribute__((used)) = {
 static char eve[50];
 #define KEYDOWN_MASK 0x8000
 size_t events_read(void *buf, size_t offset, size_t len) {
-   Log("offset:%d,len:%d",offset,len);
     memset(eve,0,sizeof(eve));
     int code=0;
     uint32_t timer=0;
