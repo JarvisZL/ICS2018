@@ -25,7 +25,6 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 static char dispinfo[128] __attribute__((used));
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-    Log("%d",dispinfo[100]);
     memcpy(buf,dispinfo+offset,len);
     return len;
 }
@@ -46,10 +45,7 @@ extern ssize_t fs_read(int fd,void * buf,size_t len);
 void init_device() {
   Log("Initializing devices...");
   _ioe_init();
-  
-  char* buff=dispinfo;
-  int fdd=fs_open("/proc/dispinfo");
-  fs_read(fdd,buff,128);
+   sprintf(dispinfo,"WIDTH:%d\nHEIGHT:%d",screen_width,screen_height); 
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
 }
