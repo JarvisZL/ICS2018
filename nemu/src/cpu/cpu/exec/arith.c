@@ -147,7 +147,8 @@ make_EHelper(neg) {
                        break;
                    }
         }
-        t2=-id_dest->val;
+        rtl_li(&t0,0);
+        rtl_sub(&t2,&t0,&id_dest->val);
         operand_write(id_dest,&t2);
         rtl_update_ZFSF(&t2,id_dest->width);
     }
