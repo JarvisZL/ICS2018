@@ -99,7 +99,7 @@ make_EHelper(rol){
            case 1: {
                       assert(0);
                       t2=(t0>>7)&0x1;
-                      t1=1;
+                      rtl_li(&t1,1);
                       rtl_shl(&t0,&t0,&t1);
                       t0=t0|t2;
                       operand_write(id_dest,&t0);
@@ -127,7 +127,7 @@ make_EHelper(rol){
    }
    if(id_src->val==1)
    {
-       if(t2==cpu.EFLAGS.CF)
+       if(t2!=cpu.EFLAGS.CF)
            cpu.EFLAGS.OF=1;
        else
            cpu.EFLAGS.OF=0;
