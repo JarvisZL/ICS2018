@@ -151,11 +151,11 @@ static inline void rtl_sr(int r, const rtlreg_t* src1, int width) {
 static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
   // dest <- ~src1
 
- //  *dest=~(*src1); 
-
+  *dest=~(*src1); 
+/*
   rtl_li(&t0,0xffffffff);
   rtl_xor(dest,src1,&t0);
-
+*/
     //TODO();
 }
 
