@@ -156,11 +156,13 @@ make_EHelper(neg) {
     if(id_dest->val==0)
     {
         cpu.EFLAGS.CF=0;
+        rtl_li(&t0,0);
+        operand_write(id_dest,&t0);
     }
     else
     {
         cpu.EFLAGS.CF=1;
-        switch(id_dest->width){
+       /* switch(id_dest->width){
             case 1:{
                        assert(0);
                        if(id_dest->val==-128)
@@ -185,7 +187,7 @@ make_EHelper(neg) {
                        break;
                    }
         }
-
+       */
         rtl_li(&t0,0);
         rtl_sub(&t1,&t0,&id_dest->val);
         operand_write(id_dest,&t1);
