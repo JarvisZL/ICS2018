@@ -8,7 +8,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
    uint32_t te0,te1,te2;
    te0=cpu.eflags;
    rtl_push(&te0);
-   te0=0x0000ffff|cpu.CS;
+   te0=cpu.CS;
    rtl_push(&te0);
    rtl_push(&ret_addr);
    
