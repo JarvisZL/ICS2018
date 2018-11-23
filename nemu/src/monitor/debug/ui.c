@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
+#include <string.h>
 void cpu_exec(uint64_t);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
@@ -38,117 +38,17 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
-static int cmd_si(char *args){
-	if(args==NULL)
-	{
-		cpu_exec(1);
-		return 0;
-	} 
-	uint64_t cnt=0;
-	int len=strlen(args);
-	if(!len)
-		cnt=1;
-	else
-	{
-		/*if(len>2){
-			printf("Unexpected expression.\n");
-			return 0;
-		}*/
-		//else{
-			for(int i=0;i<len;i++)
-			{
-				if('0'<=args[i] && args[i]<='9'){
-					cnt=cnt*10+args[i]-'0';
-				}
-				else
-				{	
-					printf("Unexpected expression.\n");
-					return 0;
-				}
-			}
-		//}
-	}
-	cpu_exec(cnt);
-	return 0;
-}
+static int cmd_si(char *args);
 
-void pwatchpoint();
-WP *new_wp();
-void init_wp_pool();
-void free_wp(int n);
+static int cmd_info(char *args);
 
-static int cmd_info(char *args)
-{
-	 if(strcmp(args,"r")==0){
-			printf("eax\t0x%-16x%-d\n",cpu.eax,cpu.eax);
-			printf("ecx\t0x%-16x%-d\n",cpu.ecx,cpu.ecx);
-			printf("edx\t0x%-16x%-d\n",cpu.edx,cpu.edx);
-			printf("ebx\t0x%-16x%-d\n",cpu.ebx,cpu.ebx);
-			printf("esp\t0x%-16x%-d\n",cpu.esp,cpu.esp);
-			printf("ebp\t0x%-16x%-d\n",cpu.ebp,cpu.ebp);
-			printf("esi\t0x%-16x%-d\n",cpu.esi,cpu.esi);
-			printf("edi\t0x%-16x%-d\n",cpu.edi,cpu.edi);
-			printf("eip\t0x%-16x%-d\n",cpu.eip,cpu.eip);
-			printf("CF: %d  ZF: %d  SF: %d  IF: %d  OF: %d\n",cpu.CF,cpu.ZF,cpu.SF,cpu.IF,cpu.OF);
-			return 0;
-	 }
-	 else if(strcmp(args,"w")==0)
-	 {
-		 pwatchpoint();/*errors*/
-		 return 0;
-	 }
-	 else{
-		/*case "w": watchpoint*/ 
-		printf("Unexpected expression\n");
-		return 0;
-	 }
-}
+static int cmd_p(char *args);
 
-static int cmd_x(char *args){
-    int n,m;
-	sscanf(args,"%d%x",&n,&m);
-	for(int i=0;i<n;i++){
-		printf("%x: ",m);
-		/*int cnt=pmem[m];*/
-		printf("0x%02x%02x%02x%02x\n",pmem[m],pmem[m+1],pmem[m+2],pmem[m+3]);
-		m+=4;
-	}
-	return 0;
-}
+static int cmd_x(char *args);
 
-uint32_t expr(char *e, bool *success);
+static int cmd_w(char *args);
 
-static int cmd_p(char *args)
-{
-	bool success = true;
-	if(args==NULL)
-	{
-		printf("Unexpected expression\n");
-		return 0;
-	}
-	uint32_t tmp=expr(args, &success);
-	printf("%u\n",tmp);
-	return 0;
-}
-
-static int cmd_w(char *args)
-{
-	WP *x;
-	x=new_wp();
-	strcat(x->bufs,args);
-	bool success = true;
-	x->ans =expr(x->bufs, &success);
-	return 0;
-}
-
-static int cmd_d(char *args)
-{
-	int n;
-	sscanf(args,"%d",&n);
-	free_wp(n);
-	return 0;
-}
-
+static int cmd_d(char *args);
 
 static struct {
   char *name;
@@ -158,12 +58,13 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  { "si", "Do the next step for N times.Expression should be si N; if not N,just do one step",cmd_si},
-  {"info", "print the state of program",cmd_info},
-  {"x","Scan the memory",cmd_x},
-  {"p","expression evaluation",cmd_p},
-  {"w","add watpoint",cmd_w},
-  {"d","delete watchpoint",cmd_d},
+  { "si", "Step Through", cmd_si},
+  { "info", "print program status", cmd_info}, 
+  { "p", "print express", cmd_p},
+  { "x", "scan memory", cmd_x},
+  { "w","watch point", cmd_w},
+  { "d","delete points",cmd_d},
+
   /* TODO: Add more commands */
 
 };
@@ -174,7 +75,7 @@ static int cmd_help(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
   int i;
-
+ 
   if (arg == NULL) {
     /* no argument given */
     for (i = 0; i < NR_CMD; i ++) {
@@ -192,9 +93,114 @@ static int cmd_help(char *args) {
   }
   return 0;
 }
+  
+
+static int cmd_si(char *args){
+  int num;
+  if(args==NULL) 
+     num=1;
+  else 
+    {
+	num=atoi(args);
+    }  
+  cpu_exec(num);
+  return 0;
+};
+	
+static int cmd_info(char *args){
+     const char s[2]="r";
+    if(strcmp(args,s)==0)
+    {
+      printf("eax\t 0x%x \t%d\n",cpu.eax,cpu.eax);
+      printf("ecx\t 0x%x \t%d\n",cpu.ecx,cpu.ecx);     
+      printf("edx\t 0x%x \t%d\n",cpu.edx,cpu.edx);
+      printf("ebx\t 0x%x \t%d\n",cpu.ebx,cpu.ebx);
+      printf("esp\t 0x%x \t%d\n",cpu.esp,cpu.esp);
+      printf("ebp\t 0x%x \t%d\n",cpu.ebp,cpu.ebp);
+      printf("esi\t 0x%x \t%d\n",cpu.esi,cpu.esi);
+      printf("edi\t 0x%x \t%d\n",cpu.edi,cpu.edi);
+      printf("eip\t 0x%x \t%d\n",cpu.eip,cpu.eip);
+       
+      printf("ax\t 0x%x \t%d\n",cpu.gpr[0]._16,cpu.gpr[0]._16);
+      printf("cx\t 0x%x \t%d\n",cpu.gpr[1]._16,cpu.gpr[1]._16);
+      printf("dx\t 0x%x \t%d\n",cpu.gpr[2]._16,cpu.gpr[2]._16);
+      printf("bx\t 0x%x \t%d\n",cpu.gpr[3]._16,cpu.gpr[3]._16);
+      printf("sp\t 0x%x \t%d\n",cpu.gpr[4]._16,cpu.gpr[4]._16);
+      printf("bp\t 0x%x \t%d\n",cpu.gpr[5]._16,cpu.gpr[5]._16);
+      printf("si\t 0x%x \t%d\n",cpu.gpr[6]._16,cpu.gpr[6]._16);
+      printf("di\t 0x%x \t%d\n",cpu.gpr[7]._16,cpu.gpr[7]._16);
+      
+      printf("al\t 0x%x \t%d\n",cpu.gpr[0]._8[0],cpu.gpr[0]._8[0]);
+      printf("cl\t 0x%x \t%d\n",cpu.gpr[1]._8[0],cpu.gpr[1]._8[0]);
+      printf("dl\t 0x%x \t%d\n",cpu.gpr[2]._8[0],cpu.gpr[2]._8[0]);
+      printf("bl\t 0x%x \t%d\n",cpu.gpr[3]._8[0],cpu.gpr[3]._8[0]);
+       
+      printf("ah\t 0x%x \t%d\n",cpu.gpr[0]._8[1],cpu.gpr[0]._8[1]);
+      printf("ch\t 0x%x \t%d\n",cpu.gpr[1]._8[1],cpu.gpr[1]._8[1]); 
+      printf("dh\t 0x%x \t%d\n",cpu.gpr[2]._8[1],cpu.gpr[2]._8[1]);
+      printf("bh\t 0x%x \t%d\n",cpu.gpr[3]._8[1],cpu.gpr[3]._8[1]);
+    }
+    extern void wp_print();
+    if(!strcmp(args,"w"))
+    {
+        printf("Num\tType\t\tDisp\tEnb\tAddress\tWhat\n");
+        wp_print();
+    }
+return 0;
+};
+
+static int cmd_p(char *args){
+      bool success=true;
+      unsigned int res;
+      static int cnt=0;
+      res=expr(args,&success);
+      if(success==true)
+      {
+         printf("$%d= %x\n",++cnt,res);
+      }
+      res=0;
+return 0;    
+}
+
+static int cmd_x(char *args){
+        char* s1=strtok(args," ");
+	int len=atoi(s1);
+	char* s2=s1+strlen(s1)+1;
+	char* aft_num;
+        int addr=(int)strtol(s2,&aft_num,16);
+        for(int i=0;i<len;++i)
+	{
+          printf("0x%x: 0x%x\n",addr+i*4,vaddr_read(addr+i*4,4));
+	}
+  return 0;
+}
+
+extern WP* new_wp();
+
+static int cmd_w(char *args){
+       	WP* w_p=new_wp();
+	strcpy(w_p->str,args);
+	printf("watchpoint %d:  %s\n",w_p->NO,w_p->str);
+	return 0;
+}
+
+extern WP* find_wp(uint32_t); 
+extern void free_wp(WP*);
+
+static int cmd_d(char *args)
+{
+	 char *useless;
+         uint32_t range;
+         range=(uint32_t) strtol(args,&useless,10);
+	 WP* d_wp=find_wp(range);
+	 printf("delete point %d:  %s\n",d_wp->NO,d_wp->str);
+	 free_wp(d_wp);
+	 return 0;
+}
 
 void ui_mainloop(int is_batch_mode) {
-  if (is_batch_mode) {
+
+if (is_batch_mode) {
     cmd_c(NULL);
     return;
   }
@@ -231,3 +237,4 @@ void ui_mainloop(int is_batch_mode) {
     if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
   }
 }
+

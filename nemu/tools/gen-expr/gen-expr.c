@@ -5,74 +5,70 @@
 #include <assert.h>
 #include <string.h>
 
+
 // this should be enough
 static char buf[65536];
 
-static uint32_t choose(uint32_t n)
-{
-	return rand()%n;
+int buf_num=0;
+int token_num=0;
+//static int dem_if=0;
+
+uint32_t choose(uint32_t x)
+{    
+      return (rand() %(x-0))+0; 
 }
 
-static inline char *gen_num()
-{
-	static char s[20];
-	int tmp=rand()%1000;
-	sprintf(s,"%d",tmp);
-	return s;
+static void gen_num(){
+     int lenth=(rand()%(6-1+1))+1;
+     buf[buf_num]=(rand()%(9-1+1))+1+48;
+     for(int i=1;i<lenth;++i)
+     {
+             buf[buf_num+i]=(rand() %(9-0+1))+0+48;
+     }
+     buf_num+=lenth;
+     buf[buf_num++]='u';
+     token_num++;
+
 }
 
-static inline char *gen(char a)
-{
-	static char b[3];
-	b[0]=a;
-	return b;
+static inline void gen(char c){
+	buf[buf_num++]=c;
+	token_num++;
 }
 
-static inline char *gen_rand_op()
-{
-	int temp=rand()%4;
-	switch(temp){
-		case 0: return "*";
-		case 1: return "/";
-		case 2: return "+";
-		case 3: return "-";
-		default: assert(0);
-	}
+static inline void gen_rand_op(){
+   
+       int sel;
+       sel=(rand() % (3-0+1))+0;
+       switch(sel){
+	       case 0: buf[buf_num++]='+'; break;
+	       case 1: buf[buf_num++]='-'; break;
+	       case 2: buf[buf_num++]='*'; break;
+	       case 3: buf[buf_num++]='/'; break;
+       } 
+      token_num++;    
 }
 
-static inline void insertspace()
-{
-	while(rand()%4==1)
-	{
-		strcat(buf," ");
-	}
+static  void gen_space(){
+      int sp_num;
+      sp_num=(rand()%(3-0+1))+0;
+      for(int i=0;i<sp_num;i++)
+      {
+	      buf[buf_num+i]=' ';
+      }
+      buf_num+=sp_num;
 }
+
 
 static inline void gen_rand_expr() {
-   /* buf[0] = '\0';*/
-   switch(choose(3)){
-	  case 0: insertspace(); strcat(buf,gen_num());strcat(buf,"U");break;
-	  case 1: strcat(buf,gen('('));
-			  insertspace();
-			  gen_rand_expr();
-			  insertspace();
-			  strcat(buf,gen(')'));
-			  insertspace();
-			  break;
-	  default: insertspace();
-			   gen_rand_expr();
-			   insertspace();
-			   strcat(buf,gen_rand_op());
-			   insertspace();
-			   gen_rand_expr();
-			   insertspace();
-			   break;
-  }
-  if(strlen(buf)>=65536)
-  {	 
-	  buf[0]='0';
-	  buf[1]='\0';
-  }
+          switch (choose(8)) {
+		        case 0:
+			case 1: gen_rand_expr(); gen_rand_op(); gen_rand_expr(); break;
+		        case 2:
+			case 3: gen_space(); gen('('); gen_rand_expr(); gen(')'); gen_space(); break;
+		        default: gen_space(); gen_num(); gen_space(); break;
+		             }
+	  buf[buf_num]='\0';
 }
 
 static char code_buf[65536];
@@ -92,9 +88,20 @@ int main(int argc, char *argv[]) {
     sscanf(argv[1], "%d", &loop);
   }
   int i;
+  buf[0]='\0';
   for (i = 0; i < loop; i ++) {
-	buf[0]='\0';
     gen_rand_expr();
+   
+    //my
+    while(token_num>100)
+    {
+
+	    token_num=0;
+	    buf_num=0;
+	    buf[0]='\0';
+	    gen_rand_expr();
+    }
+    
 
     sprintf(code_buf, code_format, buf);
 
@@ -110,10 +117,23 @@ int main(int argc, char *argv[]) {
     assert(fp != NULL);
 
     int result;
-    fscanf(fp,"%d", &result);
+   if(fscanf(fp, "%d", &result)==1)
+   {
     pclose(fp);
 
     printf("%u %s\n", result, buf);
+
+    token_num=0;
+    buf_num=0;
+    buf[0]='\0';
+   }
+  else
+   {
+	   pclose(fp);
+	   token_num=0;
+	   buf_num=0;
+	   buf[0]='\0';
+   }
   }
   return 0;
 }
