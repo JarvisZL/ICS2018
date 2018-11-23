@@ -73,10 +73,10 @@ make_EHelper(int) {
 
 make_EHelper(iret) {
     
-    rtl_pop(&decoding.jmp_eip);
+    rtl_pop(&t0);
     rtl_pop(&cpu.CS);
     rtl_pop(&cpu.eflags);
-    rtl_j(decoding.jmp_eip);
+    rtl_j(t0);
     //TODO();
 
   print_asm("iret");
@@ -89,9 +89,9 @@ extern uint32_t pio_read_b(ioaddr_t addr);
 make_EHelper(in) {
  switch(id_dest->width)
  {
-     case 1: at=pio_read_b(id_src->val); operand_write(id_dest,&at); break;
-     case 2: at=pio_read_w(id_src->val); operand_write(id_dest,&at); break;
-     case 4: at=pio_read_l(id_src->val); operand_write(id_dest,&at); break;
+     case 1: t2=pio_read_b(id_src->val); operand_write(id_dest,&t2); break;
+     case 2: t2=pio_read_w(id_src->val); operand_write(id_dest,&t2); break;
+     case 4: t2=pio_read_l(id_src->val); operand_write(id_dest,&t2); break;
  }
     // TODO();
 
