@@ -1,7 +1,7 @@
 #include "cpu/exec.h"
 
 make_EHelper(add) {
-   
+/*   
     t1=id_dest->val;
     rtl_add(&id_dest->val,&id_dest->val,&id_src->val);
    
@@ -18,13 +18,13 @@ make_EHelper(add) {
     rtl_set_OF(&t0);
 
     rtl_update_ZFSF(&id_dest->val,id_dest->width);
-   
+  */ 
     // TODO();
-/*
+
   rtl_add(&t2, &id_dest->val, &id_src->val);
   rtl_setrelop(RELOP_LTU, &t3, &t2, &id_dest->val);
-  rtl_get_CF(&t1);
-  rtl_add(&t2, &t2, &t1);
+ // rtl_get_CF(&t1);
+ // rtl_add(&t2, &t2, &t1);
   operand_write(id_dest, &t2);
 
   rtl_update_ZFSF(&t2, id_dest->width);
@@ -39,12 +39,12 @@ make_EHelper(add) {
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
   rtl_set_OF(&t0);
-  */
+  
   print_asm_template2(add);
 }
 
 make_EHelper(sub) {
- 
+/* 
   t1=id_dest->val;
   rtl_sub(&id_dest->val,&id_dest->val,&id_src->val);
   operand_write(id_dest,&id_dest->val);
@@ -56,8 +56,8 @@ make_EHelper(sub) {
   rtl_msb(&t0,&t0,id_dest->width);
   rtl_set_OF(&t0);
   rtl_update_ZFSF(&id_dest->val,id_dest->width);
-
-  /*    
+*/
+     
   rtl_sub(&t2, &id_dest->val, &id_src->val);
   rtl_setrelop(RELOP_LTU, &t3, &id_dest->val, &t2);
   operand_write(id_dest, &t2);
@@ -75,7 +75,7 @@ make_EHelper(sub) {
   rtl_set_OF(&t0);
 
 //  TODO();
-*/
+
   print_asm_template2(sub);
 }
 
@@ -84,9 +84,6 @@ make_EHelper(cmp) {
   rtl_sub(&t2, &id_dest->val, &id_src->val);
   rtl_setrelop(RELOP_LTU, &t3, &id_dest->val, &t2);
   
-  at=id_dest->val;
-  operand_write(id_dest,&t2);
- 
   rtl_update_ZFSF(&t2, id_dest->width);
 
   rtl_setrelop(RELOP_LTU, &t0, &id_dest->val, &t2);
@@ -99,7 +96,6 @@ make_EHelper(cmp) {
   rtl_msb(&t0, &t0, id_dest->width);
   rtl_set_OF(&t0);
 
-  operand_write(id_dest,&at);
     //TODO();
 
   print_asm_template2(cmp);
@@ -162,7 +158,7 @@ make_EHelper(neg) {
     else
     {
         cpu.EFLAGS.CF=1;
-       /* switch(id_dest->width){
+        switch(id_dest->width){
             case 1:{
                        assert(0);
                        if(id_dest->val==-128)
@@ -187,7 +183,7 @@ make_EHelper(neg) {
                        break;
                    }
         }
-       */
+       
         rtl_li(&t0,0);
         rtl_sub(&t1,&t0,&id_dest->val);
         operand_write(id_dest,&t1);
