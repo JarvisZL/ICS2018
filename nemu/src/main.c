@@ -1,35 +1,63 @@
+
 #include "monitor/expr.h"
+
+
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
+void tst();
 
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
-  	
+  
+	
   int is_batch_mode = init_monitor(argc, argv);
-/*
-  uint32_t expr(char *e, bool *success);
-  FILE *fp=NULL;
-  fp=fopen("./tools/gen-expr/input","r");
-  if(fp==NULL)
-	  printf("opening file failed\n");
-  bool success =true;
-  uint32_t cnt;
-  int i=0;
-  while(~fscanf(fp,"%u",&cnt)){
-	  printf("%d\n",i);
-	  i++;
-	 char str1[65536];
-	 fscanf(fp,"%[^\n]%*c",str1);
-     uint32_t tmp =  expr(str1, &success);
-	 if(cnt==tmp)
-		 printf("true\n");
-	 else
-		 printf("ying ying ying\n");
-  }
-  fclose(fp);
-*/
+
+//  tst();
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
 
   return 0;
 }
+
+void tst(){
+   unsigned int re;
+   char c;
+   int cnt;
+   char s[300];
+   FILE *fp=fopen("/home/jarviszly/ics2018/nemu/tools/gen-expr/input","r");
+   if(fp==NULL)
+   {
+	   assert(0);
+   } 
+   while((c=fgetc(fp))!=EOF)
+   {
+	memset(s,0,sizeof(s));
+	cnt=0;
+        while(c!=' ')
+	{
+	  c=fgetc(fp);
+	}
+        c=fgetc(fp);
+
+	while(c!='\n')
+	{
+            s[cnt++]=c;
+	    c=fgetc(fp);
+	}
+
+
+	bool succ = true;
+	re=expr(s, &succ);
+	if(succ==true)
+	{
+	printf("%u\n",re);
+	}
+	re=0;
+	
+
+   }
+
+   fclose(fp);
+   return;
+}
+

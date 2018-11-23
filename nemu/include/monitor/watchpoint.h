@@ -5,17 +5,18 @@
 
 typedef struct watchpoint {
   int NO;
+  char str[200];//cannot use pointers as the things in this addrs maybe change
   struct watchpoint *next;
-  /*struct watchpoint *prev;*/
+  uint32_t old_v;
+  uint32_t new_v;
+  uint32_t ht;
   /* TODO: Add more members if necessary */
-  char bufs[65536];
-  uint32_t ans;
+
+
 } WP;
 
-WP* new_wp();
-void free_wp(int n);
-void init_wp_pool();
-void pwatchpoint();
-bool checkchange();
+//WP* new_wp();
+//WP* find_wp(char*);
+//void free_wp(WP*);
 
 #endif

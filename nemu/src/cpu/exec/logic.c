@@ -7,8 +7,8 @@ make_EHelper(test) {
   rtl_and(&at,&id_dest->val,&id_src->val);
   //operand_write(id_dest,&at);
   //Log("%x",at);
-  cpu.CF=0;
-  cpu.OF=0;
+  cpu.EFLAGS.CF=0;
+  cpu.EFLAGS.OF=0;
   rtl_update_ZFSF(&at,id_dest->width);
 
   print_asm_template2(test);
@@ -22,8 +22,8 @@ make_EHelper(and) {
   rtl_and(&at,&id_dest->val,&id_src->val);
   //printf("t0: %x\n",t0);
   operand_write(id_dest,&at);
-  cpu.CF=0;
-  cpu.OF=0;
+  cpu.EFLAGS.CF=0;
+  cpu.EFLAGS.OF=0;
   rtl_update_ZFSF(&at,id_dest->width);
 
   print_asm_template2(and);
@@ -32,8 +32,8 @@ make_EHelper(and) {
 make_EHelper(xor) {
   rtl_xor(&at,&id_dest->val,&id_src->val);
   operand_write(id_dest,&at);
-  cpu.CF=0;
-  cpu.OF=0;
+  cpu.EFLAGS.CF=0;
+  cpu.EFLAGS.OF=0;
   rtl_update_ZFSF(&at,id_dest->width);
 
   print_asm_template2(xor);
@@ -42,8 +42,8 @@ make_EHelper(xor) {
 make_EHelper(or) {
   rtl_or(&at,&id_dest->val,&id_src->val); 
   operand_write(id_dest,&at);
-  cpu.CF=0;
-  cpu.OF=0;
+  cpu.EFLAGS.CF=0;
+  cpu.EFLAGS.OF=0;
   rtl_update_ZFSF(&at,id_dest->width);
 
   print_asm_template2(or);
@@ -106,10 +106,10 @@ make_EHelper(rol){
 	operand_write(id_dest,&t0);
 	int cf=((t0>>(id_dest->width*8-1))==1);
 	if(id_src->val==1){
-		if(cf!=cpu.CF)
-			cpu.OF=1;
+		if(cf!=cpu.EFLAGS.CF)
+			cpu.EFLAGS.OF=1;
 		else
-			cpu.OF=0;
+			cpu.EFLAGS.OF=0;
 	}
 }
 
@@ -126,8 +126,8 @@ make_EHelper(ror){
 	int next_cf=(((t0<<1)>>(id_dest->width*8-1))==1);
 	if(id_src->val==1){
 		if(cf!=next_cf)
-			cpu.OF=1;
+			cpu.EFLAGS.OF=1;
 		else
-			cpu.OF=0;
+			cpu.EFLAGS.OF=0;
 	}
 }
