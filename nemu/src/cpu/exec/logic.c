@@ -127,7 +127,7 @@ make_EHelper(rol){
    }
    if(id_src->val==1)
    {
-       //not equal?
+       //not equal!
        if(t2!=cpu.EFLAGS.CF)
            cpu.EFLAGS.OF=1;
        else

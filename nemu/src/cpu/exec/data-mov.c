@@ -108,25 +108,28 @@ make_EHelper(leave) {
 make_EHelper(cltd) {
   if (decoding.is_operand_size_16) {
      assert(0);
-      if(cpu.gpr[0]._16<0)
+     rtl_lr(&t0,0,2);
+     t0>>=15;
+     if(t0==1)
+         rtl_li(&t1,0xffff);
+     else
+         rtl_li(&t1,0x0);
+     rtl_sr(2,&t1,2);
+     /* if(cpu.gpr[0]._16<0)
          cpu.gpr[2]._16=0xffff;
      else cpu.gpr[2]._16=0;
-   //TODO();
+   */
+     //TODO();
   }
   else {
-    rtl_lr(&at,0,4);
-    at>>=31;
-    if(at==1)
-    {
+    rtl_lr(&t0,0,4);
+    t0>>=31;
+    if(t0==1)
         rtl_li(&t1,0xffffffff);
-        rtl_sr(2,&t1,4);
-    }
     else
-    {
         rtl_li(&t1,0);
-        rtl_sr(2,&t1,4);
-    }
-      /*
+    rtl_sr(2,&t1,4); 
+    /*
      if(cpu.eax<0)
          cpu.edx=0xffffffff;
      else cpu.edx=0;
@@ -140,15 +143,19 @@ make_EHelper(cltd) {
 make_EHelper(cwtl) {
   if (decoding.is_operand_size_16) {
       assert(0);
-      if(((cpu.gpr[0]._8[0]>>7)&0x1)==1)
+      rtl_lr(&t0,0,1);
+      rtl_sext(&t1,&t0,1);
+      rtl_sr(0,&t1,2)
+      /*if(((cpu.gpr[0]._8[0]>>7)&0x1)==1)
           cpu.gpr[0]._8[1]=0xff;
       else
           cpu.gpr[0]._8[1]=0x00;
+      */
       // TODO();
   }
   else {
-     rtl_lr(&at,0,2);
-     rtl_sext(&t1,&at,2);
+     rtl_lr(&t0,0,2);
+     rtl_sext(&t1,&t0,2);
      rtl_sr(0,&t1,4);
       /*
       if(((cpu.gpr[0]._16>>15)&0x1)==1)
