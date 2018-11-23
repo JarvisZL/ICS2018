@@ -24,6 +24,7 @@ make_EHelper(pop) {
 make_EHelper(pusha) {
     if(decoding.is_operand_size_16)
     {
+        assert(0);
         t0=cpu.gpr[4]._16;
         t1=cpu.gpr[0]._16;
         rtl_push(&t1);
@@ -69,6 +70,7 @@ make_EHelper(pusha) {
 make_EHelper(popa) {
     if(decoding.is_operand_size_16)
     {
+        assert(0);
         rtl_pop(&t0);
         cpu.gpr[7]._16=(uint16_t) t0;
         rtl_pop(&t0);
@@ -113,7 +115,8 @@ make_EHelper(leave) {
 
 make_EHelper(cltd) {
   if (decoding.is_operand_size_16) {
-     if(cpu.gpr[0]._16<0)
+     assert(0);
+      if(cpu.gpr[0]._16<0)
          cpu.gpr[2]._16=0xffff;
      else cpu.gpr[2]._16=0;
    //TODO();
@@ -130,6 +133,7 @@ make_EHelper(cltd) {
 
 make_EHelper(cwtl) {
   if (decoding.is_operand_size_16) {
+      assert(0);
       if(((cpu.gpr[0]._8[0]>>7)&0x1)==1)
           cpu.gpr[0]._8[1]=0xff;
       else

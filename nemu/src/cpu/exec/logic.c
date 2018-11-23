@@ -97,6 +97,7 @@ make_EHelper(rol){
        if(i==0) t0=id_dest->val;
        switch(id_dest->width){
            case 1: {
+                      assert(0);
                       t2=(t0>>7)&0x1;
                       t1=1;
                       rtl_shl(&t0,&t0,&t1);
@@ -105,6 +106,7 @@ make_EHelper(rol){
                       break;
                    }
            case 2 :{
+                       assert(0);
                        t2=(t0>>15)&0x1;
                        t1=1;
                        rtl_shl(&t0,&t0,&t1);

@@ -124,6 +124,7 @@ make_EHelper(neg) {
         cpu.EFLAGS.CF=1;
         switch(id_dest->width){
             case 1:{
+                       assert(0);
                        if(id_dest->val==-128)
                            cpu.EFLAGS.OF=1;
                        else 
@@ -131,6 +132,7 @@ make_EHelper(neg) {
                        break;
                    }
             case 2:{
+                       assert(0);
                        if(id_dest->val==-32768)
                            cpu.EFLAGS.OF=1;
                        else 
