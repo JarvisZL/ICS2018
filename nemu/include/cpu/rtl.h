@@ -150,7 +150,8 @@ static inline void rtl_sr(int r, const rtlreg_t* src1, int width) {
 
 static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
   // dest <- ~src1
-  *dest=~(*src1);
+  rtl_li(&t0,0xffffffff);
+  rtl_xor(dest,src1,&t0);
     //TODO();
 }
 
@@ -224,9 +225,11 @@ make_rtl_setget_eflags(SF)
 
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
-  if(*result==0)
-	 cpu.EFLAGS.ZF=1;
-  else  cpu.EFLAGS.ZF=0; 
+  assert(width==1||width==2||width==4);
+  if((*result&~(0xffffffff<<(width*8-1)<<1))==0)
+     cpu.EFLAGS.ZF=1;
+  else
+     cpu.EFLAGS.ZF=0;
  // TODO();
 }
 
