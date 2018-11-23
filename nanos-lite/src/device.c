@@ -25,7 +25,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     int code=0;
     uint32_t timer=0;
     code=read_key();
-    if(code!=0)
+    if(code!=_KEY_NONE)
     {
       if(code&KEYDOWN_MASK)
       {
