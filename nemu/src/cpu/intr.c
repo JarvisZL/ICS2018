@@ -5,25 +5,30 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   /* TODO: Trigger an interrupt/exception with ``NO''.
    * That is, use ``NO'' to index the IDT.
    */
-   uint32_t te0,te1,te2;
-   te0=cpu.eflags;
-   rtl_push(&te0);
-   te0=cpu.CS;
-   rtl_push(&te0);
-   rtl_push(&ret_addr);
-   
-   te0=cpu.IDTR.base+NO*8;
-   te1=vaddr_read(te0,4);
-   te0=te0+4;
-   te2=vaddr_read(te0,4);
-// 63:47 offset(31:16) .......
-// ...........offset(15:0)15:0
-   te1=te1&0x0000ffff;
-   te2=te2&0xffff0000;
-   te1=te1|te2;
-   rtl_j(te1);
-   
+
  // TODO();
+    union{
+		GateDesc Gatedesc;
+		uint32_t val[2];
+	}GD;
+
+    /*push eflags*/
+	//if(cpu.eflags==2)
+		//cpu.eflags=0x12;
+	rtl_push(&cpu.eflags);
+
+	/*push CS*/
+	rtl_push(&cpu.CS);
+
+	/*push eip*/
+	rtl_push(&ret_addr);
+
+	GD.val[0]=vaddr_read(cpu.IDTR.base+NO*8,4);
+	GD.val[1]=vaddr_read(cpu.IDTR.base+NO*8+4,4);
+	//TODO();
+	t0=GD.Gatedesc.offset_15_0+(GD.Gatedesc.offset_31_16<<16);
+	rtl_j(t0);
+
 }
 
 void dev_raise_intr() {
