@@ -2977,7 +2977,6 @@ PAL_InterpretInstruction(
       break;
 
    default:
-      printf("%4x\n",pScript->wOperation);
       TerminateOnError("SCRIPT: Invalid Instruction at %4x: (%4x - %4x, %4x, %4x)",
          wScriptEntry, pScript->wOperation, pScript->rgwOperand[0],
          pScript->rgwOperand[1], pScript->rgwOperand[2]);
