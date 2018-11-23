@@ -145,7 +145,7 @@ make_EHelper(cwtl) {
       assert(0);
       rtl_lr(&t0,0,1);
       rtl_sext(&t1,&t0,1);
-      rtl_sr(0,&t1,2)
+      rtl_sr(0,&t1,2);
       /*if(((cpu.gpr[0]._8[0]>>7)&0x1)==1)
           cpu.gpr[0]._8[1]=0xff;
       else
@@ -157,7 +157,8 @@ make_EHelper(cwtl) {
      rtl_lr(&t0,0,2);
      rtl_sext(&t1,&t0,2);
      rtl_sr(0,&t1,4);
-      /*
+  
+  /*
       if(((cpu.gpr[0]._16>>15)&0x1)==1)
          cpu.gpr[0]._32|=0xffff0000;
       else
