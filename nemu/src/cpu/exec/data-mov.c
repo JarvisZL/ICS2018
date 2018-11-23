@@ -13,8 +13,8 @@ make_EHelper(push) {
 }
 
 make_EHelper(pop) {
-    rtl_pop(&t2);
-    operand_write(id_dest,&t2);
+    rtl_pop(&at);
+    operand_write(id_dest,&at);
 
 //  TODO();
 
@@ -44,22 +44,15 @@ make_EHelper(pusha) {
     }
     else
     {
-        t0=cpu.esp;
-        t1=cpu.eax;
-        rtl_push(&t1);
-        t1=cpu.ecx;
-        rtl_push(&t1);
-        t1=cpu.edx;
-        rtl_push(&t1);
-        t1=cpu.ebx;
-        rtl_push(&t1);
-        rtl_push(&t0);
-        t1=cpu.ebp;
-        rtl_push(&t1);
-        t1=cpu.esi;
-        rtl_push(&t1);
-        t1=cpu.edi;
-        rtl_push(&t1);
+          at=cpu.esp;
+          rtl_push(&cpu.eax);
+	  rtl_push(&cpu.ecx);
+	  rtl_push(&cpu.edx);
+	  rtl_push(&cpu.ebx);
+	  rtl_push(&at);
+	  rtl_push(&cpu.ebp);
+	  rtl_push(&cpu.esi);
+	  rtl_push(&cpu.edi);
     }
     
     //TODO();
@@ -92,7 +85,7 @@ make_EHelper(popa) {
         rtl_pop(&cpu.edi);
         rtl_pop(&cpu.esi);
         rtl_pop(&cpu.ebp);
-        rtl_pop(&t0);//useless esp;
+        rtl_pop(&at);//useless esp;
         rtl_pop(&cpu.ebx);
         rtl_pop(&cpu.edx);
         rtl_pop(&cpu.ecx);
@@ -106,8 +99,7 @@ make_EHelper(popa) {
 make_EHelper(leave) {
     
     cpu.esp=cpu.ebp;
-    rtl_pop(&t2);
-    cpu.ebp=t2;
+    rtl_pop(&cpu.ebp);
     //TODO();
 
   print_asm("leave");
