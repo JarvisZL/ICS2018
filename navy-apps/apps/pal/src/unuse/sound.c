@@ -68,7 +68,6 @@ SOUND_OpenAudio(
 
 --*/
 {
-   Log("openaudio success");
    return 0;
 }
 
