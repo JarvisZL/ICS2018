@@ -71,57 +71,66 @@ void difftest_step(uint32_t eip) {
 
   // TODO: Check the registers state with the reference design.
   // Set `nemu_state` to `NEMU_ABORT` if they are not the same.
-   if(ref_r.eax!=cpu.eax)
-   {
-       printflog("the eax is different: NEMU  %-8x, QEMU  %-8x\n",cpu.eax,ref_r.eax);
-       nemu_state=NEMU_ABORT;
-   }
-   else if(ref_r.ecx!=cpu.ecx)
-   {
-       printflog("the ecx is different: NEMU  %-8x, QEMU  %-8x\n",cpu.ecx,ref_r.ecx);
-       nemu_state=NEMU_ABORT;
-   }
-   else if(ref_r.edx!=cpu.edx)
-   {
-       printflog("the edx is different: NEMU  %-8x, QEMU  %-8x\n",cpu.edx,ref_r.edx);
-       nemu_state=NEMU_ABORT;
-   }
-   else if(ref_r.ebx!=cpu.ebx)
-   {
-       printflog("the ebx is different: NEMU  %-8x, QEMU  %-8x\n",cpu.ebx,ref_r.ebx);
-       nemu_state=NEMU_ABORT;
-   }
-   else if(ref_r.esp!=cpu.esp)
-   {
-       printflog("the esp is different: NEMU  %-8x, QEMU  %-8x\n",cpu.esp,ref_r.esp);
-       nemu_state=NEMU_ABORT;
-   }
-   else if(ref_r.ebp!=cpu.ebp)
-   {
-       printflog("the ebp is different: NEMU  %-8x, QEMU  %-8x\n",cpu.ebp,ref_r.ebp);
-       nemu_state=NEMU_ABORT;
-   }
-   else if(ref_r.esi!=cpu.esi)
-   {
-       printflog("the esi is different: NEMU  %-8x, QEMU  %-8x\n",cpu.esi,ref_r.esi);
-       nemu_state=NEMU_ABORT;
-   }
-   else if(ref_r.edi!=cpu.edi)
-   {
-       printflog("the edi is different: NEMU  %-8x, QEMU  %-8x\n",cpu.edi,ref_r.edi);
-       nemu_state=NEMU_ABORT;
-   }
-   else if(ref_r.eip!=cpu.eip)
-   {
-       printflog("the eip is different: NEMU  %-8x, QEMU  %-8x\n",cpu.eip,ref_r.eip);
-       nemu_state=NEMU_ABORT;
-   }
+ // TODO();
+  if(cpu.eax!=ref_r.eax){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.eax\t0x%-16x%-d\n",ref_r.eax,ref_r.eax);
+	  printf("difference in cpu.eax\t0x%-16x%-d\n",cpu.eax,cpu.eax);
 
-   printflog("REGS:eax       ecx       edx       ebx       esp       ebp       esi       edi       eip\n");
-   printflog("QEMU:%-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x\n",ref_r.eax,ref_r.ecx,ref_r.edx,ref_r.ebx,ref_r.esp,ref_r.ebp,ref_r.esi,ref_r.edi,ref_r.eip);
-   printflog("NEMU:%-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x  %-8x\n",cpu.eax,cpu.ecx,cpu.edx,cpu.ebx,cpu.esp,cpu.ebp,cpu.esi,cpu.edi,cpu.eip);
-   printflog("EFLAGS:\tCF\tOF\tSF\tZF\n");
-   printflog("NEMU:\t%d\t%d\t%d\t%d\n",cpu.EFLAGS.CF,cpu.EFLAGS.OF,cpu.EFLAGS.SF,cpu.EFLAGS.ZF);
-   //TODO();
-   
+  }
+  if(cpu.ecx!=ref_r.ecx){
+      nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.ecx\t0x%-16x%-d\n",ref_r.ecx,ref_r.ecx);
+
+  }
+  if(cpu.edx!=ref_r.edx){
+      nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.edx\t0x%-16x%-d\n",ref_r.edx,ref_r.edx);
+  }
+  if(cpu.ebx!=ref_r.ebx){
+      nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.ebx\t0x%-16x%-d\n",ref_r.ebx,ref_r.ebx);
+  }
+  if(cpu.esp!=ref_r.esp){
+      nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.esp\t0x%-16x%-d\n",ref_r.esp,ref_r.esp);
+  }
+  if(cpu.ebp!=ref_r.ebp){
+      nemu_state=NEMU_ABORT;
+ 	  printf("difference in ref_r.ebp\t0x%-16x%-d\n",ref_r.ebp,ref_r.ebp);
+  }
+  if(cpu.esi!=ref_r.esi){
+      nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.esi\t0x%-16x%-d\n",ref_r.esi,ref_r.esi);
+  }
+  if(cpu.edi!=ref_r.edi){
+      nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.edi\t0x%-16x%-d\n",ref_r.edi,ref_r.edi);
+  }
+  if(cpu.eip!=ref_r.eip){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.eip\t0x%-16x%-d\n",ref_r.eip,ref_r.eip);
+  }
+ /* 
+  if(cpu.CF!=ref_r.CF){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.CF: %u\n",ref_r.CF);
+  }
+  if(cpu.ZF!=ref_r.ZF){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.ZF: %u\n",ref_r.ZF);
+  }
+  if(cpu.SF!=ref_r.SF){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.SF: %u\n",ref_r.SF);
+  }
+  if(cpu.OF!=ref_r.OF){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.OF: %u\n",ref_r.OF);
+  }
+  if(cpu.IF!=ref_r.IF){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.IF: %u\n",ref_r.IF);
+  }
+  */
 }

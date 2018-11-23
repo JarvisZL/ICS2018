@@ -1,147 +1,108 @@
 #include "monitor/watchpoint.h"
 #include "monitor/expr.h"
 
-#define NR_WP 100
-
+#define NR_WP 32
+uint32_t expr(char *e, bool *success);
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
+
+WP* new_wp();
+void free_wp(int n);
 
 void init_wp_pool() {
   int i;
   for (i = 0; i < NR_WP; i ++) {
     wp_pool[i].NO = i;
     wp_pool[i].next = &wp_pool[i + 1];
-    wp_pool[i].str[0]='\0';
-    wp_pool[i].ht=0;
   }
+ /* for(int i=0;i<NR_WP;i++)
+  {
+	  wp_pool[i]->prev=wp_pool[i-1];
+  }
+  wp_pool[0]->prev=NULL;*/
   wp_pool[NR_WP - 1].next = NULL;
+
   head = NULL;
   free_ = wp_pool;
 }
 
 /* TODO: Implement the functionality of watchpoint */
 
-WP* tem;
-
 WP* new_wp()
 {
 	if(free_==NULL)
-		assert(0);
-	else 
 	{
-            tem=free_;
-	    free_=free_->next;
-	    tem->next=NULL;
-	    if(head==NULL)
-	    {
-		    head=tem;
-		    return tem;
-	    }
-	    else
-	    {
-		    tem->next=head;
-		    head=tem;
-		    return tem;
-	    }
-	}
+		printf("There is no avalialbe watchpoint\n");
+		assert(0);
+ 	}
+    WP *x;
+	x=free_;
+	free_=free_->next;
+	x->next=head;
+	head=x;
+	return head;
 }
 
-WP* find_wp(uint32_t no)
+void free_wp(int n)
 {
+	WP *x;
+	x=head;
+	WP *y=x;
 	if(head==NULL)
 	{
-		printf("no such a watchpoint!\n");
-		assert(0);
-	}
-	else
+		printf("There is no watchpoint\n");
+		/*assert(0);*/
+		return;
+	} 
+	while((x->NO!=n)&&x->next!=NULL)
 	{
-		tem=head;
-		while(tem->NO!=no&&tem->next!=NULL)
-		{
-			tem=tem->next;
-		}
-                if(tem->NO==no)
-		{
-			return tem;
-		}
-		else return tem->next;
-	}
-}
-
-
-void free_wp(WP* wp)
-{       
-	assert(wp!=NULL);
-	if(head==NULL)
-	{
-		printf("no using watchpoint!\n");
-	}
-        else if(head==wp)
-        {
-		if(wp->next==NULL)
-		{
-			head=NULL;
-			wp->next=free_;
-			free_=wp;
-		}
+		y=x;
+		x=x->next;
+	} 
+	if(x->NO==n)
+	{ 
+		if(x==head) head=head->next;
 		else
-		{
-                       head=head->next;
-		       wp->next=free_;
-		       free_=wp;
+	 	{
+			y->next=x->next;
+			x->next=free_;
+			free_=x;
 		}
 	}
-	else
-	{
-              tem=head;
-	      while(tem->next!=wp&&tem->next!=NULL)
-	      {
-                      tem=tem->next;
-		      
-	      }
-	      if(tem->next==wp)
-	      {
-		      tem->next=wp->next;
-                      wp->next=free_;
-		      free_=wp;
-	      }
-	      else if(tem->next==NULL)
-	      {
-		      printf("the watchpoint isn't using!\n");
-	      }
-	}
-}
+};
 
-bool checkwp()
-{      
-	bool all=false;
-	bool succ;
-	tem=head;
-	while(tem!=NULL)
-	{
-           tem->new_v=expr(tem->str,&succ);
-	   if(tem->new_v!=tem->old_v)
-	   {
-		   printf("watchpoint %d:  %s\n",tem->NO,tem->str);
-		   printf("old value: %d\n",tem->old_v);
-		   printf("new value: %d\n",tem->new_v);
-		   printf("\n");
-		   all=true;
-		   tem->old_v=tem->new_v;
-		   tem->ht++;
-	   }
-	  tem=tem->next; 
-	}
-	return all;
-}
-
-void wp_print()
+void pwatchpoint()
 {
-     tem=head;
-     while(tem!=NULL)
-     {
-	     printf("%d\twatchpoint\tkeep\ty\t      \t%s\n",tem->NO,tem->str);
-	     printf("  \tbreakpoint already hit %d times\n",tem->ht);
-	     tem=tem->next;
-     }
+	WP *wp;
+	wp = head;
+/*	bool success = true;*/
+	if(wp==NULL){
+		printf("There is not such watchpoint.\n");
+		return;
+	}
+	while(wp!=NULL)
+	{
+		/*uint32_t tmp=expr(wp->bufs, &success);*/
+		printf("WATCHPOINT NO.%d  %s: %u\n",wp->NO,wp->bufs,wp->ans);
+		wp=wp->next;
+	}
+}
+
+bool checkchange()
+{
+	bool flag = true;
+	bool success = true;
+	WP *wp=head;
+	while(wp!=NULL)
+	{
+		uint32_t tmp=expr(wp->bufs,&success);
+		if(tmp!=wp->ans)
+		{
+			printf("Watchpoint %d has changed,the old value is %u and now is %u\n",wp->NO,wp->ans,tmp);
+			flag=false;
+			wp->ans=tmp;
+		}
+		wp=wp->next;
+	}
+	return flag;
 }
