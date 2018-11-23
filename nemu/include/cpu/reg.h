@@ -62,7 +62,7 @@ typedef union{
       uint16_t limit;
       uint32_t base;
   }IDTR;
-  uint16_t CS;
+  rtlreg_t CS;
   };
 } CPU_state;
 

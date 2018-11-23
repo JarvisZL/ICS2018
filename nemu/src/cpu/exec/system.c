@@ -74,8 +74,7 @@ make_EHelper(int) {
 make_EHelper(iret) {
     
     rtl_pop(&t0);
-    rtl_pop(&t1);
-    cpu.CS=(uint16_t)t1;
+    rtl_pop(&cpu.CS);
     rtl_pop(&cpu.eflags);
     rtl_j(t0);
     //TODO();
