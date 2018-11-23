@@ -185,8 +185,12 @@ make_EHelper(neg) {
                        break;
                    }
         }
-        t2=-id_dest->val;
-        operand_write(id_dest,&t2);
+
+        rtl_li(&t0,0);
+        rtl_sub(&t1,&t0,&id_dest->val);
+        operand_write(id_dest,&t1);
+        //t2=-id_dest->val;
+        //operand_write(id_dest,&t2);
         rtl_update_ZFSF(&t2,id_dest->width);
     }
     // TODO();
