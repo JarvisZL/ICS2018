@@ -84,12 +84,11 @@ PAL_GameMain(
    // Initialize game data and set the flags to load the game resources.
    //
    PAL_InitGameData(gpGlobals->bCurrentSaveSlot);
-  assert(0);
    //
    // Run the main game loop.
    //
    dwTime = SDL_GetTicks();
-
+   assert(0);
    while (TRUE)
    {
       //
