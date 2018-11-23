@@ -40,26 +40,12 @@ static inline make_DopHelper(SI) {
    * pointed by `eip'. Interpret the result as a signed immediate,
    * and assign it to op->simm.
    *
-   op->simm = ???
    */
-  uint32_t tem=instr_fetch(eip,op->width);
-  switch(op->width){
-	  case 1:{
-              if(((tem>>7)&0x1)==1)
-                  op->simm=tem|0xffffff00;
-              else op->simm=tem&0x000000ff;
-		      break;
-		 }
-	 case 2:{
-             if(((tem>>15)&0x1)==1)
-                 op->simm=tem|0xffff0000;
-             else op->simm=tem&0x0000ffff;
-			break;
-		}
-	case 4:  op->simm=tem; break;
-  }
-// TODO();
-
+  at = instr_fetch(eip,op->width);
+  rtl_sext(&t0,&at,op->width);
+ // rtl_sext(&op->simm,&at,op->width);
+  //printf("at: %d op->width: %d\n",at,op->width);
+  op->simm=t0;
   rtl_li(&op->val, op->simm);
 
 #ifdef DEBUG
@@ -125,7 +111,6 @@ static inline make_DopHelper(O) {
   snprintf(op->str, OP_STR_SIZE, "0x%x", op->addr);
 #endif
 }
-
 
 /* Eb <- Gb
  * Ev <- Gv
