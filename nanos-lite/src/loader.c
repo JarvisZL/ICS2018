@@ -9,7 +9,7 @@ extern size_t ramdisk_read(void* buf, size_t offset,size_t len);
 extern size_t fs_read(int fd,void * buf,size_t len);
 extern int fs_open(const char *pathname,int flags,int mode);
 extern size_t fs_filesz(int fd);
-
+extern int fs_close(int fd);
 
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
@@ -20,7 +20,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     buff=(void *)DEFAULT_ENTRY;
     fs_read(fd,buff,length);
     // ramdisk_read(buff,0,length);
- 
+    
+    fs_close(fd); 
     // TODO();
   return DEFAULT_ENTRY;
 }
