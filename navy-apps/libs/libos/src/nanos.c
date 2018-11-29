@@ -70,9 +70,9 @@ off_t _lseek(int fd, off_t offset, int whence) {
 }
 
 int _execve(const char *fname, char * const argv[], char *const envp[]) {
- return _syscall_(SYS_execve,(intptr_t) fname,(intptr_t) argv,(intptr_t) envp);
+/* return*/ _syscall_(SYS_execve,(intptr_t) fname,(intptr_t) argv,(intptr_t) envp);
     //_exit(SYS_execve);
-  //return 0;
+  return 0;
 
 }
 
