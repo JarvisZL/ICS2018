@@ -17,7 +17,7 @@ asm_trap:
 
   addl $4, %esp
 
-  addl $16, %esp #changed
+  addl $4, %esp #changed
   popal
   addl $8, %esp
 
