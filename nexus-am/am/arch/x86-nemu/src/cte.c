@@ -24,7 +24,7 @@ _Context* irq_handle(_Context *tf) {
       next = tf;
     }
   }
-
+  printf("addr:%x\n",next);
   return next;
 }
 
