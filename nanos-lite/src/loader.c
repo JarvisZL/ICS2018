@@ -20,7 +20,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     buff=(void *)DEFAULT_ENTRY;
     fs_read(fd,buff,length);
     // ramdisk_read(buff,0,length);
-    
+    assert(0); 
     fs_close(fd); 
     // TODO();
   return DEFAULT_ENTRY;
