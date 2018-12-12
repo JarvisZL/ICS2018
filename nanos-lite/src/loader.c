@@ -20,7 +20,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     buff=(void *)DEFAULT_ENTRY;
     fs_read(fd,buff,length);
     // ramdisk_read(buff,0,length);
-    assert(0); 
     fs_close(fd); 
     // TODO();
   return DEFAULT_ENTRY;
@@ -29,6 +28,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 void naive_uload(PCB *pcb, const char *filename) {
   uintptr_t entry = loader(pcb, filename);
   ((void(*)())entry) ();
+  assert(0);
 }
 
 void context_kload(PCB *pcb, void *entry) {
