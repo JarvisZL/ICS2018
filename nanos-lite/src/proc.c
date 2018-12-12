@@ -27,7 +27,7 @@ extern void context_kload(PCB *pcb, void *entry);
 void init_proc() {
     context_kload(&pcb[0],(void*) hello_fun);
     switch_boot_pcb();
-    naive_uload(NULL, "/bin/init");
+   // naive_uload(NULL, "/bin/init");
 }
 
 
