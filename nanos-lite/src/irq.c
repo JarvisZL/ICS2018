@@ -6,7 +6,7 @@ extern _Context* schedule(_Context *prev);
 static _Context* do_event(_Event e, _Context* c) {
   switch (e.event) {
     case _EVENT_SYSCALL:  do_syscall(c); break;
-    case _EVENT_YIELD: schedule(c); Log("This is EVENT YIELD"); break;
+    case _EVENT_YIELD: Log("This is EVENT YIELD"); return schedule(c); break;
     default: panic("Unhandled event ID = %d", e.event); break;
   }
 
