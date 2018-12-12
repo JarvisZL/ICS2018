@@ -58,7 +58,7 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
     ret_k->edi=0;
     ret_k->esi=0;
     ret_k->ebp=(uintptr_t) stack.end;
-    ret_k->esp=(uintptr_t) ret_k;
+    ret_k->esp=(uintptr_t) stack.end;
     ret_k->ebx=0;
     ret_k->ecx=0;
     ret_k->eax=0;
