@@ -90,6 +90,7 @@ make_EHelper(popa) {
         rtl_pop(&cpu.edx);
         rtl_pop(&cpu.ecx);
         rtl_pop(&cpu.eax);
+        printf("%d\t%d\t%d\t%d\t%d\t%d\n",cpu.edi,cpu.esi,cpu.ebx,cpu.edx,cpu.ecx,cpu.eax);
     }
   //TODO();
 
