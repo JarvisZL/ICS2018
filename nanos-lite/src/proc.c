@@ -25,10 +25,9 @@ extern void context_kload(PCB *pcb, void *entry);
 
 
 void init_proc() {
-    assert(0);
     naive_uload(NULL, "/bin/init");
-    context_kload(&pcb[0],(void*) hello_fun);
-    switch_boot_pcb();
+    //context_kload(&pcb[0],(void*) hello_fun);
+    //switch_boot_pcb();
 }
 
 _Context* schedule(_Context *prev) {
