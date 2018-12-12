@@ -53,18 +53,15 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
   _Context * ret_k=(_Context *)((uintptr_t)stack.end-sizeof(_Context)); //find the addr
     
-    printf("entry:%d\t",(uintptr_t)entry);
-    printf("end:%d\n",(uintptr_t)stack.end);
-    printf("prot:%d\n",sizeof(ret_k->prot));
     ret_k->prot=NULL;
-    ret_k->edi=1;
-    ret_k->esi=2;
+    ret_k->edi=0;
+    ret_k->esi=0;
     ret_k->ebp=(uintptr_t) stack.end;
     ret_k->esp=0;
-    ret_k->ebx=3;
-    ret_k->edx=4;
-    ret_k->ecx=5;
-    ret_k->eax=6;
+    ret_k->ebx=0;
+    ret_k->edx=0;
+    ret_k->ecx=0;
+    ret_k->eax=0;
     ret_k->irq=0x81;
     ret_k->err=0;
     ret_k->eip=(uintptr_t) entry;
