@@ -80,5 +80,24 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 }
 
 _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *args) {
-  return NULL;
+    _Context * ret_u=(_Context *) ((uintptr_t)ustack.end-sizeof(_Context)-4);
+   
+     
+     ret_u->prot=NULL;
+     ret_u->edi=0;
+     ret_u->esi=0;
+     ret_u->ebp=(uintptr_t) ustack.end;
+     ret_u->esp=0;
+     ret_u->ebx=0;
+     ret_u->edx=0;
+     ret_u->ecx=0;
+     ret_u->eax=0;
+     ret_u->irq=0x81;
+     ret_u->err=0;
+     ret_u->eip=(uintptr_t) entry;
+     ret_u->cs=8;
+     ret_u->eflags=0x2;
+     
+   //  memset(ret_u+sizeof(_Context),0,4);
+    return ret_u;
 }
