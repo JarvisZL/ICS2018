@@ -25,7 +25,7 @@ _Context* irq_handle(_Context *tf) {
     }
   }
   printf("addr:%d\n",(uintptr_t)next);
-  printf("next.eax:%d\tnext.eip:%d\n",next->eax,next->eip);
+  printf("next.eax:%d\tnext.esp:%d\tnext.ebp:%d\tnext.eip:%d\n",next->eax,next->esp,next->ebp,next->eip);
   return next;
 }
 
