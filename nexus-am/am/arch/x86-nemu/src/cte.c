@@ -62,7 +62,7 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
     ret_k->eax=0;
     ret_k->irq=0x81;
     ret_k->err=0;
-    ret_k->eip=(uintptr_t) entry;
+    ret_k->eip=(uintptr_t) 0x40000000;
     ret_k->cs=8;
     ret_k->eflags=0x2;
     return ret_k;
