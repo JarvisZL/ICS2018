@@ -55,6 +55,7 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
     
     printf("entry:%d\t",(uintptr_t)entry);
     printf("end:%d\n",(uintptr_t)stack.end);
+    printf("prot:%d\n",sizeof(ret_k->prot));
     ret_k->prot=NULL;
     ret_k->edi=1;
     ret_k->esi=2;
