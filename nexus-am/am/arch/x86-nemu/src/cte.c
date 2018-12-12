@@ -50,7 +50,22 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 }
 
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
-  return NULL;
+  _Context * ret_k=(_Context *)((uintptr_t)stack.end-sizeof(_Context)); //find the addr
+    
+    ret_k->prot=NULL;
+    ret_k->edi=0;
+    ret_k->esi=0;
+    ret_k->ebp=(uintptr_t) stack.end;
+    ret_k->esp=(uintptr_t) ret_k;
+    ret_k->ebx=0;
+    ret_k->ecx=0;
+    ret_k->eax=0;
+    ret_k->irq=0x81;
+    ret_k->err=0;
+    ret_k->eip=(uintptr_t) entry;
+    ret_k->cs=8;
+    ret_k->eflags=0x2;
+    return ret_k;
 }
 
 void _yield() {
