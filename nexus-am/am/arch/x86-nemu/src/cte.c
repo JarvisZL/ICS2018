@@ -21,7 +21,8 @@ _Context* irq_handle(_Context *tf) {
 
     next = user_handler(ev, tf);
     if (next == NULL) {
-      next = tf;
+        assert(0);
+        next = tf;
     }
   }
   printf("addr:%x\n",(uintptr_t)next);
