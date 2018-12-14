@@ -49,7 +49,7 @@ paddr_t page_translate(vaddr_t addr)
     else
     {
         Log("page on");
-        Log("vaddr:%x",addr);
+        Log("vaddr:%x",addr>>22);
         unsigned long dir=(unsigned long)(addr>>22)<<2;
         unsigned long base=cpu.cr3.page_directory_base<<12;
         PDE * pde_p=(PDE *) (base|dir);
