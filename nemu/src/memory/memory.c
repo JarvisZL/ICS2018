@@ -55,18 +55,19 @@ paddr_t page_translate(vaddr_t addr)
         Log("cpu.cr3:%x",cpu.cr3.val);
         
         uintptr_t base=cpu.cr3.page_directory_base<<12;
-        PDE * pde_p=(PDE *) (base|dir);
+        uintptr_t pde_p=base|dir;
         
         Log("dir:%lx,base:%lx",dir,base);
         Log("addr:%lx",(uintptr_t) pde_p);
         
-        //assert(pde_p->present);
+        PDE pde=(PDE)paddr_read(pde_p,4);
+        assert(pde.present);
         /*if(pde_p->present==0)
         {
             assert(0);
         }*/
         assert(0);
-        uintptr_t sec_base=pde_p->page_frame<<12;
+       /* uintptr_t sec_base=pde_p->page_frame<<12;
         uintptr_t page=((addr>>12)<<22)>>20;
         PTE * pte_p=(PTE*) (sec_base|page);
         if(pte_p->present==0)
@@ -77,7 +78,7 @@ paddr_t page_translate(vaddr_t addr)
         uintptr_t offset=addr&0xfff;
         assert(0);
         return (paddr_t) (page_base|offset);
-        
+        */
        // assert(0);
     }
 }
