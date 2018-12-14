@@ -105,9 +105,8 @@ static inline void set_idt(GateDesc *idt, int size) {
   data[2] = (uint32_t)idt >> 16;
   __asm__ volatile("lidt (%0)" : : "r"(data));
 }
-
 static inline void set_cr3(void *pdir) {
-  __asm__ volatile("movl %0, %%cr3" : : "r"(pdir));
+    __asm__ volatile("movl %0, %%cr3" : : "r"(pdir));
 }
 
 static inline uint8_t inb(int port) {
