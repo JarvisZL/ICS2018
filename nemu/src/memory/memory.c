@@ -49,9 +49,28 @@ paddr_t page_translate(vaddr_t addr)
     else
     {
         Log("page on");
-        assert(0);
+        unsigned long dir=(addr>>22)<<2;
+        unsigned long base=cpu.cr3.page_directory_base<<12;
+        PDE * pde_p=(PDE *) (base|dir); 
+        if(pde_p->present==0)
+        {
+            Log("directory present 0");
+            assert(0);
+        }
+        unsigned long sec_base=pde_p->page_frame<<12;
+        unsigned long page=((addr>>12)<<22)>>20;
+        PTE * pte_p=(PTE*) (sec_base|page);
+        if(pte_p->present==0)
+        {
+            Log("page table present 0");
+            assert(0);
+        }
+        unsigned long page_base=pte_p->page_frame<<12;
+        unsigned long offset=addr&0xfff;
+        return (paddr_t) (page_base|offset);
+        
+       // assert(0);
     }
-    return 0;
 }
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
