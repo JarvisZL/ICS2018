@@ -57,6 +57,7 @@ paddr_t page_translate(vaddr_t addr)
             Log("directory present 0");
             assert(0);
         }
+        assert(0);
         unsigned long sec_base=pde_p->page_frame<<12;
         unsigned long page=((addr>>12)<<22)>>20;
         PTE * pte_p=(PTE*) (sec_base|page);
