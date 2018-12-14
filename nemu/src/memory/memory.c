@@ -41,7 +41,12 @@ void paddr_write(paddr_t addr, uint32_t data, int len) {
 
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
-  return paddr_read(addr, len);
+    if(((addr+len-1)>>12) > (addr >> 12))
+    {
+        assert(0);
+    }
+    
+    return paddr_read(addr, len);
 }
 
 void vaddr_write(vaddr_t addr, uint32_t data, int len) {
