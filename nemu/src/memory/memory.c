@@ -78,7 +78,16 @@ paddr_t page_translate(vaddr_t addr)
 uint32_t vaddr_read(vaddr_t addr, int len) {
     if(((addr+len-1)>>12) > (addr >> 12))
     {
-        assert(0);
+        vaddr_t new_addr=(addr&0xfffff000)+0x1000;
+        int fir_len=new_addr-addr;
+        int sec_len=len-fir_len;
+        paddr_t pa0=page_translate(addr);
+        uint32_t val0=paddr_read(pa0,fir_len);
+        paddr_t pa1=page_translate(new_addr);
+        uint32_t val1=paddr_read(pa1,sec_len);
+        uint32_t ret=(val1<<(fir_len*8))+val0;
+        return ret;
+        //assert(0);
     }
     else 
     {
