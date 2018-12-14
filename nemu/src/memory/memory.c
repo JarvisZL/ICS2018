@@ -56,7 +56,7 @@ paddr_t page_translate(vaddr_t addr)
         PDE * pde_p=(PDE *) (base|dir);
         Log("dir:%lx,base:%lx",dir,base);
         Log("addr:%lx",(uintptr_t) pde_p);
-        assert(pde_p->present);
+      //  assert(pde_p->present);
         /*if(pde_p->present==0)
         {
             assert(0);
