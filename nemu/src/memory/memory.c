@@ -48,17 +48,10 @@ paddr_t page_translate(vaddr_t addr)
     }
     else
     {
-        Log("page on");
-        Log("vaddr:%x",addr);
-        
         uintptr_t dir=(addr>>22)<<2;
-        Log("cpu.cr3:%x",cpu.cr3.val);
         
         uintptr_t base=cpu.cr3.page_directory_base<<12;
         uintptr_t pde_p=base|dir;
-        
-        Log("dir:%lx,base:%lx",dir,base);
-        Log("addr:%lx",(uintptr_t) pde_p);
         
         PDE pde=(PDE)paddr_read(pde_p,4);
         assert(pde.present);
