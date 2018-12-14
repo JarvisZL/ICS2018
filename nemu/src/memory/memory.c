@@ -62,23 +62,22 @@ paddr_t page_translate(vaddr_t addr)
         
         PDE pde=(PDE)paddr_read(pde_p,4);
         assert(pde.present);
-        /*if(pde_p->present==0)
-        {
-            assert(0);
-        }*/
-        assert(0);
-       /* uintptr_t sec_base=pde_p->page_frame<<12;
+        /*
+         * pay attention that pde_p is a physical addr, which is about nemu instead of real machine, so DO NOT use pointer like pde_p->present which will cause sf
+         *
+         */
+        
+        uintptr_t sec_base=pde.page_frame<<12;
         uintptr_t page=((addr>>12)<<22)>>20;
-        PTE * pte_p=(PTE*) (sec_base|page);
-        if(pte_p->present==0)
-        {
-            assert(0);
-        }
-        uintptr_t page_base=pte_p->page_frame<<12;
+        uintptr_t pte_p=sec_base|page;
+        
+        PTE pte=(PTE)paddr_read(pte_p,4);
+        assert(pte.present);
+
+        uintptr_t page_base=pte.page_frame<<12;
         uintptr_t offset=addr&0xfff;
-        assert(0);
+        
         return (paddr_t) (page_base|offset);
-        */
        // assert(0);
     }
 }
