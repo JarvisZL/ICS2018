@@ -67,6 +67,7 @@ paddr_t page_translate(vaddr_t addr)
         }
         unsigned long page_base=pte_p->page_frame<<12;
         unsigned long offset=addr&0xfff;
+        assert(0);
         return (paddr_t) (page_base|offset);
         
        // assert(0);
