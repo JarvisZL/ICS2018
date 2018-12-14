@@ -44,7 +44,7 @@ typedef union PageDirectoryEntry {
     uint32_t accessed            : 1;
     uint32_t pad0                : 6;
     uint32_t page_frame          : 20;
-  };
+  }pde;
   uint32_t val;
 } PDE;
 

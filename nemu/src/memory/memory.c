@@ -56,13 +56,13 @@ paddr_t page_translate(vaddr_t addr)
         PDE * pde_p=(PDE *) (base|dir);
         Log("dir:%lx,base:%lx",dir,base);
         Log("addr:%lx",(uintptr_t) pde_p);
-      //  assert(pde_p->present);
+        assert(pde_p->pde.present);
         /*if(pde_p->present==0)
         {
             assert(0);
         }*/
         assert(0);
-        unsigned long sec_base=pde_p->page_frame<<12;
+      /*  unsigned long sec_base=pde_p->page_frame<<12;
         unsigned long page=((addr>>12)<<22)>>20;
         PTE * pte_p=(PTE*) (sec_base|page);
         if(pte_p->present==0)
@@ -73,7 +73,7 @@ paddr_t page_translate(vaddr_t addr)
         unsigned long offset=addr&0xfff;
         assert(0);
         return (paddr_t) (page_base|offset);
-        
+*/        
        // assert(0);
     }
 }
