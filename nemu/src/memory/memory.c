@@ -46,7 +46,11 @@ paddr_t page_translate(vaddr_t addr)
     {
         return addr;
     }
-    assert(0);
+    else
+    {
+        Log("page on");
+        assert(0);
+    }
     return 0;
 }
 
