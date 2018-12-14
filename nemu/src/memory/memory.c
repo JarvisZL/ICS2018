@@ -1,5 +1,5 @@
 #include "nemu.h"
-
+#include "memory/mmu.h"
 #define PMEM_SIZE (128 * 1024 * 1024)
 
 #define pmem_rw(addr, type) *(type *)({\
@@ -42,6 +42,10 @@ void paddr_write(paddr_t addr, uint32_t data, int len) {
 
 paddr_t page_translate(vaddr_t addr)
 {
+    if(cpu.cr0.paging==0)
+    {
+        return addr;
+    }
     assert(0);
     return 0;
 }
