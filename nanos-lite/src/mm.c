@@ -1,6 +1,7 @@
 #include "memory.h"
-
+#include "proc.h"
 static void *pf = NULL;
+extern PCB *current;
 
 void* new_page(size_t nr_page) {
   void *p = pf;

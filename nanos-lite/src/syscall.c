@@ -14,10 +14,6 @@ void naive_uload(PCB *pcb,const char * filename);
 int mm_brk(uintptr_t new_brk);
 
 //pa3.2 we can let user to control stack
-/*
-extern char _end;
-void *program_break=&_end;
-*/
 
 
 
