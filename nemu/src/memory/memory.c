@@ -54,14 +54,14 @@ paddr_t page_translate(vaddr_t addr)
         uintptr_t pde_p=base|dir;
         
         PDE pde=(PDE)paddr_read(pde_p,4);
-        /*if(pde.present==0)
+        if(pde.present==0)
         {
             Log("addr:%x",addr);
             Log("dir:%lx",dir);
             Log("base:%lx",base);
             Log("pde_p:%lx",pde_p);
             assert(0);
-        }*/
+        }
         assert(pde.present);
         /*
          * pay attention that pde_p is a physical addr, which is about nemu instead of real machine, so DO NOT use pointer like pde_p->present which will cause sf
