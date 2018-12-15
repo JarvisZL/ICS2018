@@ -38,6 +38,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
           fs_read(fd,page,PG_SIZE);
       }
     }
+
+    pcb->max_brk=pcb->cur_brk=DEFAULT_ENTRY+(times+1)*PG_SIZE;
     
     //buff=(void *)DEFAULT_ENTRY;
     //fs_read(fd,buff,length);

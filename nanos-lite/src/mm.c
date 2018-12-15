@@ -21,7 +21,6 @@ int _map(_Protect *p,void *va,void* pa,int mode);
 
 int mm_brk(uintptr_t new_brk) {
 
-    printf("new:%d\n",new_brk);
     if(new_brk > current->max_brk)
     {
        uintptr_t above=new_brk-current->max_brk;
