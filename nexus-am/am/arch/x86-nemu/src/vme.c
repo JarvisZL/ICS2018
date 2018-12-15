@@ -78,7 +78,10 @@ void _switch(_Context *c) {
 int _map(_Protect *p, void *va, void *pa, int mode) {
    if(mode==0)
        return 0;
-    
+   
+   printf("base:%x\n",(uintptr_t)p->ptr);
+
+
    uintptr_t dir_base=(uintptr_t)p->ptr;
    uintptr_t dir=(uintptr_t)(PDX(va)<<2);
    PDE * pde_p=(PDE *)(dir_base|dir);
@@ -104,7 +107,6 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *args) {
     _Context * ret_u=(_Context *) ((uintptr_t)ustack.end-sizeof(_Context)-4);
    
-     
      ret_u->prot=p;
      ret_u->edi=0;
      ret_u->esi=0;
