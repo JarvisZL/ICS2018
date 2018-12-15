@@ -120,7 +120,7 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
     _Context * ret_u=(_Context *) ((uintptr_t)ustack.end-sizeof(_Context)-4);
    
      cur_as=p; 
-     ret_u->prot=NULL;
+     ret_u->prot=p;
      ret_u->edi=0;
      ret_u->esi=0;
      ret_u->ebp=(uintptr_t) ustack.end;
