@@ -86,7 +86,9 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
    uintptr_t dir_base=(uintptr_t)p->ptr;
    uintptr_t dir=(uintptr_t)(PDX(va)<<2);
    PDE * pde_p=(PDE *)(dir_base|dir);
-  
+ 
+
+   printf("dir:%p\n",(void*) dir);
    printf("pde_p:%p\n",pde_p);
 
    if(((*pde_p)&PTE_P)==0)//need to create the second page table 
@@ -104,7 +106,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
    PTE* pte_p=(PTE*)(pg_base|pg); 
   
    printf("pte_p:%p\n",pte_p);
-
+   printf("\n");
 
 
    (*pte_p)=(uintptr_t)pa|PTE_P; 
