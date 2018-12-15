@@ -79,7 +79,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
    if(mode==0)
        return 0;
    
-   printf("base:%d\n",(uintptr_t)p->ptr);
+   printf("base:%p\n",p->ptr);
 
 
    uintptr_t dir_base=(uintptr_t)p->ptr;
