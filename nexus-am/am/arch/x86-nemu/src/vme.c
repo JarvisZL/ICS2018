@@ -119,7 +119,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *args) {
     _Context * ret_u=(_Context *) ((uintptr_t)ustack.end-sizeof(_Context)-4);
    
-     //cur_as=p; 
+     cur_as=p; 
      ret_u->prot=p;
      ret_u->edi=0;
      ret_u->esi=0;
