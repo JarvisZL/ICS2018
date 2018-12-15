@@ -78,19 +78,19 @@ void _switch(_Context *c) {
 int _map(_Protect *p, void *va, void *pa, int mode) {
    if(mode==0)
        return 0;
-   
+  /* 
    printf("base:%p\n",p->ptr);
    printf("va:%p\n",va);
    printf("pa:%p\n",pa);
-
+*/
    uintptr_t dir_base=(uintptr_t)p->ptr;
    uintptr_t dir=(uintptr_t)(PDX(va)<<2);
    PDE * pde_p=(PDE *)(dir_base|dir);
  
-
+/*
    printf("dir:%p\n",(void*) dir);
    printf("pde_p:%p\n",pde_p);
-
+*/
    if(((*pde_p)&PTE_P)==0)//need to create the second page table 
    {
        PTE * new_pt=(PTE *)pgalloc_usr(1);
@@ -104,12 +104,12 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
    uintptr_t pg=(uintptr_t)(PTX(va)<<2);
    uintptr_t pg_base=(uintptr_t)((*pde_p)&0xfffff000); 
    PTE* pte_p=(PTE*)(pg_base|pg); 
- 
+ /*
    printf("pg:%p\n",(void*)pg);
    printf("pg_base:%p\n",(void*)pg_base);
    printf("pte_p:%p\n",pte_p);
    printf("\n");
-
+*/
 
    (*pte_p)=(uintptr_t)pa|PTE_P; 
     
@@ -120,7 +120,7 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
     _Context * ret_u=(_Context *) ((uintptr_t)ustack.end-sizeof(_Context)-4);
    
      cur_as=p; 
-     ret_u->prot=p;
+     ret_u->prot=NULL;
      ret_u->edi=0;
      ret_u->esi=0;
      ret_u->ebp=(uintptr_t) ustack.end;
