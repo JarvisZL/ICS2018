@@ -49,7 +49,7 @@ _Context* do_syscall(_Context *c) {
                    break;    
     case SYS_write: c->GPRx=fs_write(a[1],(void*)a[2],(size_t)a[3]); 
                     break;
-    case SYS_exit: naive_uload(NULL,"/bin/init");//_halt(c->GPR2); 
+    case SYS_exit: /*naive_uload(NULL,"/bin/init");*/_halt(c->GPR2); 
                    break;
     case SYS_yield: _yield(); c->GPRx=0; break;
     default: panic("Unhandled syscall ID = %d", a[0]);
