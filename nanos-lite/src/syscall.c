@@ -11,18 +11,13 @@ off_t fs_lseek(int fd,off_t offset,int whence);
 ssize_t fs_read(int fd, void* buf,size_t len);
 ssize_t fs_write(int fd, void* buf,size_t len);
 void naive_uload(PCB *pcb,const char * filename);
-
+int mm_brk(uintptr_t new_brk);
 
 //pa3.2 we can let user to control stack
 /*
 extern char _end;
 void *program_break=&_end;
 */
- int brk(void * addr)
-{
-  //  program_break=addr;
-    return 0;
-}
 
 
 
@@ -45,7 +40,7 @@ _Context* do_syscall(_Context *c) {
                    break;
     case SYS_read: c->GPRx=fs_read(a[1],(void *)a[2],(size_t)a[3]); 
                    break;
-    case SYS_brk:  c->GPRx=brk((void *)a[1]); 
+    case SYS_brk:  c->GPRx=mm_brk((uintptr_t)a[1]); 
                    break;    
     case SYS_write: c->GPRx=fs_write(a[1],(void*)a[2],(size_t)a[3]); 
                     break;
