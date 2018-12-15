@@ -18,7 +18,7 @@ void free_page(void *p) {
 int _map(_Protect *p,void *va,void* pa,int mode);
 /* The brk() system call handler. */
 int mm_brk(uintptr_t new_brk) {
-    
+   /* 
     if(new_brk > current->max_brk)
     {
        uintptr_t above=new_brk-current->max_brk;
@@ -32,7 +32,7 @@ int mm_brk(uintptr_t new_brk) {
     }
 
    current->cur_brk=new_brk;
-    
+    */
     return 0;
 }
 
