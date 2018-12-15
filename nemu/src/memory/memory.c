@@ -57,6 +57,8 @@ paddr_t page_translate(vaddr_t addr)
         if(pde.present==0)
         {
             Log("addr:%x",addr);
+            Log("dir:%lx",dir);
+            Log("base:%lx",base);
             Log("pde_p:%lx",pde_p);
             assert(0);
         }
