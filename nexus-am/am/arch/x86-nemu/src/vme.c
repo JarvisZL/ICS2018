@@ -104,7 +104,9 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
    uintptr_t pg=(uintptr_t)(PTX(va)<<2);
    uintptr_t pg_base=(uintptr_t)((*pde_p)&0xfffff000); 
    PTE* pte_p=(PTE*)(pg_base|pg); 
-  
+ 
+   printf("pg:%p\n",(void*)pg);
+   printf("pg_base:%p\n",(void*)pg_base);
    printf("pte_p:%p\n",pte_p);
    printf("\n");
 
