@@ -80,7 +80,8 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
        return 0;
    
    printf("base:%p\n",p->ptr);
-
+   printf("va:%p\n",va);
+   printf("pa:%p\n",pa);
 
    uintptr_t dir_base=(uintptr_t)p->ptr;
    uintptr_t dir=(uintptr_t)(PDX(va)<<2);
