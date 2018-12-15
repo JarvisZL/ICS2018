@@ -15,7 +15,6 @@ void free_page(void *p) {
   panic("not implement yet");
 }
 
-extern char _end;
 int _map(_Protect *p,void *va,void* pa,int mode);
 /* The brk() system call handler. */
 
