@@ -20,8 +20,6 @@ int _map(_Protect *p,void *va,void* pa,int mode);
 /* The brk() system call handler. */
 int mm_brk(uintptr_t new_brk) {
   
-    if(current->max_brk==0&&current->cur_brk==0)
-        current->max_brk=current->cur_brk=(uintptr_t)&_end;
     if(new_brk > current->max_brk)
     {
        uintptr_t above=new_brk-current->max_brk;
