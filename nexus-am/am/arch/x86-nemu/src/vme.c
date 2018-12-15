@@ -76,14 +76,36 @@ void _switch(_Context *c) {
 }
 
 int _map(_Protect *p, void *va, void *pa, int mode) {
-  return 0;
+   if(mode==0)
+       return 0;
+    
+   uintptr_t dir_base=(uintptr_t)p->ptr;
+   uintptr_t dir=(uintptr_t)(PDX(va)<<2);
+   PDE * pde_p=(PDE *)(dir_base|dir);
+   
+   if(((*pde_p)&PTE_P)==0)//need to create the second page table 
+   {
+       PTE * new_pt=(PTE *)pgalloc_usr(1);
+       (*pde_p)=(uintptr_t)new_pt|PTE_P;
+   }
+
+   //assert((*pde_p)&PTE_P);
+   //search the second page table
+   
+   uintptr_t pg=(uintptr_t)(PTX(va)<<2);
+   uintptr_t pg_base=(uintptr_t)((*pde_p)&0xfffff000); 
+   PTE* pte_p=(PTE*)(pg_base|pg); 
+   
+   (*pte_p)=(uintptr_t)pa|PTE_P; 
+    
+   return 0;
 }
 
 _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *args) {
     _Context * ret_u=(_Context *) ((uintptr_t)ustack.end-sizeof(_Context)-4);
    
      
-     ret_u->prot=NULL;
+     ret_u->prot=p;
      ret_u->edi=0;
      ret_u->esi=0;
      ret_u->ebp=(uintptr_t) ustack.end;
