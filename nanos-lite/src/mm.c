@@ -15,17 +15,22 @@ void free_page(void *p) {
   panic("not implement yet");
 }
 
+int _map(_Protect *p,void *va,void* pa,int mode);
 /* The brk() system call handler. */
 int mm_brk(uintptr_t new_brk) {
-/*    if(new_brk > current->max_brk)
+    if(new_brk > current->max_brk)
     {
        uintptr_t above=new_brk-current->max_brk;
        uintptr_t times=(above-1)/PGSIZE;
-
+       for(uintptr_t i=0;i<=times;++i)
+       {
+           void* new_pg=new_page(1);
+           _map(&current->as,(void *)current->max_brk,new_pg,1);
+           current->max_brk+=PGSIZE;
+       }
     }
-*/
 
-    
+   current->cur_brk=new_brk;
     
     return 0;
 }

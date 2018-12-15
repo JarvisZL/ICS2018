@@ -60,7 +60,6 @@ void context_kload(PCB *pcb, void *entry) {
   pcb->cp = _kcontext(stack, entry, NULL);
 }
 
-extern char _end;
 
 void context_uload(PCB *pcb, const char *filename) {
   _protect(&pcb->as);
