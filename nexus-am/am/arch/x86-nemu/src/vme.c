@@ -95,13 +95,18 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
        (*pde_p)=(uintptr_t)new_pt|PTE_P;
    }
 
+
    assert((*pde_p)&PTE_P);
    //search the second page table
    
    uintptr_t pg=(uintptr_t)(PTX(va)<<2);
    uintptr_t pg_base=(uintptr_t)((*pde_p)&0xfffff000); 
    PTE* pte_p=(PTE*)(pg_base|pg); 
-   
+  
+   printf("pte_p:%p\n",pte_p);
+
+
+
    (*pte_p)=(uintptr_t)pa|PTE_P; 
     
    return 0;
