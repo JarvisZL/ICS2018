@@ -19,6 +19,8 @@ int _map(_Protect *p,void *va,void* pa,int mode);
 /* The brk() system call handler. */
 int mm_brk(uintptr_t new_brk) {
    
+    Log("malloc");
+    Log("malloc");
     if(new_brk > current->max_brk)
     {
        uintptr_t above=new_brk-current->max_brk;
