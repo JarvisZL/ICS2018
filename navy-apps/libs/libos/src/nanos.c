@@ -45,6 +45,8 @@ void * old_pb;
 
 
 void *_sbrk(intptr_t increment){
+     printf("_end:%p\n",&_end);
+    
     old_pb=program_break;
     intptr_t now=(intptr_t) program_break+increment;
     program_break=(void *) now;//actually we let user to alter the stack
