@@ -89,7 +89,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
        (*pde_p)=(uintptr_t)new_pt|PTE_P;
    }
 
-   //assert((*pde_p)&PTE_P);
+   assert((*pde_p)&PTE_P);
    //search the second page table
    
    uintptr_t pg=(uintptr_t)(PTX(va)<<2);
