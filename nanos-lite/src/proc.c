@@ -25,9 +25,9 @@ extern void context_kload(PCB *pcb, void *entry);
 extern void context_uload(PCB *pcb,const char *filename);
 
 void init_proc() {
-    context_kload(&pcb[0],(void*) hello_fun);
+//    context_kload(&pcb[0],(void*) hello_fun);
     
-    context_uload(&pcb[1],"/bin/dummy");
+    context_uload(&pcb[0],"/bin/dummy");
     switch_boot_pcb();
    // naive_uload(NULL, "/bin/init");
 }
@@ -36,7 +36,7 @@ void init_proc() {
 _Context* schedule(_Context *prev) {
     current->cp=prev;
 
-    current=(current==&pcb[0]? &pcb[1]:&pcb[0]);
-
+  //  current=(current==&pcb[0]? &pcb[1]:&pcb[0]);
+     current=&pcb[0];
     return current->cp;
 }
