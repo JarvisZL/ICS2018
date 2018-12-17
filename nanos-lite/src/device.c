@@ -5,7 +5,7 @@
 
 extern void _yield();
 size_t serial_write(const void *buf, size_t offset, size_t len) {
-    _yield();
+  //  _yield();
 
     char *ptr=(char*) buf;
     for(size_t i=0;i<len;++i)
@@ -25,7 +25,7 @@ static const char *keyname[256] __attribute__((used)) = {
 static char eve[50];
 #define KEYDOWN_MASK 0x8000
 size_t events_read(void *buf, size_t offset, size_t len) {
-    _yield();
+   // _yield();
     
     memset(eve,0,sizeof(eve));
     int code=0;
@@ -70,7 +70,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
-    _yield();
+   // _yield();
 
     int w=screen_width();
    // int h=screen_height();
