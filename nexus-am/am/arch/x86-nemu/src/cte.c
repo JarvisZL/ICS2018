@@ -11,7 +11,7 @@ void _switch(_Context *c);
 
 _Context* irq_handle(_Context *tf) {
    // debug
-   // printf("%d  %d  %d  %d  %d  %d  %d  %d\n",tf->eax,tf->ecx,tf->edx,tf->ebx,tf->esp,tf->ebp,tf->esi,tf->edi);
+    printf("%d  %d  %d  %d  %d  %d  %d  %d\n",tf->eax,tf->ecx,tf->edx,tf->ebx,tf->esp,tf->ebp,tf->esi,tf->edi);
     get_cur_as(tf);
     _Context *next = tf;
   if (user_handler) {
