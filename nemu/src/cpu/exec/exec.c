@@ -263,6 +263,6 @@ if(cpu.INTR&cpu.EFLAGS.IF)
     update_eip();
 }
 
-update_eip();
+//update_eip();
 
 }
