@@ -23,7 +23,8 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
    te2=te2&0xffff0000;
    te1=te1|te2;
    rtl_j(te1);
-   
+
+Log("raise");
  // TODO();
 }
 
