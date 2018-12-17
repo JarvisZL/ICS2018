@@ -28,7 +28,6 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 }
 
 void dev_raise_intr() {
-   Log("dev");
     cpu.INTR=true;
 
 }
