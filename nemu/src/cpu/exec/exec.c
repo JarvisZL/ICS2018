@@ -262,7 +262,7 @@ if(cpu.INTR&cpu.EFLAGS.IF)
     raise_intr(IRQ_TIMER,cpu.eip);
     update_eip();
 }
-
-//update_eip();
+else
+  update_eip();
 
 }
