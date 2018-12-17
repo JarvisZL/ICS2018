@@ -260,7 +260,7 @@ if(cpu.INTR&cpu.EFLAGS.IF)
 {
     Log("YES");
     cpu.INTR=false;
-    raise_intr(IRQ_TIMER,cpu.eip);
+    raise_intr(32,cpu.eip);
     update_eip();
 }
 
