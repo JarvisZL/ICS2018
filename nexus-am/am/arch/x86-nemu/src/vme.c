@@ -133,8 +133,8 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
      ret_u->err=0;
      ret_u->eip=(uintptr_t) entry;
      ret_u->cs=8;
-     ret_u->eflags=0x2;
-     
+     ret_u->eflags=0x202;
+    // ret_u->EFLAGS.IF=1; 
    //  memset(ret_u+sizeof(_Context),0,4);
     return ret_u;
 }

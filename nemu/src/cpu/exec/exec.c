@@ -225,6 +225,7 @@ static inline void update_eip(void) {
   else { cpu.eip = decoding.seq_eip; }
 }
 
+void raise_intr(uint8_t NO,vaddr_t ret_addr);
 void exec_wrapper(bool print_flag) {
   vaddr_t ori_eip = cpu.eip;
 
@@ -246,10 +247,21 @@ void exec_wrapper(bool print_flag) {
   }
 #endif
 
-  update_eip();
+ // update_eip();
 
 #if defined(DIFF_TEST)
   void difftest_step(uint32_t);
   difftest_step(ori_eip);
 #endif
+
+#define IRQ_TIMER 32
+
+if(cpu.INTR&cpu.EFLAGS.IF)
+{
+    cpu.INTR=false;
+    raise_intr(IRQ_TIMER,cpu.eip);
+    update_eip();
+}
+else
+    update_eip();
 }
