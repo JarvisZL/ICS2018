@@ -14,8 +14,6 @@ _Context* irq_handle(_Context *tf) {
    // printf("%d  %d  %d  %d  %d  %d  %d  %d\n",tf->eax,tf->ecx,tf->edx,tf->ebx,tf->esp,tf->ebp,tf->esi,tf->edi);
     get_cur_as(tf);
     _Context *next = tf;
-    
-    printf("%d\n",tf->irq);
   if (user_handler) {
     _Event ev={0};
     switch (tf->irq) {
