@@ -32,7 +32,7 @@ void init_proc() {
     context_uload(&pcb[0],"/bin/hello");
     context_uload(&pcb[1],"/bin/pal");
     context_uload(&pcb[2],"/bin/slider");
-    context_uload(&pcb[3],"/bin/init");
+    context_uload(&pcb[3],"/bin/bmptest");
     for(int i=0;i<MAX_NR_PROC;++i)
         s_pcb[i]=pcb[i];
     fg_pcb=&pcb[1];

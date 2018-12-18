@@ -1,8 +1,6 @@
 #include <am.h>
 
 void _trm_init() {
-  int ret=main();
-  _halt(ret);
 }
 
 void _putc(char ch) {
