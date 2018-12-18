@@ -35,7 +35,7 @@ void init_proc() {
     context_uload(&pcb[3],"/bin/bmptest");
     for(int i=0;i<MAX_NR_PROC;++i)
         s_pcb[i]=pcb[i];
-    fg_pcb=&pcb[3];
+    fg_pcb=&pcb[2];
     switch_boot_pcb();
    // naive_uload(NULL, "/bin/init");
 }
