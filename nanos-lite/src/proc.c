@@ -31,11 +31,11 @@ void init_proc() {
   //  context_kload(&pcb[0],(void*) hello_fun);
     context_uload(&pcb[0],"/bin/hello");
     context_uload(&pcb[1],"/bin/pal");
-    context_uload(&pcb[2],"/bin/slider");
-    context_uload(&pcb[3],"/bin/bmptest");
+    context_uload(&pcb[2],"/bin/pal");
+    context_uload(&pcb[3],"/bin/pal");
     for(int i=0;i<MAX_NR_PROC;++i)
         s_pcb[i]=pcb[i];
-    fg_pcb=&pcb[2];
+    fg_pcb=&pcb[1];
     switch_boot_pcb();
    // naive_uload(NULL, "/bin/init");
 }
