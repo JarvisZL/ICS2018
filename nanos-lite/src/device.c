@@ -51,7 +51,6 @@ size_t events_read(void *buf, size_t offset, size_t len) {
          fg_pcb=&s_pcb[2];
       if(code==_KEY_F3)
          fg_pcb=&s_pcb[3];
-        
     }
     else
     {
