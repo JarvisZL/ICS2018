@@ -6,7 +6,7 @@ static PCB pcb[MAX_NR_PROC] __attribute__((used));
 static PCB pcb_boot;
 PCB *current;
 PCB s_pcb[MAX_NR_PROC];
-PCB fg_pcb;
+PCB *fg_pcb;
 
 
 void switch_boot_pcb() {
@@ -35,7 +35,7 @@ void init_proc() {
     context_uload(&pcb[3],"/bin/init");
     for(int i=0;i<MAX_NR_PROC;++i)
         s_pcb[i]=pcb[i];
-    fg_pcb=pcb[1];
+    fg_pcb=&pcb[1];
     switch_boot_pcb();
    // naive_uload(NULL, "/bin/init");
 }
@@ -44,7 +44,7 @@ void init_proc() {
 _Context* schedule(_Context *prev) {
     current->cp=prev;
 
-     current=(current==&pcb[0]? &fg_pcb:&pcb[0]);
+     current=(current==&pcb[0]? fg_pcb:&pcb[0]);
   //  current=(current==&pcb[0]? &pcb[1]:&pcb[0]);
     // current=&pcb[0];
     return current->cp;

@@ -21,5 +21,5 @@ typedef union {
 
 extern PCB *current;
 extern PCB s_pcb[MAX_NR_PROC];
-extern PCB fg_pcb;
+extern PCB *fg_pcb;
 #endif
