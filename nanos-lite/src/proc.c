@@ -31,7 +31,7 @@ void init_proc() {
     context_uload(&pcb[1],"/bin/pal");
     context_uload(&pcb[2],"/bin/pal");
     context_uload(&pcb[3],"/bin/pal");
-    fg_pcb=0;
+    fg_pcb=1;
     switch_boot_pcb();
    // naive_uload(NULL, "/bin/init");
 }
