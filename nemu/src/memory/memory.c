@@ -107,7 +107,15 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
 void vaddr_write(vaddr_t addr, uint32_t data, int len) {
   if(((addr+len-1)>>12) > (addr >>12))
   {
-      assert(0);
+      for(uint32_t i=0;i<len;++i)
+      {
+          uint32_t val=data&0x000000ff;
+          paddr_t paddr=page_translate(addr);
+          paddr_write(paddr,val,1);
+          data>>=8;
+          addr+=1;
+      }
+      //assert(0);
   }
   else
   {
